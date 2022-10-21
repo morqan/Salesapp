@@ -1,16 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Image, Text, View } from 'react-native'
+import { Image, View } from 'react-native'
 import SvgGenerator from '@/Components/SvgGenerator'
-import { navigate, navigationRef } from "@/Navigators/utils"
+import { navigate, navigationRef } from '@/Navigators/utils'
+import { projectStyles } from '@/Containers/Private/Project/index.style'
+import MyBtn from '@/Components/MyBtn'
+import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 
 export default function Floor(props) {
-  console.log(props?.route?.params?.floor, 'props')
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
   const { img, plans } = props?.route?.params?.floor
   useEffect(() => {
     Image.getSize(img, (width, height) => {
-      console.log(width, height, 'width, height')
       setHeights(height)
       setWidths(width)
     })
@@ -19,11 +20,19 @@ export default function Floor(props) {
     navigationRef.goBack()
   }, [])
   const onOpenPlan = useCallback(item => {
-    console.log('test')
-    navigate('Plan', { detail: item })
+    navigate('Plan', { plan: item })
   }, [])
   return (
     <View>
+      <View style={projectStyles.projectHead}>
+        <MyBtn
+          btnStyle={homeStyles.btn}
+          textStyle={homeStyles.btnText}
+          containerStyle={{ width: '6%' }}
+          text={'<'}
+          onPress={goBack}
+        />
+      </View>
       {widths && (
         <SvgGenerator
           img={img}
@@ -31,6 +40,7 @@ export default function Floor(props) {
           onPress={onOpenPlan}
           width={widths}
           height={heights}
+          top={0}
         />
       )}
     </View>

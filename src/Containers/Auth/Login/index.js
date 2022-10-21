@@ -12,11 +12,14 @@ export default function Login() {
 
   const [login, setLogin] = useState('')
   const [pass, setPass] = useState('')
-  const [onLogin, { data, isSuccess, isLoading }] = useOnLoginMutation()
+  const [onLogin, { data, isSuccess, isLoading, isError, error }] = useOnLoginMutation()
   useEffect(() => {
     if (isSuccess) {
       const { token } = data
       dispatch(changeToken({ token }))
+    }
+    if (isError) {
+      console.log(error, 'error')
     }
   }, [isSuccess, isLoading])
 

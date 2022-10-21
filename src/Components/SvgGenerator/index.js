@@ -4,15 +4,20 @@ import { svgGeneratorStyles } from '@/Components/SvgGenerator/index.style'
 import MyBtn from '@/Components/MyBtn'
 import { Dimensions, View } from 'react-native'
 
-export default function SvgGenerator({ img, path, items, onPress, width, height }) {
-  const originalWidth = Number(width) * 8.5
-  const originalHeight = Number(height) * 8.5
+export default function SvgGenerator({
+  img,
+  path,
+  onPress,
+  width,
+  height,
+  top,
+  backgroundColor,
+}) {
+  const originalWidth = Number(width) * 8.6
+  const originalHeight = Number(height) * 8.6
   const aspectRatio = originalWidth / originalHeight
   const windowWidth = Dimensions.get('window').width
-  // const { width, height } = Dimensions.get('window')
-  console.log(originalHeight, 'SvgGenerator height')
-  console.log(originalWidth, 'SvgGenerator width')
-  console.log(img, 'SvgGenerator width')
+
   return (
     <View style={{ width: windowWidth, aspectRatio, backgroundColor: 'red' }}>
       <Svg
@@ -26,18 +31,29 @@ export default function SvgGenerator({ img, path, items, onPress, width, height 
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
         <G id="Layer_x0020_1">
-          <Image width={originalWidth} height={originalHeight} xlinkHref={img} />
+          <Image
+            width={originalWidth}
+            height={originalHeight}
+            xlinkHref={img}
+          />
           {path &&
             path.map((item, index) => {
               return (
                 <Path
                   key={index}
                   className="fil0"
-                  style={svgGeneratorStyles.path}
+                  style={[
+                    svgGeneratorStyles.path,
+                    backgroundColor && { fill: backgroundColor },
+                  ]}
                   onPress={() => onPress(item)}
-                  d={`M${Number(item?.left)} ${Number(item?.top -2600)}h${item?.name.length * 130}v330H${Number(item?.left)}z`}
+                  d={`M${Number(item?.left)} ${Number(item?.top - top)}h${
+                    item?.name.length > 2
+                      ? item?.name.length * 130
+                      : item?.name.length * 220
+                  }v330H${Number(item?.left)}z`}
                   stroke="#AC7D3A"
-                  strokeWidth={10.667}
+                  strokeWidth={10}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
@@ -48,46 +64,19 @@ export default function SvgGenerator({ img, path, items, onPress, width, height 
               return (
                 <Text
                   key={index + 100}
-                  fontSize={220}
-                  // fontWeight="bold"
+                  fontSize={210}
+                  fontWeight="500"
                   // letterSpacing={-0.2}
                   style={{ position: 'absolute' }}
                 >
                   <TSpan
                     x={Number(item?.left) + 120}
-                    y={Number(item?.top) - 2350}
-                    fill="#000"
+                    y={Number(item?.top) - top + 250}
+                    fill={backgroundColor ? '#fff' : '#000'}
                   >
                     {item?.name}
                   </TSpan>
                 </Text>
-              )
-            })}
-          {items &&
-            items.map((item, index) => {
-              return (
-                // <View pointerEvents="none" >
-                <MyBtn
-                  key={index}
-                  containerStyle={{
-                    position: 'absolute',
-                    top: (height * Number(item?.top)) / 100,
-                    left: (width * Number(item?.left)) / 100,
-                    // width: 100,
-                  }}
-                  text={item?.name}
-                />
-                //   <Path
-                //     key={item?.id}
-                //     className="fil0"
-                //     style={svgGeneratorStyles.pathBtn}
-                //     onPress={() => onPress(item)}
-                //     d="M2200 3400h1400v303H2200z"
-                //     stroke="#AC7D3A"
-                //     strokeWidth={10.667}
-                //     strokeLinecap="round"
-                //     strokeLinejoin="round"
-                //   />
               )
             })}
         </G>

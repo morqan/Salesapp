@@ -5,12 +5,8 @@ export const svgGeneratorStyles = StyleSheet.create({
     flex: 1,
   },
   path: {
-    opacity: 0.6,
+    // opacity: 0.6,
     fill: '#fff',
-    borderWidth: 2,
-    borderColor: 'red',
-    stroke: '#000000',
-    strokeWidth: '2px'
   },
   pathBtn: {
     opacity: 1,
@@ -19,5 +15,5 @@ export const svgGeneratorStyles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     paddingVertical: 5,
-  }
+  },
 })

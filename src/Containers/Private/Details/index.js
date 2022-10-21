@@ -8,7 +8,6 @@ import { navigate, navigationRef } from '@/Navigators/utils'
 
 export default function Details(props) {
   const { gallery, blocks, name } = props?.route?.params?.detail
-  console.log(props?.route?.params?.detail, 'detail')
   const isPortrait = () => {
     const dim = Dimensions.get('screen')
     return dim.height >= dim.width
@@ -20,7 +19,6 @@ export default function Details(props) {
   }, [])
 
   const onOpenFloor = useCallback(item => {
-    console.log('test')
     navigate('Floor', { floor: item })
   }, [])
 
@@ -47,10 +45,6 @@ export default function Details(props) {
             scrollAnimationDuration={3000}
             onSnapToItem={index => console.log('current index:', index)}
             renderItem={({ index, item }) => {
-              console.log(
-                'https://salesapp.portonovi.com/storage/app/media' + item?.img,
-                'item',
-              )
               return (
                 <View
                   style={{
@@ -79,9 +73,7 @@ export default function Details(props) {
           <View style={detailsStyles.contentHeader}>
             {blocks?.data &&
               blocks?.data.map(item => {
-                console.log(item, 'test')
                 return item?.floors?.data.map(floor => {
-                  console.log(floor, 'floor')
                   return (
                     <MyBtn
                       key={floor?.id}

@@ -1,33 +1,40 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Dimensions, Image, View } from 'react-native'
+import { Image, View } from 'react-native'
 import SvgGenerator from '@/Components/SvgGenerator'
-import { navigate } from '@/Navigators/utils'
+import { navigate, navigationRef } from '@/Navigators/utils'
+import MyBtn from '@/Components/MyBtn'
+import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
+import { projectStyles } from '@/Containers/Private/Project/index.style'
 
 export default function Project(props) {
-  const { width, height } = Dimensions.get('window')
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
   const { img, items } = props?.route?.params?.project
-  console.log(props?.route?.params?.project, 'project')
 
   const onOpenDetails = useCallback(item => {
-    console.log('test')
     navigate('Details', { detail: item })
   }, [])
 
-  const image = {
-    uri: `${img}`,
-  }
-
   useEffect(() => {
     Image.getSize(img, (width, height) => {
-      console.log(width, height, 'width, height')
       setHeights(height)
       setWidths(width)
     })
   }, [])
+  const goBack = useCallback(() => {
+    navigationRef.goBack()
+  }, [])
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, paddingRight: 20 }}>
+      <View style={projectStyles.projectHead}>
+        <MyBtn
+          btnStyle={homeStyles.btn}
+          textStyle={homeStyles.btnText}
+          containerStyle={{ width: '6%' }}
+          text={'<'}
+          onPress={goBack}
+        />
+      </View>
       {widths && (
         <SvgGenerator
           img={img}
@@ -35,6 +42,8 @@ export default function Project(props) {
           onPress={item => onOpenDetails(item)}
           width={widths}
           height={heights}
+          top={1600}
+          backgroundColor="#0d6a78"
         />
       )}
     </View>
