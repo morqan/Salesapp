@@ -1,26 +1,30 @@
 import React, { useCallback } from 'react'
-import { Dimensions, Image, Text, View } from 'react-native'
+import { Image, Text, View, useWindowDimensions } from 'react-native'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import Carousel from 'react-native-reanimated-carousel'
 import { projectStyles } from '@/Containers/Private/Project/index.style'
 import MyBtn from '@/Components/MyBtn'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigationRef } from '@/Navigators/utils'
+import RenderHtml from 'react-native-render-html'
 
 export default function Plan(props) {
+  const { width } = useWindowDimensions()
   const { gallery } = props?.route?.params?.plan
-  const width = Dimensions.get('window').width
-  const height = Dimensions.get('window').height
-  const isPortrait = () => {
-    const dim = Dimensions.get('screen')
-    return dim.height >= dim.width
-  }
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
   console.log(props?.route?.params?.plan, 'plan')
+
+  const source = {
+    html: `
+<p style='text-align:center;'>
+  Hello World!
+</p>`,
+  }
+
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: 'red' }}>
       <View style={projectStyles.projectHead}>
         <MyBtn
           btnStyle={homeStyles.btn}
@@ -30,8 +34,9 @@ export default function Plan(props) {
           onPress={goBack}
         />
       </View>
-      <View>
-        <Text>Plan Header</Text>
+      <View style={{ marginTop: -30, flexDirection:'row' }}>
+        <RenderHtml contentWidth={width} source={source} />
+        <RenderHtml contentWidth={width} source={source} />
       </View>
       <View>
         <Carousel
