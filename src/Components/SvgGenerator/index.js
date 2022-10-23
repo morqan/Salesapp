@@ -19,7 +19,7 @@ export default function SvgGenerator({
   const windowWidth = Dimensions.get('window').width
 
   return (
-    <View style={{ width: windowWidth, aspectRatio, backgroundColor: 'red' }}>
+    <View style={{ width: windowWidth, aspectRatio }}>
       <Svg
         width="100%"
         height="100%"

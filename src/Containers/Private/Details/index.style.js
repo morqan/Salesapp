@@ -57,8 +57,8 @@ export const detailsStyles = StyleSheet.create({
     lineHeight: 25,
   },
   sliderImg: {
-    width: '90%',
-    height: '90%',
+    width: '100%',
+    height: '100%',
 
   }
 })

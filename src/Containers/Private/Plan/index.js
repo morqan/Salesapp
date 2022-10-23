@@ -1,42 +1,49 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Image, Text, View, useWindowDimensions } from 'react-native'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import Carousel from 'react-native-reanimated-carousel'
-import { projectStyles } from '@/Containers/Private/Project/index.style'
 import MyBtn from '@/Components/MyBtn'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigationRef } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
+import { planStyles } from '@/Containers/Private/Plan/index.style'
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
-  const { gallery } = props?.route?.params?.plan
+  const { gallery, name, info } = props?.route?.params?.plan
+  const [headInfo, setHeadInfo] = useState([])
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
-  console.log(props?.route?.params?.plan, 'plan')
 
-  const source = {
-    html: `
-<p style='text-align:center;'>
-  Hello World!
-</p>`,
-  }
+  useEffect(() => {
+    const infoHead = info.map(item => {
+      return {
+        html: `${item?.content}`,
+      }
+    })
+    setHeadInfo(infoHead)
+    console.log(infoHead, 'infohead')
+  }, [])
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'red' }}>
-      <View style={projectStyles.projectHead}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={planStyles.backBtnBox}>
         <MyBtn
           btnStyle={homeStyles.btn}
           textStyle={homeStyles.btnText}
-          containerStyle={{ width: '6%' }}
+          containerStyle={{ width: '100%' }}
           text={'<'}
           onPress={goBack}
         />
       </View>
-      <View style={{ marginTop: -30, flexDirection:'row' }}>
-        <RenderHtml contentWidth={width} source={source} />
-        <RenderHtml contentWidth={width} source={source} />
+      <View style={planStyles.header}>
+        <View>
+          <Text>{name}</Text>
+        </View>
+        {headInfo.map((item, index) => {
+          return <RenderHtml key={index} contentWidth={width} source={item} />
+        })}
       </View>
       <View>
         <Carousel
@@ -51,8 +58,11 @@ export default function Plan(props) {
               <View
                 style={{
                   alignItems: 'center',
-                  width: '100%',
-                  height: '100%',
+                  // width: 500,
+                  // height: 500,
+                  justifyContent: 'center',
+                  backgroundColor: 'red',
+                  flex: 1,
                 }}
               >
                 <Image

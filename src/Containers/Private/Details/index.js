@@ -5,22 +5,29 @@ import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import Carousel from 'react-native-reanimated-carousel'
 import { navigate, navigationRef } from '@/Navigators/utils'
+import RenderHtml from 'react-native-render-html'
 
 export default function Details(props) {
-  const { gallery, blocks, name } = props?.route?.params?.detail
-  const isPortrait = () => {
-    const dim = Dimensions.get('screen')
-    return dim.height >= dim.width
-  }
+  const { gallery, blocks, name, content, video } = props?.route?.params?.detail
   const width = Dimensions.get('window').width
-  const height = Dimensions.get('window').height
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
 
   const onOpenFloor = useCallback(item => {
-    navigate('Floor', { floor: item })
+    if (item?.is_plan) {
+      console.log(item, 'item')
+      navigate('Plan', { plan: item })
+    } else {
+      navigate('Floor', { floor: item })
+    }
   }, [])
+
+  const source = {
+    html: `${content}`,
+  }
+
+  console.log(props?.route?.params?.detail, 'props?.route?.params?.detail')
 
   return (
     <View style={detailsStyles.container}>
@@ -38,12 +45,11 @@ export default function Details(props) {
         <View style={detailsStyles.sliderBox}>
           <Carousel
             loop
-            width={isPortrait() ? (width * 2) / 3.5 : (height * 2) / 3.5}
-            height={height / 1.16}
+            width={width / 2}
             autoPlay={gallery.length > 1}
             data={gallery}
             scrollAnimationDuration={3000}
-            onSnapToItem={index => console.log('current index:', index)}
+            // onSnapToItem={index => console.log('current index:', index)}
             renderItem={({ index, item }) => {
               return (
                 <View
@@ -67,8 +73,12 @@ export default function Details(props) {
         </View>
         <View style={detailsStyles.content}>
           <View style={detailsStyles.contentHeader}>
-            <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>
-            <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>
+            {blocks?.data.length > 0 && (
+              <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>
+            )}
+            {video && (
+              <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>
+            )}
           </View>
           <View style={detailsStyles.contentHeader}>
             {blocks?.data &&
@@ -87,20 +97,7 @@ export default function Details(props) {
               })}
           </View>
           <View>
-            <Text style={detailsStyles.contentText}>
-              With expansive indoor-outdoor living space, including your own
-              roof garden, pool terrace, private beachfront and jetty, Villa
-              Orjen is the ideal home for gathering family and friends together.
-              Three or four spacious king or twin rooms open onto private
-              terraces or balconies with breathtaking views of Montenegro’s
-              mountainous coastline. Inside, local heritage meets distinctive
-              modern design accented with a rich use of colour and texture.
-              Through floor-to-ceiling glass walls, your private outdoor
-              playground beckons. Jump between your hydrotherapy swimming pool
-              and private beach, and watch magical sunsets on the azure waters
-              of the Adriatic Sea. Villa Orjen includes three or four bedrooms,
-              accommodating
-            </Text>
+            <RenderHtml contentWidth={width} source={source} />
           </View>
           <View />
         </View>

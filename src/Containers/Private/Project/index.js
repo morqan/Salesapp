@@ -20,10 +20,12 @@ export default function Project(props) {
       setHeights(height)
       setWidths(width)
     })
+    console.log(props?.route?.params?.project, 'props?.route?.params?.project')
   }, [])
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
+
   return (
     <View style={{ flex: 1, paddingRight: 20 }}>
       <View style={projectStyles.projectHead}>
