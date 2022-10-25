@@ -5,11 +5,22 @@ import { navigate, navigationRef } from '@/Navigators/utils'
 import MyBtn from '@/Components/MyBtn'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { projectStyles } from '@/Containers/Private/Project/index.style'
+import Footer from '@/Components/Footer'
 
 export default function Project(props) {
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
-  const { img, items } = props?.route?.params?.project
+  const {
+    img,
+    items,
+    catalog,
+    gallery,
+    information,
+    video,
+    pyc,
+    name,
+    pyc_gallery,
+  } = props?.route?.params?.project
 
   const onOpenDetails = useCallback(item => {
     navigate('Details', { detail: item })
@@ -27,7 +38,7 @@ export default function Project(props) {
   }, [])
 
   return (
-    <View style={{ flex: 1, paddingRight: 20 }}>
+    <View style={{ flex: 1, paddingRight: 20, backgroundColor: '#fff' }}>
       <View style={projectStyles.projectHead}>
         <MyBtn
           btnStyle={homeStyles.btn}
@@ -48,6 +59,15 @@ export default function Project(props) {
           backgroundColor="#0d6a78"
         />
       )}
+      <Footer
+        catalog={catalog}
+        gallery={gallery}
+        information={information}
+        video={video}
+        pyc={pyc}
+        name={name}
+        pyc_gallery={pyc_gallery}
+      />
     </View>
   )
 }

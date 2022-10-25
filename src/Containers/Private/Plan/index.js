@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Image, Text, View, useWindowDimensions } from 'react-native'
-import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import Carousel from 'react-native-reanimated-carousel'
 import MyBtn from '@/Components/MyBtn'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
@@ -10,7 +9,8 @@ import { planStyles } from '@/Containers/Private/Plan/index.style'
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
-  const { gallery, name, info } = props?.route?.params?.plan
+  const { gallery, name, info, is_reserved, is_sold } =
+    props?.route?.params?.plan
   const [headInfo, setHeadInfo] = useState([])
   const goBack = useCallback(() => {
     navigationRef.goBack()
@@ -23,7 +23,7 @@ export default function Plan(props) {
       }
     })
     setHeadInfo(infoHead)
-    console.log(infoHead, 'infohead')
+    console.log(props?.route?.params?.plan, 'props?.route?.params?.plan')
   }, [])
 
   return (
@@ -52,21 +52,12 @@ export default function Plan(props) {
           autoPlay={false}
           data={gallery}
           scrollAnimationDuration={3000}
-          onSnapToItem={index => console.log('current index:', index)}
+          // onSnapToItem={index => console.log('current index:', index)}
           renderItem={({ index, item }) => {
             return (
-              <View
-                style={{
-                  alignItems: 'center',
-                  // width: 500,
-                  // height: 500,
-                  justifyContent: 'center',
-                  backgroundColor: 'red',
-                  flex: 1,
-                }}
-              >
+              <View style={planStyles.slideBox}>
                 <Image
-                  style={detailsStyles.sliderImg}
+                  style={planStyles.sliderImg}
                   source={{
                     uri: `https://salesapp.portonovi.com/storage/app/media${item?.img}`,
                   }}
@@ -76,6 +67,15 @@ export default function Plan(props) {
           }}
         />
       </View>
+      {is_reserved ||
+        (is_sold && (
+          <View style={planStyles.sliderAbsoluteBox}>
+            <Text style={planStyles.sliderAbsoluteText}>
+              {is_sold !== 0 && 'Sold out'}
+              {is_reserved !== 0 && 'Reserved'}
+            </Text>
+          </View>
+        ))}
     </View>
   )
 }

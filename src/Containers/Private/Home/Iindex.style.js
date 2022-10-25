@@ -37,8 +37,10 @@ export const homeStyles = StyleSheet.create({
     backgroundColor: '#0d6a78',
     borderColor: '#fff',
     borderWidth: 1,
+    // minWidth: 100,
   },
   btnText: {
     color: '#fff',
+    textTransform: 'uppercase',
   },
 })

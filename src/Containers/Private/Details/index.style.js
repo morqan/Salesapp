@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native'
-const width = Dimensions.get('window').width;
+const width = Dimensions.get('window').width
 
 export const detailsStyles = StyleSheet.create({
   container: {
@@ -59,6 +59,5 @@ export const detailsStyles = StyleSheet.create({
   sliderImg: {
     width: '100%',
     height: '100%',
-
-  }
+  },
 })
