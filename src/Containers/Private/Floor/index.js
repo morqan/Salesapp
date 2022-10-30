@@ -22,13 +22,14 @@ export default function Floor(props) {
   const onOpenPlan = useCallback(item => {
     navigate('Plan', { plan: item })
   }, [])
+  console.log(plans, 'plans')
   return (
     <View>
-      <View style={projectStyles.projectHead}>
+      <View style={projectStyles.absoluteHead}>
         <MyBtn
           btnStyle={homeStyles.btn}
           textStyle={homeStyles.btnText}
-          containerStyle={{ width: '6%' }}
+          containerStyle={{ width: '100%' }}
           text={'<'}
           onPress={goBack}
         />

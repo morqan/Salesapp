@@ -27,6 +27,7 @@ export default function Home() {
     isError: getImagesIsError,
   } = result
   const onDownloadImages = async imgUrls => {
+    console.log('test')
     let imgLocalUrls = []
     try {
       const FILE = Platform.OS === 'ios' ? '' : 'file://'
@@ -34,22 +35,23 @@ export default function Home() {
         let fileName = FILE + RNFS.DocumentDirectoryPath + '/' + `img${i}.jpg`
         let sourceUrl = imgUrls[i]
         if (await RNFS.exists(fileName)) {
-          const newPath = { id: sourceUrl, localUrl: fileName }
+          await RNFS.unlink(fileName)
+        }
+        const download = RNFS.downloadFile({
+          fromUrl: sourceUrl,
+          toFile: fileName,
+        })
+        const downloadResult = await download.promise
+        console.log(downloadResult, 'downloadResult')
+        if (downloadResult.statusCode === 200) {
+          const newPath = {
+            id: sourceUrl,
+            localUrl: fileName,
+            imgName: `img${i}.jpg`,
+          }
           console.log(newPath, 'newPath')
           imgLocalUrls.push(newPath)
           i++
-        } else {
-          let destination_path = '/' + `img${i}.jpg`
-          const download = RNFS.downloadFile({
-            fromUrl: sourceUrl,
-            toFile: RNFS.DocumentDirectoryPath + destination_path,
-          })
-          const downloadResult = await download.promise
-          if (downloadResult.status === 200) {
-            const newPath = { id: sourceUrl, localUrl: fileName }
-            imgLocalUrls.push(newPath)
-            i++
-          }
         }
       }
     } catch (err) {
@@ -60,7 +62,7 @@ export default function Home() {
     }
   }
   useEffect(() => {
-    if (!localImagesUrls?.length && getImagesData?.length) {
+    if (localImagesUrls?.length === 0 && getImagesData?.length) {
       onDownloadImages(getImagesData)
     }
   }, [getImagesIsSuccess])
@@ -83,13 +85,13 @@ export default function Home() {
     if (!pages) {
       getPage()
     }
-    if (!localImagesUrls?.length) {
-      getImages()
-        .unwrap()
-        .then(res => {
-          console.log(res, 'getImages')
-        })
-    }
+    // if (localImagesUrls?.length) {
+    getImages()
+      .unwrap()
+      .then(res => {
+        console.log(res, 'getImages')
+      })
+    // }
   }, [])
 
   useEffect(() => {
@@ -125,7 +127,7 @@ export default function Home() {
   }, [])
   // console.log(pages, 'pages')
   // console.log(homeItemPositions, 'homeItemPositions')
-  console.log(localImagesUrls, 'localImagesUrls')
+  console.log(localImagesUrls, 'localImagesUrlsas')
 
   return (
     <View style={homeStyles.container}>

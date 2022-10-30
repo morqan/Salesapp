@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Svg, { G, Image, Path, Text, TSpan } from 'react-native-svg'
+import Svg, { G, Path, Text, TSpan, Image } from 'react-native-svg'
 import { svgGeneratorStyles } from '@/Components/SvgGenerator/index.style'
 import { Dimensions, View } from 'react-native'
 import { useAuth } from '@/Hooks/useAuth'
@@ -22,17 +22,12 @@ export default function SvgGenerator({
 
   useEffect(() => {
     const newImg = img.replace(' ', '%20')
-    const localPath = localImagesUrls.filter(x => {
+    localImagesUrls.filter(x => {
       if (x?.id === newImg) {
-        setLocalImg(x?.localUrl)
-        return x
-      } else {
-        setLocalImg(img)
+        console.log(x, 'xxx')
+        setLocalImg(`${x?.localUrl}`)
       }
     })
-    console.log(img)
-    console.log(localPath, 'localPath')
-    console.log(path, 'path')
   }, [])
 
   return (
@@ -48,11 +43,14 @@ export default function SvgGenerator({
         xmlnsXlink="http://www.w3.org/1999/xlink"
       >
         <G id="Layer_x0020_1">
-          <Image
-            width={originalWidth}
-            height={originalHeight}
-            xlinkHref={localImg}
-          />
+          {localImg && (
+            <Image
+              width={originalWidth}
+              height={originalHeight}
+              xlinkHref={localImg}
+              // href={localImg}
+            />
+          )}
           {path &&
             path.map((item, index) => {
               return (
