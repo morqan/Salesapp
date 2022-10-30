@@ -19,7 +19,17 @@ export const authApi = api.injectEndpoints({
         url: 'v1/data/page/index',
       }),
     }),
+    getImages: build.query({
+      query: () => ({
+        url: '/v1/data/img',
+      }),
+    }),
   }),
 })
 
-export const { useOnLoginMutation, useLazyGetPositionQuery, useLazyGetPagesQuery } = authApi
+export const {
+  useOnLoginMutation,
+  useLazyGetPositionQuery,
+  useLazyGetPagesQuery,
+  useLazyGetImagesQuery,
+} = authApi

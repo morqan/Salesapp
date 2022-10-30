@@ -9,7 +9,8 @@ import RenderHtml from 'react-native-render-html'
 
 export default function Details(props) {
   const { gallery, blocks, name, content, video } = props?.route?.params?.detail
-  const width = Dimensions.get('window').width
+  // const width = Dimensions.get('window').width
+  const { width } = Dimensions.get('window')
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])

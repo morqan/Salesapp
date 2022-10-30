@@ -24,7 +24,6 @@ export default function Footer({
   const onPressPyc = useCallback(() => {
     navigate('PycScreen', { gallery: pyc_gallery, text: pyc })
   }, [])
-  console.log(pyc_gallery, 'pyc_gallery')
   return (
     <View style={homeStyles.footer}>
       {information && (
