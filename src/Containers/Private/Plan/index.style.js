@@ -14,18 +14,25 @@ export const planStyles = StyleSheet.create({
   header: {
     // marginTop: -30,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    // height: 70
+    top: 15,
+    right: 15,
+    zIndex: 999,
+    // width: 50,
+    height: 100
   },
   slideBox: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // backgroundColor: 'red',
+    // marginTop: -100
   },
   sliderImg: {
-    width: '90%',
-    height: '90%',
+    width: '100%',
+    height: '100%',
+    resizeMode: "contain"
   },
   sliderAbsoluteBox: {
     position: 'absolute',

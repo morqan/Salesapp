@@ -6,4 +6,11 @@ export const projectStyles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
   },
+  absoluteHead: {
+    position: 'absolute',
+    top: 0,
+    right: 20,
+    zIndex: 999,
+    width: 50,
+  },
 })

@@ -804,16 +804,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@georstat/react-native-image-cache@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@georstat/react-native-image-cache/-/react-native-image-cache-2.3.0.tgz#4338f7a052a363656db44f0203e7450485de114f"
-  integrity sha512-qL+wtDjKzv8kXZQ5l6+dGcKSm7SiMRm8Veusu3a0g4ebcSL+A7ZyCe7QGb7pOyMKVB2R9Ir4WM0iwmucu1XD1Q==
-  dependencies:
-    crypto-js "^4.1.1"
-    lodash "^4.17.21"
-    react-native-file-access "^2.4.4"
-    react-native-reanimated "^2.9.1"
-
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
@@ -2621,11 +2611,6 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
-
-crypto-js@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
-  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 css-color-keywords@^1.0.0:
   version "1.0.0"
@@ -6218,16 +6203,6 @@ react-native-codegen@^0.69.1:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-fast-image@^8.6.1:
-  version "8.6.1"
-  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.6.1.tgz#6a3a11b8ebc7629919265d33a420a04d13c897e0"
-  integrity sha512-ILuP7EuakqHNzTr8ZbumhuxG4tE/wGQ66z4nEEuzc0FlqY6rYaPsnq/UD2ahoyFj6QP1WvA2RIK3odib+VcqWg==
-
-react-native-file-access@^2.4.4, react-native-file-access@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-file-access/-/react-native-file-access-2.5.0.tgz#df6916e5edacaaed73a1ea20bea79d4be13b3faf"
-  integrity sha512-12Dq2NJ4pcTi+nATwT6ZwotpFn1iHZt/W5fOYNcCOuxIg2JnV4KlyDHEBI2WwwEXn6BvEkg9SZDYFk4rkQFttA==
-
 react-native-flipper@^0.156.0:
   version "0.156.0"
   resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.156.0.tgz#2ec9a8d4e78d3e9f52357d094c5d099501a58e2a"
@@ -6261,19 +6236,6 @@ react-native-reanimated-carousel@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/react-native-reanimated-carousel/-/react-native-reanimated-carousel-3.1.0.tgz#1350e92b2b7c4af2e7657efcd4994f6f6d92af1a"
   integrity sha512-P7ie+RF7O9WSUwkNaQKTGEmpttnUkyFenA4cHws7FeVJt+VAET1b6WWFmJvv1tCTZXkjU3kNk7IEgoYkxS7HMg==
-
-react-native-reanimated@^2.9.1:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.12.0.tgz#5821eecfb1769b1617a67a2d4dec12fdeedb2b6e"
-  integrity sha512-nrlPyw+Hx9u4iJhZk9PoTvDo/QmVAd+bo7OK9Tv3hveNEF9++5oig/g3Uv9V93shy9avTYGsUprUvAEt/xdzeQ==
-  dependencies:
-    "@babel/plugin-transform-object-assign" "^7.16.7"
-    "@babel/preset-typescript" "^7.16.7"
-    "@types/invariant" "^2.2.35"
-    invariant "^2.2.4"
-    lodash.isequal "^4.5.0"
-    setimmediate "^1.0.5"
-    string-hash-64 "^1.0.3"
 
 react-native-reanimated@^3.0.0-rc.3:
   version "3.0.0-rc.3"
@@ -6315,6 +6277,11 @@ react-native-screens@^3.15.0:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-share@^7.9.1:
+  version "7.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-7.9.1.tgz#36d1cb9786c58ba14ae31cc72f10b3179a045953"
+  integrity sha512-v4b6lD4YsiCJB14kjXons+d5cvvxgLv8OdBF0aP58X8Qqbcj81QNv1icAxiNmhxFx5OFYsu/E6v+o8S0GSaneQ==
 
 react-native-svg@^13.4.0:
   version "13.4.0"

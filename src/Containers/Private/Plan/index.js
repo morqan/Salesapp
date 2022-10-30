@@ -6,12 +6,16 @@ import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigationRef } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
+import { useAuth } from "@/Hooks/useAuth"
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
+  const { localImagesUrls } = useAuth()
   const { gallery, name, info, is_reserved, is_sold } =
     props?.route?.params?.plan
   const [headInfo, setHeadInfo] = useState([])
+  const [localImgs, setLocalImgs] = useState([])
+
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
@@ -23,9 +27,22 @@ export default function Plan(props) {
       }
     })
     setHeadInfo(infoHead)
-    console.log(props?.route?.params?.plan, 'props?.route?.params?.plan')
+    console.log(infoHead, 'infoHead')
   }, [])
+  useEffect(() => {
+    const newGallery = gallery.map(item => {
+      let newImg =
+        `https://app-portonovi-test.gocreative.az/storage/app/media${item?.img}`.replaceAll(
+          ' ',
+          '%20',
+        )
+      return newImg
+    })
+    const localGallery = localImagesUrls.filter(i => newGallery.includes(i?.id))
 
+    setLocalImgs(localGallery)
+  }, [])
+  console.log(localImgs, 'localImgs')
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={planStyles.backBtnBox}>
@@ -45,12 +62,12 @@ export default function Plan(props) {
           return <RenderHtml key={index} contentWidth={width} source={item} />
         })}
       </View>
-      <View>
+      <View style={{height: '80%'}}>
         <Carousel
           // loop
           width={width}
           autoPlay={false}
-          data={gallery}
+          data={localImgs}
           scrollAnimationDuration={3000}
           // onSnapToItem={index => console.log('current index:', index)}
           renderItem={({ index, item }) => {
@@ -59,7 +76,7 @@ export default function Plan(props) {
                 <Image
                   style={planStyles.sliderImg}
                   source={{
-                    uri: `https://salesapp.portonovi.com/storage/app/media${item?.img}`,
+                    uri: item?.localUrl,
                   }}
                 />
               </View>
@@ -67,8 +84,8 @@ export default function Plan(props) {
           }}
         />
       </View>
-      {is_reserved ||
-        (is_sold && (
+      {is_reserved !== 0 ||
+        (is_sold !== 0 && (
           <View style={planStyles.sliderAbsoluteBox}>
             <Text style={planStyles.sliderAbsoluteText}>
               {is_sold !== 0 && 'Sold out'}

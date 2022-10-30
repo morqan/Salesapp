@@ -39,11 +39,11 @@ export default function Project(props) {
 
   return (
     <View style={{ flex: 1, paddingRight: 20, backgroundColor: '#fff' }}>
-      <View style={projectStyles.projectHead}>
+      <View style={projectStyles.absoluteHead}>
         <MyBtn
           btnStyle={homeStyles.btn}
           textStyle={homeStyles.btnText}
-          containerStyle={{ width: '6%' }}
+          containerStyle={{ width: '100%' }}
           text={'<'}
           onPress={goBack}
         />

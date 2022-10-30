@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Dimensions, Image, Text, View } from 'react-native'
 import MyBtn from '@/Components/MyBtn'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
@@ -6,15 +6,16 @@ import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import Carousel from 'react-native-reanimated-carousel'
 import { navigate, navigationRef } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
+import { useAuth } from '@/Hooks/useAuth'
 
 export default function Details(props) {
   const { gallery, blocks, name, content, video } = props?.route?.params?.detail
-  // const width = Dimensions.get('window').width
   const { width } = Dimensions.get('window')
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
-
+  const { localImagesUrls } = useAuth()
+  const [localImg, setLocalImg] = useState([])
   const onOpenFloor = useCallback(item => {
     if (item?.is_plan) {
       console.log(item, 'item')
@@ -28,7 +29,18 @@ export default function Details(props) {
     html: `${content}`,
   }
 
-  console.log(props?.route?.params?.detail, 'props?.route?.params?.detail')
+  useEffect(() => {
+    const newGallery = gallery.map(item => {
+      let newImg =
+        `https://app-portonovi-test.gocreative.az/storage/app/media${item?.img}`.replaceAll(
+          ' ',
+          '%20',
+        )
+      return newImg
+    })
+    const localGallery = localImagesUrls.filter(i => newGallery.includes(i?.id))
+    setLocalImg(localGallery)
+  }, [])
 
   return (
     <View style={detailsStyles.container}>
@@ -47,8 +59,8 @@ export default function Details(props) {
           <Carousel
             loop
             width={width / 2}
-            autoPlay={gallery.length > 1}
-            data={gallery}
+            autoPlay={localImg.length > 1}
+            data={localImg}
             scrollAnimationDuration={3000}
             // onSnapToItem={index => console.log('current index:', index)}
             renderItem={({ index, item }) => {
@@ -64,7 +76,7 @@ export default function Details(props) {
                   <Image
                     style={detailsStyles.sliderImg}
                     source={{
-                      uri: `https://salesapp.portonovi.com/storage/app/media${item?.img}`,
+                      uri: item?.localUrl,
                     }}
                   />
                 </View>
