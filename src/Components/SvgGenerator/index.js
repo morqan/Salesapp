@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Svg, { G, Image, Path, Text, TSpan } from 'react-native-svg'
 import { svgGeneratorStyles } from '@/Components/SvgGenerator/index.style'
-import MyBtn from '@/Components/MyBtn'
 import { Dimensions, View } from 'react-native'
+import { useAuth } from '@/Hooks/useAuth'
 
 export default function SvgGenerator({
   img,
@@ -17,6 +17,23 @@ export default function SvgGenerator({
   const originalHeight = Number(height) * 8.6
   const aspectRatio = originalWidth / originalHeight
   const windowWidth = Dimensions.get('window').width
+  const { localImagesUrls } = useAuth()
+  const [localImg, setLocalImg] = useState('')
+
+  useEffect(() => {
+    const newImg = img.replace(' ', '%20')
+    const localPath = localImagesUrls.filter(x => {
+      if (x?.id === newImg) {
+        setLocalImg(x?.localUrl)
+        return x
+      } else {
+        setLocalImg(img)
+      }
+    })
+    console.log(img)
+    console.log(localPath, 'localPath')
+    console.log(path, 'path')
+  }, [])
 
   return (
     <View style={{ width: windowWidth, aspectRatio }}>
@@ -34,7 +51,7 @@ export default function SvgGenerator({
           <Image
             width={originalWidth}
             height={originalHeight}
-            xlinkHref={img}
+            xlinkHref={localImg}
           />
           {path &&
             path.map((item, index) => {
@@ -46,7 +63,7 @@ export default function SvgGenerator({
                     svgGeneratorStyles.path,
                     backgroundColor && { fill: backgroundColor },
                   ]}
-                  onPress={() => onPress(item)}
+                  onPress={() => (item?.is_active === 1 ? onPress(item) : {})}
                   d={`M${Number(item?.left)} ${Number(item?.top - top)}h${
                     item?.name.length > 2
                       ? item?.name.length * 130
