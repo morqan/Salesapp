@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Text, View, Image, Platform } from 'react-native'
+import { Text, View, Image, Platform, ActivityIndicator } from 'react-native'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigate } from '@/Navigators/utils'
 import {
@@ -17,6 +17,7 @@ import * as RNFS from 'react-native-fs'
 export default function Home() {
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const dispatch = useDispatch()
   const { homeItemPositions, pages, localImagesUrls } = useAuth()
@@ -27,7 +28,6 @@ export default function Home() {
     isError: getImagesIsError,
   } = result
   const onDownloadImages = async imgUrls => {
-    console.log('test')
     let imgLocalUrls = []
     try {
       const FILE = Platform.OS === 'ios' ? '' : 'file://'
@@ -42,7 +42,6 @@ export default function Home() {
           toFile: fileName,
         })
         const downloadResult = await download.promise
-        console.log(downloadResult, 'downloadResult')
         if (downloadResult.statusCode === 200) {
           const newPath = {
             id: sourceUrl,
@@ -59,10 +58,12 @@ export default function Home() {
     } finally {
       console.log(imgLocalUrls, 'imgLocalUrls')
       dispatch(setLocalImgUrls({ localUrls: imgLocalUrls }))
+      setLoading(false)
     }
   }
   useEffect(() => {
-    if (localImagesUrls?.length === 0 && getImagesData?.length) {
+    if (localImagesUrls?.length !== 502 && getImagesData?.length) {
+      setLoading(true)
       onDownloadImages(getImagesData)
     }
   }, [getImagesIsSuccess])
@@ -75,7 +76,7 @@ export default function Home() {
     { data: getPageData, isSuccess: getPageIsSuccess, isError: getPageIsError },
   ] = useLazyGetPagesQuery()
   const image = {
-    uri: `https://salesapp.portonovi.com/storage/app/media/${pages?.data?.viewBag?.img}`,
+    uri: `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.data?.viewBag?.img}`,
   }
 
   useEffect(() => {
@@ -96,7 +97,7 @@ export default function Home() {
 
   useEffect(() => {
     if (getPageIsSuccess) {
-      console.log(getPageData, 'getPageData')
+      // console.log(getPageData, 'getPageData')
       dispatch(setPages({ page: getPageData }))
     }
   }, [getPageIsSuccess, getPageIsError])
@@ -128,7 +129,13 @@ export default function Home() {
   // console.log(pages, 'pages')
   // console.log(homeItemPositions, 'homeItemPositions')
   console.log(localImagesUrls, 'localImagesUrlsas')
-
+  if (loading) {
+    return (
+      <View style={{ justifyContent: 'center', alignItems: 'center' , flex: 1}}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    )
+  }
   return (
     <View style={homeStyles.container}>
       <View style={homeStyles.logoBox}>

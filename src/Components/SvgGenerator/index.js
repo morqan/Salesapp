@@ -22,14 +22,16 @@ export default function SvgGenerator({
 
   useEffect(() => {
     const newImg = img.replace(' ', '%20')
+    console.log(newImg, 'newImg')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
-        console.log(x, 'xxx')
+        console.log(x, 'xxxs')
         setLocalImg(`${x?.localUrl}`)
       }
     })
   }, [])
-
+  console.log(localImg, 'localImg')
+  console.log(localImagesUrls, 'localImagesUrlslocalImagesUrls')
   return (
     <View style={{ width: windowWidth, aspectRatio }}>
       <Svg
