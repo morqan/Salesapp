@@ -6,6 +6,7 @@ import MyBtn from '@/Components/MyBtn'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { projectStyles } from '@/Containers/Private/Project/index.style'
 import Footer from '@/Components/Footer'
+import BackBtn from "@/Components/BackBtn"
 
 export default function Project(props) {
   const [widths, setWidths] = useState('')
@@ -38,15 +39,9 @@ export default function Project(props) {
   }, [])
 
   return (
-    <View style={{ flex: 1, paddingRight: 20, backgroundColor: '#fff' }}>
+    <View style={projectStyles.container}>
       <View style={projectStyles.absoluteHead}>
-        <MyBtn
-          btnStyle={homeStyles.btn}
-          textStyle={homeStyles.btnText}
-          containerStyle={{ width: '100%' }}
-          text={'<'}
-          onPress={goBack}
-        />
+        <BackBtn onPress={goBack} />
       </View>
       {widths && (
         <SvgGenerator

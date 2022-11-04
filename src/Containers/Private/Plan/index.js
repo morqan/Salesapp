@@ -1,12 +1,18 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Image, Text, View, useWindowDimensions } from 'react-native'
+import {
+  Image,
+  Text,
+  View,
+  useWindowDimensions,
+  TouchableOpacity,
+} from 'react-native'
 import Carousel from 'react-native-reanimated-carousel'
-import MyBtn from '@/Components/MyBtn'
-import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigationRef } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
-import { useAuth } from "@/Hooks/useAuth"
+import { useAuth } from '@/Hooks/useAuth'
+import BackBtn from '@/Components/BackBtn'
+import letterImg from '../../../Assets/Images/mail.png'
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
@@ -46,13 +52,11 @@ export default function Plan(props) {
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={planStyles.backBtnBox}>
-        <MyBtn
-          btnStyle={homeStyles.btn}
-          textStyle={homeStyles.btnText}
-          containerStyle={{ width: '100%' }}
-          text={'<'}
-          onPress={goBack}
-        />
+        <BackBtn onPress={goBack} />
+        <TouchableOpacity>
+          <Image source={letterImg} style={{ width: 30,
+            height: 30, }} />
+        </TouchableOpacity>
       </View>
       <View style={planStyles.header}>
         <View>
@@ -62,7 +66,7 @@ export default function Plan(props) {
           return <RenderHtml key={index} contentWidth={width} source={item} />
         })}
       </View>
-      <View style={{height: '80%'}}>
+      <View style={{ height: '80%' }}>
         <Carousel
           // loop
           width={width}

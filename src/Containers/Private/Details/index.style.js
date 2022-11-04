@@ -21,15 +21,16 @@ export const detailsStyles = StyleSheet.create({
   body: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     paddingHorizontal: 5,
   },
   sliderBox: {
-    flex: 3,
+    // flex: 1,
     // backgroundColor: 'blue',
-    width: (width * 2) / 3,
+    // width: (width * 2) / 3,
   },
   content: {
-    flex: 2,
+    flex: 1,
     paddingHorizontal: 10,
   },
   contentHeader: {
@@ -43,9 +44,18 @@ export const detailsStyles = StyleSheet.create({
     fontWeight: '600',
     color: '#9b8264',
   },
+  btnBox: {
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start',
+    // width: '100%',
+    // backgroundColor: 'red'
+  },
   typeBtn: {
     backgroundColor: '#9b8264',
-    width: '30%',
+    // flex: 1,
+    margin: 5,
   },
   typeBtnText: {
     color: '#fff',
@@ -59,5 +69,25 @@ export const detailsStyles = StyleSheet.create({
   sliderImg: {
     width: '100%',
     height: '100%',
+    // resizeMode: 'stretch',
+  },
+  tagsStyles: {
+    p: {
+      marginBottom: 0,
+    },
+  },
+  videoIconBox: {
+    borderWidth: 2,
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 30,
+    borderColor: '#9b8264',
+    marginLeft: 10
+  },
+  videoBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })

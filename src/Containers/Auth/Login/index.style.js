@@ -19,5 +19,12 @@ export const styles = StyleSheet.create({
   },
   inputBox: {
     marginBottom: 30
+  },
+  errText: {
+    color: 'red',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 50
   }
 })

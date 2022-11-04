@@ -8,9 +8,16 @@ export const projectStyles = StyleSheet.create({
   },
   absoluteHead: {
     position: 'absolute',
-    top: 0,
-    right: 20,
+    top: 10,
+    right: 15,
     zIndex: 999,
-    width: 50,
+    // width: 25,
+    // height: 25,
+  },
+  container: {
+    flex: 1,
+    paddingRight: 20,
+    paddingTop: 20,
+    backgroundColor: '#fff',
   },
 })

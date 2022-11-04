@@ -61,6 +61,7 @@ export default function Login() {
         </View>
         <MyBtn text={'SIGN IN'} onPress={onPressLogin} />
       </View>
+      <Text style={styles.errText}>{error?.data?.error}</Text>
     </View>
   )
 }

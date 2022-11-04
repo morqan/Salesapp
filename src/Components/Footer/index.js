@@ -12,6 +12,7 @@ export default function Footer({
   catalog,
   name,
   pyc_gallery,
+  homeFooter = 0,
 }) {
   const onPressInfo = useCallback(() => {
     navigate('Information', { text: information, title: name })
@@ -64,6 +65,17 @@ export default function Footer({
           text={'catalog'}
         />
       )}
+      {homeFooter.length > 0 &&
+        homeFooter.map(item => {
+          return (
+            <MyBtn
+              key={item?.text}
+              btnStyle={[homeStyles.btn, { minWidth: 100 }]}
+              textStyle={homeStyles.btnText}
+              text={item?.text}
+            />
+          )
+        })}
     </View>
   )
 }
