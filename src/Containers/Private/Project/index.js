@@ -7,6 +7,7 @@ import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { projectStyles } from '@/Containers/Private/Project/index.style'
 import Footer from '@/Components/Footer'
 import BackBtn from "@/Components/BackBtn"
+import MainBtnGroup from "@/Components/MainBtnGroup"
 
 export default function Project(props) {
   const [widths, setWidths] = useState('')
@@ -63,6 +64,7 @@ export default function Project(props) {
         name={name}
         pyc_gallery={pyc_gallery}
       />
+      <MainBtnGroup/>
     </View>
   )
 }

@@ -8,12 +8,18 @@ import {
   useLazyGetPositionQuery,
 } from '@/Services/modules/Auth'
 import { useDispatch } from 'react-redux'
-import { setDownloaded, setHomeItemPosition, setLocalImgUrls, setPages } from "@/Store/Auth"
+import {
+  setDownloaded,
+  setHomeItemPosition,
+  setLocalImgUrls,
+  setPages,
+} from '@/Store/Auth'
 import { useAuth } from '@/Hooks/useAuth'
 import Footer from '@/Components/Footer'
 import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
 import logo from '../../../Assets/Images/logo.png'
+import MainBtnGroup from '@/Components/MainBtnGroup'
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -170,6 +176,7 @@ export default function Home() {
         />
       )}
       <Footer homeFooter={pages?.data?.viewBag?.footer_menu} />
+      <MainBtnGroup />
     </View>
   )
 }
