@@ -68,7 +68,6 @@ const authSlice = createSlice({
 export const {
   removeCredentials,
   changeToken,
-  changeUser,
   setHomeItemPosition,
   setPages,
   setLocalImgUrls,

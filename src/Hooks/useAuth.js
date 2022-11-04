@@ -2,7 +2,6 @@ import {
   selectCurrentAccessToken,
   selectCurrentDownloaded,
   selectCurrentHomeItemPosition,
-  selectCurrentIsd,
   selectCurrentLocalImagesUrls,
   selectCurrentPages,
   selectCurrentUser,
