@@ -16,23 +16,22 @@ export const planStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    top: 15,
+    paddingHorizontal: 70,
+    top: 20,
     right: 15,
     zIndex: 999,
-    // width: 50,
-    height: 100
+    height: 100,
   },
   slideBox: {
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     // backgroundColor: 'red',
     // marginTop: -100
   },
   sliderImg: {
-    width: '100%',
+    width: '90%',
     height: '100%',
-    resizeMode: "contain"
+    resizeMode: 'contain',
   },
   sliderAbsoluteBox: {
     position: 'absolute',

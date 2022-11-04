@@ -8,19 +8,23 @@ import {
   useLazyGetPositionQuery,
 } from '@/Services/modules/Auth'
 import { useDispatch } from 'react-redux'
-import { setHomeItemPosition, setLocalImgUrls, setPages } from '@/Store/Auth'
+import { setDownloaded, setHomeItemPosition, setLocalImgUrls, setPages } from "@/Store/Auth"
 import { useAuth } from '@/Hooks/useAuth'
 import Footer from '@/Components/Footer'
 import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
+import logo from '../../../Assets/Images/logo.png'
 
 export default function Home() {
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
   const [loading, setLoading] = useState(false)
+  const [downloadedImg, setDownloadedImg] = useState(0)
 
   const dispatch = useDispatch()
-  const { homeItemPositions, pages, localImagesUrls } = useAuth()
+  const { homeItemPositions, pages, localImagesUrls, downloaded } = useAuth()
+  // console.log(downloaded, 'downloaded')
+
   const [getImages, result] = useLazyGetImagesQuery()
   const {
     data: getImagesData,
@@ -35,22 +39,33 @@ export default function Home() {
         let fileName = FILE + RNFS.DocumentDirectoryPath + '/' + `img${i}.jpg`
         let sourceUrl = imgUrls[i]
         if (await RNFS.exists(fileName)) {
-          await RNFS.unlink(fileName)
-        }
-        const download = RNFS.downloadFile({
-          fromUrl: sourceUrl,
-          toFile: fileName,
-        })
-        const downloadResult = await download.promise
-        if (downloadResult.statusCode === 200) {
+          // await RNFS.unlink(fileName)
           const newPath = {
             id: sourceUrl,
             localUrl: fileName,
             imgName: `img${i}.jpg`,
           }
-          console.log(newPath, 'newPath')
+          console.log(imgLocalUrls.length, 'oldPath')
+          setDownloadedImg(prevState => prevState + 1)
           imgLocalUrls.push(newPath)
           i++
+        } else {
+          const download = RNFS.downloadFile({
+            fromUrl: sourceUrl,
+            toFile: fileName,
+          })
+          const downloadResult = await download.promise
+          if (downloadResult.statusCode === 200) {
+            const newPath = {
+              id: sourceUrl,
+              localUrl: fileName,
+              imgName: `img${i}.jpg`,
+            }
+            console.log(imgLocalUrls.length, 'newPath')
+            setDownloadedImg(prevState => prevState + 1)
+            imgLocalUrls.push(newPath)
+            i++
+          }
         }
       }
     } catch (err) {
@@ -58,11 +73,12 @@ export default function Home() {
     } finally {
       console.log(imgLocalUrls, 'imgLocalUrls')
       dispatch(setLocalImgUrls({ localUrls: imgLocalUrls }))
+      // dispatch(setDownloaded({ download: true }))
       setLoading(false)
     }
   }
   useEffect(() => {
-    if (localImagesUrls?.length !== 502 && getImagesData?.length) {
+    if (localImagesUrls?.length !== getImagesData?.length) {
       setLoading(true)
       onDownloadImages(getImagesData)
     }
@@ -128,18 +144,20 @@ export default function Home() {
   }, [])
   // console.log(pages, 'pages')
   // console.log(homeItemPositions, 'homeItemPositions')
-  console.log(localImagesUrls, 'localImagesUrlsas')
+  // console.log(getImagesData?.length, 'getImagesData?.length')
   if (loading) {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center' , flex: 1}}>
+      <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
         <ActivityIndicator size="large" color="#00ff00" />
+        <Text>Image size: {getImagesData?.length} </Text>
+        <Text>Downloaded image count: {downloadedImg} </Text>
       </View>
     )
   }
   return (
     <View style={homeStyles.container}>
       <View style={homeStyles.logoBox}>
-        <Text style={homeStyles.logo}>PORTONOVI</Text>
+        <Image source={logo} style={homeStyles.logo} />
       </View>
       {(getPageIsSuccess || pages) && widths && (
         <SvgGenerator
@@ -151,7 +169,7 @@ export default function Home() {
           top={2600}
         />
       )}
-      <Footer />
+      <Footer homeFooter={pages?.data?.viewBag?.footer_menu} />
     </View>
   )
 }

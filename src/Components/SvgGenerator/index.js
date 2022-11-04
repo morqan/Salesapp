@@ -22,7 +22,6 @@ export default function SvgGenerator({
 
   useEffect(() => {
     const newImg = img.replace(' ', '%20')
-    console.log(newImg, 'newImg')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
         console.log(x, 'xxxs')
@@ -30,8 +29,8 @@ export default function SvgGenerator({
       }
     })
   }, [])
-  console.log(localImg, 'localImg')
-  console.log(localImagesUrls, 'localImagesUrlslocalImagesUrls')
+  // console.log(localImg, 'localImg')
+  // console.log(localImagesUrls, 'localImagesUrlslocalImagesUrls')
   return (
     <View style={{ width: windowWidth, aspectRatio }}>
       <Svg
@@ -62,11 +61,12 @@ export default function SvgGenerator({
                   style={[
                     svgGeneratorStyles.path,
                     backgroundColor && { fill: backgroundColor },
+                    item?.is_active === 0 && { opacity: 0.5 },
                   ]}
                   onPress={() => (item?.is_active === 1 ? onPress(item) : {})}
                   d={`M${Number(item?.left)} ${Number(item?.top - top)}h${
                     item?.name.length > 2
-                      ? item?.name.length * 130
+                      ? item?.name.length * 90
                       : item?.name.length * 220
                   }v330H${Number(item?.left)}z`}
                   stroke="#AC7D3A"
@@ -81,14 +81,14 @@ export default function SvgGenerator({
               return (
                 <Text
                   key={index + 100}
-                  fontSize={210}
+                  fontSize={130}
                   fontWeight="500"
                   // letterSpacing={-0.2}
-                  style={{ position: 'absolute' }}
+                  style={{ position: 'absolute', textTransform: 'uppercase' }}
                 >
                   <TSpan
                     x={Number(item?.left) + 120}
-                    y={Number(item?.top) - top + 250}
+                    y={Number(item?.top) - top + 200}
                     fill={backgroundColor ? '#fff' : '#000'}
                   >
                     {item?.name}

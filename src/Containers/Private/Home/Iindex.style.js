@@ -6,16 +6,17 @@ export const homeStyles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logoBox: {
-    paddingVertical: 30,
+    paddingTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 50,
+    // marginBottom: 50,
     // backgroundColor: 'green',
     // height: '15%'
   },
   logo: {
-    fontSize: 25,
-    fontWeight: 'bold',
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
   },
   mapBox: {
     flex: 1,

@@ -1,6 +1,8 @@
 import {
   selectCurrentAccessToken,
+  selectCurrentDownloaded,
   selectCurrentHomeItemPosition,
+  selectCurrentIsd,
   selectCurrentLocalImagesUrls,
   selectCurrentPages,
   selectCurrentUser,
@@ -14,6 +16,7 @@ export const useAuth = () => {
   const homeItemPositions = useSelector(selectCurrentHomeItemPosition)
   const pages = useSelector(selectCurrentPages)
   const localImagesUrls = useSelector(selectCurrentLocalImagesUrls)
+  const downloaded = useSelector(selectCurrentDownloaded)
 
   return useMemo(
     () => ({
@@ -22,7 +25,8 @@ export const useAuth = () => {
       homeItemPositions,
       pages,
       localImagesUrls,
+      downloaded,
     }),
-    [user, token, homeItemPositions, pages, localImagesUrls],
+    [user, token, homeItemPositions, pages, localImagesUrls, downloaded],
   )
 }

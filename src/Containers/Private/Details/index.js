@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Dimensions, Image, Text, View } from 'react-native'
+import { Dimensions, Image, ScrollView, Text, View } from 'react-native'
 import MyBtn from '@/Components/MyBtn'
-import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import Carousel from 'react-native-reanimated-carousel'
 import { navigate, navigationRef } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
 import { useAuth } from '@/Hooks/useAuth'
+import BackBtn from '@/Components/BackBtn'
+import SvgVideoIcon from '@/Assets/SvgVideoIcon'
 
 export default function Details(props) {
-  const { gallery, blocks, name, content, video } = props?.route?.params?.detail
+  const { gallery, blocks, name, content, video, info, is_plan } =
+    props?.route?.params?.detail
   const { width } = Dimensions.get('window')
   const goBack = useCallback(() => {
     navigationRef.goBack()
@@ -26,9 +28,9 @@ export default function Details(props) {
   }, [])
 
   const source = {
-    html: `${content}`,
+    html: is_plan ? `${info}` : `${content}`,
   }
-
+  console.log(props?.route?.params?.detail, 'props?.route?.params?.detail')
   useEffect(() => {
     const newGallery = gallery.map(item => {
       let newImg =
@@ -46,13 +48,7 @@ export default function Details(props) {
     <View style={detailsStyles.container}>
       <View style={detailsStyles.header}>
         <Text style={detailsStyles.headerTitle}>{name}</Text>
-        <MyBtn
-          btnStyle={homeStyles.btn}
-          textStyle={homeStyles.btnText}
-          containerStyle={{ width: '6%' }}
-          text={'<'}
-          onPress={goBack}
-        />
+        <BackBtn onPress={goBack} />
       </View>
       <View style={detailsStyles.body}>
         <View style={detailsStyles.sliderBox}>
@@ -68,7 +64,7 @@ export default function Details(props) {
                 <View
                   style={{
                     flex: 1,
-                    borderWidth: 1,
+                    // borderWidth: 1,
                     justifyContent: 'center',
                     // backgroundColor: 'green',
                   }}
@@ -84,16 +80,22 @@ export default function Details(props) {
             }}
           />
         </View>
+
         <View style={detailsStyles.content}>
           <View style={detailsStyles.contentHeader}>
             {blocks?.data.length > 0 && (
               <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>
             )}
             {video && (
-              <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>
+              <View style={detailsStyles.videoBox}>
+                <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>
+                <View style={detailsStyles.videoIconBox}>
+                  <SvgVideoIcon />
+                </View>
+              </View>
             )}
           </View>
-          <View style={detailsStyles.contentHeader}>
+          <View style={detailsStyles.btnBox}>
             {blocks?.data &&
               blocks?.data.map(item => {
                 return item?.floors?.data.map(floor => {
@@ -109,9 +111,13 @@ export default function Details(props) {
                 })
               })}
           </View>
-          <View>
-            <RenderHtml contentWidth={width} source={source} />
-          </View>
+          <ScrollView>
+            <RenderHtml
+              contentWidth={width}
+              source={source}
+              tagsStyles={detailsStyles.tagsStyles}
+            />
+          </ScrollView>
           <View />
         </View>
       </View>
