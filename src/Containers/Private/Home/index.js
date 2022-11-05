@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Text, View, Image, Platform, ActivityIndicator } from 'react-native'
+import {
+  Text,
+  View,
+  Image,
+  Platform,
+  ActivityIndicator,
+  TouchableOpacity,
+} from 'react-native'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigate } from '@/Navigators/utils'
 import {
@@ -20,6 +27,7 @@ import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
 import logo from '../../../Assets/Images/logo.png'
 import MainBtnGroup from '@/Components/MainBtnGroup'
+import downloadIcon from '../../../Assets/Images/akar-icons_download.png'
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -190,10 +198,28 @@ export default function Home() {
         </View>
       ) : (
         <View style={homeStyles.downloadHint}>
-          <Text style={homeStyles.downloadHintText}>Please download data</Text>
+          <Text style={homeStyles.downloadHintText}>
+            Please click button for downloading application data.
+          </Text>
+          <Text style={homeStyles.downloadHintText}>
+            Please note that it might take 5-10 minutes based on your internet
+            connection.
+          </Text>
+          <TouchableOpacity
+            onPress={onOpenDownloadImages}
+            style={homeStyles.downloadBtn}
+          >
+            <Text style={homeStyles.downloadBtnText}>Download</Text>
+          </TouchableOpacity>
         </View>
       )}
       <MainBtnGroup onPressVideo={onOpenDownloadImages} downloadBtn />
+      <TouchableOpacity
+        onPress={onOpenDownloadImages}
+        style={homeStyles.downloadBtnLittle}
+      >
+        <Image source={downloadIcon} style={homeStyles.downloadIcon} />
+      </TouchableOpacity>
     </View>
   )
 }
