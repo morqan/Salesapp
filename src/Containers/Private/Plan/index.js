@@ -13,6 +13,7 @@ import { planStyles } from '@/Containers/Private/Plan/index.style'
 import { useAuth } from '@/Hooks/useAuth'
 import BackBtn from '@/Components/BackBtn'
 import letterImg from '../../../Assets/Images/mail.png'
+import MainBtnGroup from "@/Components/MainBtnGroup"
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
@@ -70,10 +71,9 @@ export default function Plan(props) {
         <Carousel
           // loop
           width={width}
-          autoPlay={false}
+          autoPlay={localImgs.length > 1}
           data={localImgs}
           scrollAnimationDuration={3000}
-          // onSnapToItem={index => console.log('current index:', index)}
           renderItem={({ index, item }) => {
             return (
               <View style={planStyles.slideBox}>
@@ -97,6 +97,7 @@ export default function Plan(props) {
             </Text>
           </View>
         ))}
+      <MainBtnGroup />
     </View>
   )
 }

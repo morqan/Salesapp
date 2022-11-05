@@ -1,5 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Dimensions, Image, ScrollView, Text, View } from 'react-native'
+import {
+  Dimensions,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import MyBtn from '@/Components/MyBtn'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import Carousel from 'react-native-reanimated-carousel'
@@ -8,8 +15,13 @@ import RenderHtml from 'react-native-render-html'
 import { useAuth } from '@/Hooks/useAuth'
 import BackBtn from '@/Components/BackBtn'
 import SvgVideoIcon from '@/Assets/SvgVideoIcon'
+import VideoModal from '@/Components/VideoModal'
+import MainBtnGroup from "@/Components/MainBtnGroup"
 
 export default function Details(props) {
+  const [showVideo, setShowVideo] = useState(false)
+  const [localImg, setLocalImg] = useState([])
+
   const { gallery, blocks, name, content, video, info, is_plan } =
     props?.route?.params?.detail
   const { width } = Dimensions.get('window')
@@ -17,7 +29,6 @@ export default function Details(props) {
     navigationRef.goBack()
   }, [])
   const { localImagesUrls } = useAuth()
-  const [localImg, setLocalImg] = useState([])
   const onOpenFloor = useCallback(item => {
     if (item?.is_plan) {
       console.log(item, 'item')
@@ -42,6 +53,10 @@ export default function Details(props) {
     })
     const localGallery = localImagesUrls.filter(i => newGallery.includes(i?.id))
     setLocalImg(localGallery)
+  }, [])
+
+  const videoModalHandler = useCallback(() => {
+    setShowVideo(prevState => !prevState)
   }, [])
 
   return (
@@ -83,16 +98,21 @@ export default function Details(props) {
 
         <View style={detailsStyles.content}>
           <View style={detailsStyles.contentHeader}>
-            {blocks?.data.length > 0 && (
-              <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>
-            )}
+            <View>
+              {blocks?.data.length > 0 && (
+                <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>
+              )}
+            </View>
             {video && (
-              <View style={detailsStyles.videoBox}>
+              <TouchableOpacity
+                style={detailsStyles.videoBox}
+                onPress={videoModalHandler}
+              >
                 <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>
                 <View style={detailsStyles.videoIconBox}>
                   <SvgVideoIcon />
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
           </View>
           <View style={detailsStyles.btnBox}>
@@ -121,6 +141,10 @@ export default function Details(props) {
           <View />
         </View>
       </View>
+      {showVideo && (
+        <VideoModal video={video} onPressClose={videoModalHandler} />
+      )}
+      <MainBtnGroup />
     </View>
   )
 }

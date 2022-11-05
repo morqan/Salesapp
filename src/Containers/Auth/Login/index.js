@@ -12,7 +12,8 @@ export default function Login() {
 
   const [login, setLogin] = useState('')
   const [pass, setPass] = useState('')
-  const [onLogin, { data, isSuccess, isLoading, isError, error }] = useOnLoginMutation()
+  const [onLogin, { data, isSuccess, isLoading, isError, error }] =
+    useOnLoginMutation()
   useEffect(() => {
     if (isSuccess) {
       const { token } = data
@@ -59,7 +60,12 @@ export default function Login() {
             onChangeText={text => onChangePass(text)}
           />
         </View>
-        <MyBtn text={'SIGN IN'} onPress={onPressLogin} />
+        <MyBtn
+          text={'SIGN IN'}
+          onPress={onPressLogin}
+          btnStyle={{ backgroundColor: '#fff' }}
+          textStyle={{ color: '#000' }}
+        />
       </View>
       <Text style={styles.errText}>{error?.data?.error}</Text>
     </View>

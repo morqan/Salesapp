@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Image, View } from 'react-native'
-import SvgGenerator from '@/Components/SvgGenerator'
 import { navigate, navigationRef } from '@/Navigators/utils'
 import { projectStyles } from '@/Containers/Private/Project/index.style'
-import MyBtn from '@/Components/MyBtn'
-import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
+import FloorSvgGenerator from '@/Components/FloorSvgGenerator'
+import BackBtn from '@/Components/BackBtn'
 
 export default function Floor(props) {
   const [widths, setWidths] = useState('')
@@ -26,22 +25,17 @@ export default function Floor(props) {
   return (
     <View>
       <View style={projectStyles.absoluteHead}>
-        <MyBtn
-          btnStyle={homeStyles.btn}
-          textStyle={homeStyles.btnText}
-          containerStyle={{ width: '100%' }}
-          text={'<'}
-          onPress={goBack}
-        />
+        <BackBtn onPress={goBack} />
       </View>
       {widths && (
-        <SvgGenerator
+        <FloorSvgGenerator
           img={img}
           path={plans?.data}
           onPress={onOpenPlan}
           width={widths}
           height={heights}
           top={0}
+          backgroundColor={'#AC7D3A'}
         />
       )}
     </View>

@@ -6,7 +6,7 @@ export const btnStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#9b8264',
     alignSelf: 'flex-start',
-    padding: 1
+    padding: 1,
   },
   btn: {
     borderColor: '#9b8264',
@@ -17,7 +17,7 @@ export const btnStyles = StyleSheet.create({
     paddingTop: 3,
     paddingHorizontal: 8,
     paddingVertical: 2,
-    backgroundColor: '#fff',
+    backgroundColor: '#9b8264',
   },
   backBtn: {
     backgroundColor: '#0d6a78',
@@ -25,5 +25,10 @@ export const btnStyles = StyleSheet.create({
     height: 25,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  btnText: {
+    color: 'red',
+    fontSize: 15,
+    fontWeight: '500',
+  },
 })

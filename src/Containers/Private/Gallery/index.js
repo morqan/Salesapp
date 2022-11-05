@@ -1,24 +1,40 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Dimensions, Image, View } from 'react-native'
 import Carousel from 'react-native-reanimated-carousel'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
-import MyBtn from '@/Components/MyBtn'
-import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
-import { navigationRef } from "@/Navigators/utils"
+import { navigationRef } from '@/Navigators/utils'
+import BackBtn from '@/Components/BackBtn'
+import { useAuth } from '@/Hooks/useAuth'
+import MainBtnGroup from "@/Components/MainBtnGroup"
 
 export default function Gallery(props) {
+  const [localImg, setLocalImg] = useState([])
+  const { localImagesUrls } = useAuth()
   const { gallery } = props?.route?.params
   const width = Dimensions.get('window').width
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
+  useEffect(() => {
+    const newGallery = gallery.map(item => {
+      let newImg =
+        `https://app-portonovi-test.gocreative.az/storage/app/media${item?.img}`.replaceAll(
+          ' ',
+          '%20',
+        )
+      return newImg
+    })
+    const localGallery = localImagesUrls.filter(i => newGallery.includes(i?.id))
+    setLocalImg(localGallery)
+  }, [])
+
   return (
     <View style={{ backgroundColor: '#fff', paddingTop: 50 }}>
       <Carousel
         // loop
         width={width}
-        autoPlay={false}
-        data={gallery}
+        autoPlay={localImg?.length > 1}
+        data={localImg}
         scrollAnimationDuration={2000}
         // onSnapToItem={index => console.log('current index:', index)}
         renderItem={({ index, item }) => {
@@ -27,7 +43,7 @@ export default function Gallery(props) {
               <Image
                 style={planStyles.sliderImg}
                 source={{
-                  uri: `https://salesapp.portonovi.com/storage/app/media${item?.img}`,
+                  uri: item?.localUrl,
                 }}
               />
             </View>
@@ -35,14 +51,9 @@ export default function Gallery(props) {
         }}
       />
       <View style={planStyles.backBtnBox}>
-        <MyBtn
-          btnStyle={homeStyles.btn}
-          textStyle={homeStyles.btnText}
-          containerStyle={{ width: '100%' }}
-          text={'<'}
-          onPress={goBack}
-        />
+        <BackBtn onPress={goBack} />
       </View>
+      <MainBtnGroup />
     </View>
   )
 }

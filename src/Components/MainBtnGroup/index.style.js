@@ -6,6 +6,7 @@ export const mainBtnStyles = StyleSheet.create({
     bottom: 20,
     right: 20,
     alignItems: 'center',
+    zIndex: 9999
   },
   img: {
     width: 30,

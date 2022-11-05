@@ -10,6 +10,13 @@ export const infoStyles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: '600',
-  }
+  },
+  tagStyle: {
+    p: {
+      lineHeight: 30,
+      fontSize: 15
+      // color: 'red'
+    },
+  },
 
 });
