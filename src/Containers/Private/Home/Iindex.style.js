@@ -84,11 +84,38 @@ export const homeStyles = StyleSheet.create({
   downloadHint: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 100
+    paddingTop: 100,
   },
   downloadHintText: {
     color: '#000',
     fontWeight: 'bold',
     fontSize: 20,
-  }
+  },
+  downloadBtn: {
+    backgroundColor: '#0d6a78',
+    paddingVertical: 10,
+    paddingHorizontal: 25,
+    marginTop: 30,
+  },
+  downloadBtnText: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 20,
+  },
+  downloadBtnLittle: {
+    backgroundColor: '#fff',
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    position: 'absolute',
+    bottom: 20,
+    left: 10,
+  },
+  downloadIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+  },
 })
