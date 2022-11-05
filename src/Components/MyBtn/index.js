@@ -18,7 +18,7 @@ export default function MyBtn({
         onPress={onPress}
         // disabled={disabled}
       >
-        <Text style={[textStyle]}>{text}</Text>
+        <Text style={[btnStyles.btnText, textStyle]}>{text}</Text>
       </TouchableOpacity>
     </View>
   )

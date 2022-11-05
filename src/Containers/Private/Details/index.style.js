@@ -74,6 +74,7 @@ export const detailsStyles = StyleSheet.create({
   tagsStyles: {
     p: {
       marginBottom: 0,
+      lineHeight: 25
     },
   },
   videoIconBox: {

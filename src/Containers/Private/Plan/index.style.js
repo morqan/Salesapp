@@ -30,7 +30,7 @@ export const planStyles = StyleSheet.create({
   },
   sliderImg: {
     width: '90%',
-    height: '100%',
+    height: '90%',
     resizeMode: 'contain',
   },
   sliderAbsoluteBox: {

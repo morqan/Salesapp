@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Text, View, Image, Platform, ActivityIndicator } from 'react-native'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigate } from '@/Navigators/utils'
@@ -32,11 +32,7 @@ export default function Home() {
   // console.log(downloaded, 'downloaded')
 
   const [getImages, result] = useLazyGetImagesQuery()
-  const {
-    data: getImagesData,
-    isSuccess: getImagesIsSuccess,
-    isError: getImagesIsError,
-  } = result
+  const { data: getImagesData, isSuccess: getImagesIsSuccess } = result
   const onDownloadImages = async imgUrls => {
     let imgLocalUrls = []
     try {
@@ -79,16 +75,18 @@ export default function Home() {
     } finally {
       console.log(imgLocalUrls, 'imgLocalUrls')
       dispatch(setLocalImgUrls({ localUrls: imgLocalUrls }))
-      // dispatch(setDownloaded({ download: true }))
+      dispatch(setDownloaded({ download: true }))
       setLoading(false)
+      setDownloadedImg(0)
     }
   }
-  useEffect(() => {
-    if (localImagesUrls?.length !== getImagesData?.length) {
-      setLoading(true)
-      onDownloadImages(getImagesData)
-    }
-  }, [getImagesIsSuccess])
+
+  // useEffect(() => {
+  //   if (localImagesUrls?.length !== getImagesData?.length) {
+  //     setLoading(true)
+  //     onDownloadImages(getImagesData)
+  //   }
+  // }, [getImagesIsSuccess])
 
   const [getPosition, { data, isSuccess, isError, error }] =
     useLazyGetPositionQuery()
@@ -149,14 +147,25 @@ export default function Home() {
     navigate('Project', { project: item })
   }, [])
   // console.log(pages, 'pages')
-  // console.log(homeItemPositions, 'homeItemPositions')
+  // console.log(homeItemPositions[0]?.video, 'homeItemPositions')
   // console.log(getImagesData?.length, 'getImagesData?.length')
+  console.log(downloaded, 'downloadeds')
+
+  const onOpenDownloadImages = useCallback(() => {
+    setLoading(true)
+    onDownloadImages(getImagesData)
+  }, [getImagesData])
+  // console.log(getImagesData, 'getImagesData')
   if (loading) {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
-        <ActivityIndicator size="large" color="#00ff00" />
-        <Text>Image size: {getImagesData?.length} </Text>
-        <Text>Downloaded image count: {downloadedImg} </Text>
+      <View style={homeStyles.spinnerBox}>
+        <ActivityIndicator size="large" color="#000" />
+        <Text style={{ fontSize: 20 }}>
+          Image size: {getImagesData?.length}{' '}
+        </Text>
+        <Text style={{ fontSize: 20 }}>
+          Downloaded image count: {downloadedImg}{' '}
+        </Text>
       </View>
     )
   }
@@ -165,18 +174,26 @@ export default function Home() {
       <View style={homeStyles.logoBox}>
         <Image source={logo} style={homeStyles.logo} />
       </View>
-      {(getPageIsSuccess || pages) && widths && (
-        <SvgGenerator
-          img={image?.uri}
-          path={homeItemPositions}
-          onPress={onOpenProject}
-          height={heights}
-          width={widths}
-          top={2600}
-        />
+      {downloaded && getImagesData?.length > 0 ? (
+        <View>
+          {(getPageIsSuccess || pages) && widths && (
+            <SvgGenerator
+              img={image?.uri}
+              path={homeItemPositions}
+              onPress={onOpenProject}
+              height={heights}
+              width={widths}
+              top={2600}
+            />
+          )}
+          <Footer homeFooter={pages?.data?.viewBag?.footer_menu} />
+        </View>
+      ) : (
+        <View style={homeStyles.downloadHint}>
+          <Text style={homeStyles.downloadHintText}>Please download data</Text>
+        </View>
       )}
-      <Footer homeFooter={pages?.data?.viewBag?.footer_menu} />
-      <MainBtnGroup />
+      <MainBtnGroup onPressVideo={onOpenDownloadImages} downloadBtn />
     </View>
   )
 }

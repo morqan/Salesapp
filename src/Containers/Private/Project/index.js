@@ -2,16 +2,16 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Image, View } from 'react-native'
 import SvgGenerator from '@/Components/SvgGenerator'
 import { navigate, navigationRef } from '@/Navigators/utils'
-import MyBtn from '@/Components/MyBtn'
-import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { projectStyles } from '@/Containers/Private/Project/index.style'
 import Footer from '@/Components/Footer'
-import BackBtn from "@/Components/BackBtn"
-import MainBtnGroup from "@/Components/MainBtnGroup"
+import BackBtn from '@/Components/BackBtn'
+import MainBtnGroup from '@/Components/MainBtnGroup'
+import VideoModal from '@/Components/VideoModal'
 
 export default function Project(props) {
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
+  const [showVideo, setShowVideo] = useState(false)
   const {
     img,
     items,
@@ -26,6 +26,10 @@ export default function Project(props) {
 
   const onOpenDetails = useCallback(item => {
     navigate('Details', { detail: item })
+  }, [])
+
+  const videoModalHandler = useCallback(() => {
+    setShowVideo(prevState => !prevState)
   }, [])
 
   useEffect(() => {
@@ -63,8 +67,13 @@ export default function Project(props) {
         pyc={pyc}
         name={name}
         pyc_gallery={pyc_gallery}
+        onPressVideo={videoModalHandler}
+        params={props?.route?.params?.project}
       />
-      <MainBtnGroup/>
+      <MainBtnGroup />
+      {showVideo && (
+        <VideoModal video={video} onPressClose={videoModalHandler} />
+      )}
     </View>
   )
 }
