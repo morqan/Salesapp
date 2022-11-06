@@ -36,11 +36,10 @@ export default function Home() {
   const [downloadedImg, setDownloadedImg] = useState(0)
 
   const dispatch = useDispatch()
-  const { homeItemPositions, pages, localImagesUrls, downloaded } = useAuth()
-  // console.log(downloaded, 'downloaded')
+  const { homeItemPositions, pages, downloaded } = useAuth()
 
   const [getImages, result] = useLazyGetImagesQuery()
-  const { data: getImagesData, isSuccess: getImagesIsSuccess } = result
+  const { data: getImagesData, } = result
   const onDownloadImages = async imgUrls => {
     let imgLocalUrls = []
     try {
@@ -81,7 +80,6 @@ export default function Home() {
     } catch (err) {
       console.log(err, 'down err')
     } finally {
-      console.log(imgLocalUrls, 'imgLocalUrls')
       dispatch(setLocalImgUrls({ localUrls: imgLocalUrls }))
       dispatch(setDownloaded({ download: true }))
       setLoading(false)
@@ -99,6 +97,7 @@ export default function Home() {
   const image = {
     uri: `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.index?.img}`,
   }
+  console.log(image, 'imagess')
 
   useEffect(() => {
     if (!homeItemPositions.length) {
@@ -147,16 +146,14 @@ export default function Home() {
   const onOpenProject = useCallback(item => {
     navigate('Project', { project: item })
   }, [])
-  console.log(pages, 'pagess')
-  // console.log(homeItemPositions[0]?.video, 'homeItemPositions')
-  // console.log(getImagesData?.length, 'getImagesData?.length')
-  // console.log(downloaded, 'downloadeds')
+  console.log(pages, 'pagessss')
 
   const onOpenDownloadImages = useCallback(() => {
     setLoading(true)
+    getPosition()
+    getPage()
     onDownloadImages(getImagesData)
   }, [getImagesData])
-  // console.log(getImagesData, 'getImagesData')
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>

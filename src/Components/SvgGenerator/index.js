@@ -29,7 +29,6 @@ export default function SvgGenerator({
       }
     })
   }, [])
-  // console.log(localImg, 'localImg')
   // console.log(localImagesUrls, 'localImagesUrlslocalImagesUrls')
   return (
     <View style={{ width: windowWidth, aspectRatio }}>

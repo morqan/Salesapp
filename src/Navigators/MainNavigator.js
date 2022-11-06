@@ -8,6 +8,8 @@ import Plan from '@/Containers/Private/Plan'
 import Information from '@/Containers/Private/Information'
 import Gallery from '@/Containers/Private/Gallery'
 import PycScreen from '@/Containers/Private/PycScreen'
+import MapScreen from '@/Containers/Private/MapScreen'
+import Montegro from '@/Containers/Private/Montegro'
 
 const Stack = createStackNavigator()
 
@@ -32,6 +34,8 @@ const MainNavigator = () => {
       />
       <Stack.Screen name="Gallery" component={Gallery} options={option} />
       <Stack.Screen name="PycScreen" component={PycScreen} options={option} />
+      <Stack.Screen name="MapScreen" component={MapScreen} options={option} />
+      <Stack.Screen name="Montegro" component={Montegro} options={option} />
     </Stack.Navigator>
   )
 }

@@ -50,6 +50,7 @@ export default function Information(props) {
         pyc_gallery={pyc_gallery}
         params={params}
         onPressVideo={videoModalHandler}
+        map={map}
       />
       <MainBtnGroup />
       {showVideo && (

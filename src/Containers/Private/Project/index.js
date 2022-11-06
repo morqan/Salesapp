@@ -49,15 +49,17 @@ export default function Project(props) {
         <BackBtn onPress={goBack} />
       </View>
       {widths && (
-        <SvgGenerator
-          img={img}
-          path={items?.data}
-          onPress={item => onOpenDetails(item)}
-          width={widths}
-          height={heights}
-          top={1600}
-          backgroundColor="#0d6a78"
-        />
+        <View style={{ paddingTop: 45 }}>
+          <SvgGenerator
+            img={img}
+            path={items?.data}
+            onPress={item => onOpenDetails(item)}
+            width={widths}
+            height={heights}
+            top={1600}
+            backgroundColor="#0d6a78"
+          />
+        </View>
       )}
       <Footer
         catalog={catalog}

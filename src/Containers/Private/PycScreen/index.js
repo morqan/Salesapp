@@ -38,9 +38,7 @@ export default function PycScreen(props) {
                 <View
                   style={{
                     flex: 1,
-                    borderWidth: 1,
                     justifyContent: 'center',
-                    // backgroundColor: 'green',
                   }}
                 >
                   <Image

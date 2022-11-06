@@ -5,7 +5,7 @@ import { planStyles } from '@/Containers/Private/Plan/index.style'
 import { navigationRef } from '@/Navigators/utils'
 import BackBtn from '@/Components/BackBtn'
 import { useAuth } from '@/Hooks/useAuth'
-import MainBtnGroup from "@/Components/MainBtnGroup"
+import MainBtnGroup from '@/Components/MainBtnGroup'
 
 export default function Gallery(props) {
   const [localImg, setLocalImg] = useState([])
@@ -27,6 +27,8 @@ export default function Gallery(props) {
     const localGallery = localImagesUrls.filter(i => newGallery.includes(i?.id))
     setLocalImg(localGallery)
   }, [])
+
+  console.log(localImg, 'localImg')
 
   return (
     <View style={{ backgroundColor: '#fff', paddingTop: 50 }}>
