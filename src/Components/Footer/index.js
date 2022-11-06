@@ -17,6 +17,7 @@ export default function Footer({
   lifestyle,
   montenegro,
   portonovi,
+  map,
 }) {
   const onPressInfo = useCallback(() => {
     navigate('Information', { text: information, title: name, params })
@@ -29,6 +30,28 @@ export default function Footer({
       title: 'LIFESTYLE',
       params: lifestyle,
     })
+  }, [])
+
+  const onPressPortonovi = useCallback(() => {
+    const { content } = portonovi
+    navigate('Information', {
+      text: content,
+      title: 'PORTONOVI',
+      params: portonovi,
+    })
+  }, [])
+
+  const onPressMontenegro = useCallback(() => {
+    const { content } = montenegro
+    navigate('Montegro', {
+      text: content,
+      title: 'MONTENEGRO',
+      params: montenegro,
+    })
+  }, [])
+
+  const onPressMap = useCallback(() => {
+    navigate('MapScreen', { img: map })
   }, [])
 
   const onPressGallery = useCallback(() => {
@@ -89,12 +112,23 @@ export default function Footer({
           />
         </View>
       )}
+      {map && (
+        <View style={{ marginRight: 10 }}>
+          <MyBtn
+            btnStyle={[homeStyles.btn, { minWidth: 100 }]}
+            textStyle={homeStyles.btnText}
+            text={'MAP'}
+            onPress={onPressMap}
+          />
+        </View>
+      )}
       {montenegro && (
         <View style={{ marginRight: 10 }}>
           <MyBtn
             btnStyle={[homeStyles.btn, { minWidth: 100 }]}
             textStyle={homeStyles.btnText}
             text={'MONTENEGRO'}
+            onPress={onPressMontenegro}
           />
         </View>
       )}
@@ -104,6 +138,7 @@ export default function Footer({
             btnStyle={[homeStyles.btn, { minWidth: 100 }]}
             textStyle={homeStyles.btnText}
             text={'PORTONOVI'}
+            onPress={onPressPortonovi}
           />
         </View>
       )}

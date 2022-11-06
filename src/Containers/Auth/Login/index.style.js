@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
   },
   logoBox: {
     alignItems: 'center',
-    paddingVertical: 100
+    paddingVertical: 30,
+    backgroundColor: '#fff',
   },
   logoText: {
     color: '#fff',
@@ -15,7 +16,8 @@ export const styles = StyleSheet.create({
     fontSize: 30,
   },
   form: {
-    paddingHorizontal: 50
+    paddingHorizontal: 50,
+    paddingTop: 10
   },
   inputBox: {
     marginBottom: 30

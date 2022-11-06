@@ -16,8 +16,8 @@ export const projectStyles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    paddingRight: 20,
-    paddingTop: 20,
+    // paddingRight: 20,
+    // paddingTop: 20,
     backgroundColor: '#fff',
   },
 })

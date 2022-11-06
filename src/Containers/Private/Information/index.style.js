@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native'
 
 export const infoStyles = StyleSheet.create({
   container: {
@@ -14,9 +14,11 @@ export const infoStyles = StyleSheet.create({
   tagStyle: {
     p: {
       lineHeight: 30,
-      fontSize: 15
+      fontSize: 15,
       // color: 'red'
     },
+    br: {
+      opacity: 0
+    }
   },
-
-});
+})

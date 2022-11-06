@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { Image, ScrollView, Text, View } from "react-native"
 import { styles } from '@/Containers/Auth/Login/index.style'
 import MyInput from '@/Components/MyInput'
 import MyBtn from '@/Components/MyBtn'
 import { useOnLoginMutation } from '@/Services/modules/Auth'
 import { useDispatch } from 'react-redux'
-import { changeToken, changeUser } from "@/Store/Auth"
+import { changeToken, changeUser } from '@/Store/Auth'
+import logo from '../../../Assets/Images/logo.png'
+import { homeStyles } from "@/Containers/Private/Home/Iindex.style"
 
 export default function Login() {
   const dispatch = useDispatch()
@@ -42,9 +44,9 @@ export default function Login() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.logoBox}>
-        <Text style={styles.logoText}>PORTONOVI</Text>
+        <Image source={logo} style={homeStyles.logo} />
       </View>
       <View style={styles.form}>
         <View style={styles.inputBox}>
@@ -69,6 +71,6 @@ export default function Login() {
         />
       </View>
       <Text style={styles.errText}>{error?.data?.error}</Text>
-    </View>
+    </ScrollView>
   )
 }
