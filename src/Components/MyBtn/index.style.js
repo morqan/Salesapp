@@ -6,7 +6,7 @@ export const btnStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#9b8264',
     alignSelf: 'flex-start',
-    padding: 1,
+    padding: 2,
   },
   btn: {
     borderColor: '#9b8264',

@@ -5,13 +5,12 @@ const { createSlice } = require('@reduxjs/toolkit')
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    user: 'test',
+    user: null,
     accessToken: null,
     homeItemPosition: [],
     pages: null,
     downloadStatus: false,
     localImagesUrls: [],
-    isd: 'tests',
   },
   reducers: {
     removeCredentials: state => {
@@ -23,9 +22,9 @@ const authSlice = createSlice({
         state.accessToken = token
       }
     },
-    changeUser: (state, { payload: { token } }) => {
-      if (typeof token !== 'undefined') {
-        state.loginData = token
+    changeUser: (state, { payload: { userData } }) => {
+      if (typeof userData !== 'undefined') {
+        state.user = userData
       }
     },
     setHomeItemPosition: (state, { payload: { itemPosition } }) => {
@@ -41,11 +40,6 @@ const authSlice = createSlice({
     setLocalImgUrls: (state, { payload: { localUrls } }) => {
       if (typeof localUrls !== 'undefined') {
         state.localImagesUrls = localUrls
-      }
-    },
-    setIsd: (state, { payload: { localIsd } }) => {
-      if (typeof localIsd !== 'undefined') {
-        state.isd = localIsd
       }
     },
     setDownloaded: (state, { payload: { download } }) => {
@@ -72,7 +66,7 @@ export const {
   setPages,
   setLocalImgUrls,
   setDownloaded,
-  setIsd,
+  changeUser,
 } = authSlice.actions
 
 export default authSlice.reducer
@@ -84,4 +78,4 @@ export const selectCurrentHomeItemPosition = state =>
 export const selectCurrentPages = state => state.auth.pages
 export const selectCurrentLocalImagesUrls = state => state.auth.localImagesUrls
 export const selectCurrentDownloaded = state => state.auth.downloadStatus
-export const selectCurrentIsd = state => state.auth.isd
+export const selectCurrentChangeUser = state => state.auth.user

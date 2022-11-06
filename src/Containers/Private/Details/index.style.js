@@ -11,7 +11,8 @@ export const detailsStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 10,
     marginBottom: 20,
   },
   headerTitle: {

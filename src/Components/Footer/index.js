@@ -12,12 +12,23 @@ export default function Footer({
   catalog,
   name,
   pyc_gallery,
-  homeFooter = 0,
   onPressVideo,
   params,
+  lifestyle,
+  montenegro,
+  portonovi,
 }) {
   const onPressInfo = useCallback(() => {
     navigate('Information', { text: information, title: name, params })
+  }, [])
+
+  const onPressLifestyle = useCallback(() => {
+    const { content } = lifestyle
+    navigate('Information', {
+      text: content,
+      title: 'LIFESTYLE',
+      params: lifestyle,
+    })
   }, [])
 
   const onPressGallery = useCallback(() => {
@@ -70,7 +81,7 @@ export default function Footer({
         </View>
       )}
       {catalog && (
-        <View>
+        <View style={{ marginRight: 10 }}>
           <MyBtn
             btnStyle={[homeStyles.btn, { minWidth: 100 }]}
             textStyle={homeStyles.btnText}
@@ -78,18 +89,34 @@ export default function Footer({
           />
         </View>
       )}
-      {homeFooter.length > 0 &&
-        homeFooter.map(item => {
-          return (
-            <View key={item?.text} style={{ marginRight: 10 }}>
-              <MyBtn
-                btnStyle={[homeStyles.btn, { minWidth: 100 }]}
-                textStyle={homeStyles.btnText}
-                text={item?.text}
-              />
-            </View>
-          )
-        })}
+      {montenegro && (
+        <View style={{ marginRight: 10 }}>
+          <MyBtn
+            btnStyle={[homeStyles.btn, { minWidth: 100 }]}
+            textStyle={homeStyles.btnText}
+            text={'MONTENEGRO'}
+          />
+        </View>
+      )}
+      {portonovi && (
+        <View style={{ marginRight: 10 }}>
+          <MyBtn
+            btnStyle={[homeStyles.btn, { minWidth: 100 }]}
+            textStyle={homeStyles.btnText}
+            text={'PORTONOVI'}
+          />
+        </View>
+      )}
+      {lifestyle && (
+        <View style={{ marginRight: 10 }}>
+          <MyBtn
+            btnStyle={[homeStyles.btn, { minWidth: 100 }]}
+            textStyle={homeStyles.btnText}
+            text={'LIFESTYLE'}
+            onPress={onPressLifestyle}
+          />
+        </View>
+      )}
     </View>
   )
 }

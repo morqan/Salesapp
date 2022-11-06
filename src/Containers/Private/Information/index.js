@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Dimensions, Text, View } from 'react-native'
+import { Dimensions, ScrollView, Text, View } from 'react-native'
 import { infoStyles } from '@/Containers/Private/Information/index.style'
 import RenderHtml from 'react-native-render-html'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
@@ -12,7 +12,7 @@ import VideoModal from '@/Components/VideoModal'
 export default function Information(props) {
   const [showVideo, setShowVideo] = useState(false)
   const { title, text, params } = props?.route?.params
-  const { catalog, gallery, information, video, pyc, name, pyc_gallery } =
+  const { catalog, gallery, information, video, pyc, name, pyc_gallery, map } =
     params
   const width = Dimensions.get('window').width
   const source = {
@@ -30,13 +30,13 @@ export default function Information(props) {
   return (
     <View style={infoStyles.container}>
       <Text style={infoStyles.title}>{title}</Text>
-      <View style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }}>
         <RenderHtml
           contentWidth={width}
           source={source}
           tagsStyles={infoStyles.tagStyle}
         />
-      </View>
+      </ScrollView>
       <View style={planStyles.backBtnBox}>
         <BackBtn onPress={goBack} />
       </View>

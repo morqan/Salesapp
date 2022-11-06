@@ -9,7 +9,7 @@ export const planStyles = StyleSheet.create({
     top: 5,
     right: 15,
     zIndex: 9999,
-    width: 50,
+    // width: 50,
   },
   header: {
     // marginTop: -30,
