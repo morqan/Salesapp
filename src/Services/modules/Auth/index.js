@@ -9,6 +9,13 @@ export const authApi = api.injectEndpoints({
         body,
       }),
     }),
+    onSendMail: build.mutation({
+      query: body => ({
+        url: 'v1/data/send',
+        method: 'POST',
+        body,
+      }),
+    }),
     getPosition: build.query({
       query: () => ({
         url: 'v1/data/projects',
@@ -16,7 +23,7 @@ export const authApi = api.injectEndpoints({
     }),
     getPages: build.query({
       query: () => ({
-        url: 'v1/data/page/index',
+        url: 'v1/data/page',
       }),
     }),
     getImages: build.query({
@@ -29,6 +36,7 @@ export const authApi = api.injectEndpoints({
 
 export const {
   useOnLoginMutation,
+  useOnSendMailMutation,
   useLazyGetPositionQuery,
   useLazyGetPagesQuery,
   useLazyGetImagesQuery,

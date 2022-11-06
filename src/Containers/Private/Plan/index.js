@@ -13,19 +13,58 @@ import { planStyles } from '@/Containers/Private/Plan/index.style'
 import { useAuth } from '@/Hooks/useAuth'
 import BackBtn from '@/Components/BackBtn'
 import letterImg from '../../../Assets/Images/mail.png'
-import MainBtnGroup from "@/Components/MainBtnGroup"
+import MainBtnGroup from '@/Components/MainBtnGroup'
+import MailSendModal from '@/Components/MailSendModal'
+import { useOnSendMailMutation } from '@/Services/modules/Auth'
+import SuccessModal from '@/Components/SuccessModal'
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
-  const { localImagesUrls } = useAuth()
-  const { gallery, name, info, is_reserved, is_sold } =
+  const { localImagesUrls, user } = useAuth()
+  const { gallery, name, info, is_reserved, is_sold, id } =
     props?.route?.params?.plan
   const [headInfo, setHeadInfo] = useState([])
   const [localImgs, setLocalImgs] = useState([])
+  const [mailModal, setMailModal] = useState(false)
+  const [mail, setMail] = useState('')
+  const [successPopup, setSuccessPopup] = useState(false)
+
+  const [sendMail, { data, isSuccess, isError, error }] =
+    useOnSendMailMutation()
 
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
+
+  const setMailHandler = useCallback(() => {
+    setMailModal(prevState => !prevState)
+  }, [])
+
+  const setSuccessPopupHandler = useCallback(() => {
+    setSuccessPopup(prevState => !prevState)
+  }, [])
+
+  const onChangeMailValue = useCallback(value => {
+    setMail(value)
+  }, [])
+
+  const onSendMail = useCallback(() => {
+    const body = {
+      user_id: user?.id,
+      email: mail,
+      id: id,
+    }
+    console.log(body, 'body')
+    sendMail(body).unwrap()
+  }, [mail])
+
+  useEffect(() => {
+    if (isSuccess) {
+      setMailHandler()
+      setSuccessPopupHandler()
+      setMail('')
+    }
+  }, [isSuccess, isError])
 
   useEffect(() => {
     const infoHead = info.map(item => {
@@ -34,8 +73,8 @@ export default function Plan(props) {
       }
     })
     setHeadInfo(infoHead)
-    console.log(infoHead, 'infoHead')
   }, [])
+
   useEffect(() => {
     const newGallery = gallery.map(item => {
       let newImg =
@@ -49,14 +88,13 @@ export default function Plan(props) {
 
     setLocalImgs(localGallery)
   }, [])
-  console.log(localImgs, 'localImgs')
+  console.log(props?.route?.params?.plan, 'props?.route?.params?.plan')
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={planStyles.backBtnBox}>
         <BackBtn onPress={goBack} />
-        <TouchableOpacity>
-          <Image source={letterImg} style={{ width: 30,
-            height: 30, }} />
+        <TouchableOpacity onPress={setMailHandler}>
+          <Image source={letterImg} style={{ width: 30, height: 30 }} />
         </TouchableOpacity>
       </View>
       <View style={planStyles.header}>
@@ -98,6 +136,15 @@ export default function Plan(props) {
           </View>
         ))}
       <MainBtnGroup />
+      {mailModal && (
+        <MailSendModal
+          onPressCancel={setMailHandler}
+          value={mail}
+          onChangeText={onChangeMailValue}
+          onPressSend={onSendMail}
+        />
+      )}
+      {successPopup && <SuccessModal onPress={setSuccessPopupHandler} />}
     </View>
   )
 }

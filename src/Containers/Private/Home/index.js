@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Text,
   View,
@@ -89,13 +89,6 @@ export default function Home() {
     }
   }
 
-  // useEffect(() => {
-  //   if (localImagesUrls?.length !== getImagesData?.length) {
-  //     setLoading(true)
-  //     onDownloadImages(getImagesData)
-  //   }
-  // }, [getImagesIsSuccess])
-
   const [getPosition, { data, isSuccess, isError, error }] =
     useLazyGetPositionQuery()
 
@@ -104,7 +97,7 @@ export default function Home() {
     { data: getPageData, isSuccess: getPageIsSuccess, isError: getPageIsError },
   ] = useLazyGetPagesQuery()
   const image = {
-    uri: `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.data?.viewBag?.img}`,
+    uri: `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.index?.img}`,
   }
 
   useEffect(() => {
@@ -154,10 +147,10 @@ export default function Home() {
   const onOpenProject = useCallback(item => {
     navigate('Project', { project: item })
   }, [])
-  // console.log(pages, 'pages')
+  console.log(pages, 'pagess')
   // console.log(homeItemPositions[0]?.video, 'homeItemPositions')
   // console.log(getImagesData?.length, 'getImagesData?.length')
-  console.log(downloaded, 'downloadeds')
+  // console.log(downloaded, 'downloadeds')
 
   const onOpenDownloadImages = useCallback(() => {
     setLoading(true)
@@ -194,7 +187,11 @@ export default function Home() {
               top={2600}
             />
           )}
-          <Footer homeFooter={pages?.data?.viewBag?.footer_menu} />
+          <Footer
+            lifestyle={pages?.lifestyle}
+            montenegro={pages?.montenegro}
+            portonovi={pages?.portonovi}
+          />
         </View>
       ) : (
         <View style={homeStyles.downloadHint}>
@@ -213,7 +210,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
       )}
-      <MainBtnGroup onPressVideo={onOpenDownloadImages} downloadBtn />
+      <MainBtnGroup />
       <TouchableOpacity
         onPress={onOpenDownloadImages}
         style={homeStyles.downloadBtnLittle}

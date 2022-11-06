@@ -5,7 +5,7 @@ import MyInput from '@/Components/MyInput'
 import MyBtn from '@/Components/MyBtn'
 import { useOnLoginMutation } from '@/Services/modules/Auth'
 import { useDispatch } from 'react-redux'
-import { changeToken } from '@/Store/Auth'
+import { changeToken, changeUser } from "@/Store/Auth"
 
 export default function Login() {
   const dispatch = useDispatch()
@@ -16,8 +16,9 @@ export default function Login() {
     useOnLoginMutation()
   useEffect(() => {
     if (isSuccess) {
-      const { token } = data
+      const { token, user } = data
       dispatch(changeToken({ token }))
+      dispatch(changeUser({ userData: user }))
     }
     if (isError) {
       console.log(error, 'error')

@@ -11,7 +11,7 @@ import { changeToken } from '@/Store/Auth'
 import { useDispatch } from 'react-redux'
 import { navigateAndSimpleReset } from '@/Navigators/utils'
 
-export default function MainBtnGroup({ onPressVideo, downloadBtn }) {
+export default function MainBtnGroup({ onPressVideo }) {
   const dispatch = useDispatch()
   const [hiddenBox, setHiddenBox] = useState(false)
   const onPressLogOut = () => {
@@ -41,11 +41,9 @@ export default function MainBtnGroup({ onPressVideo, downloadBtn }) {
         <TouchableOpacity>
           <Image source={portIcon} style={mainBtnStyles.img} />
         </TouchableOpacity>
-        {downloadBtn && (
           <TouchableOpacity onPress={onPressVideo}>
             <Image source={moonIcon} style={mainBtnStyles.img} />
           </TouchableOpacity>
-        )}
       </View>
       <TouchableOpacity onPress={() => setHiddenBox(!hiddenBox)}>
         <Image source={btnImg} style={mainBtnStyles.img} />
