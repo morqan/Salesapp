@@ -23,8 +23,6 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
-	<key>UIUserInterfaceStyle</key>
-    <string>Light</string>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
@@ -55,6 +53,8 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>
