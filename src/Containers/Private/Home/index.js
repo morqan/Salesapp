@@ -5,8 +5,8 @@ import {
   Image,
   Platform,
   ActivityIndicator,
-  TouchableOpacity,
-} from 'react-native'
+  TouchableOpacity, ScrollView,
+} from "react-native"
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigate } from '@/Navigators/utils'
 import {
@@ -191,7 +191,7 @@ export default function Home() {
           />
         </View>
       ) : (
-        <View style={homeStyles.downloadHint}>
+        <ScrollView style={homeStyles.downloadHint}>
           <Text style={homeStyles.downloadHintText}>
             Please click button for downloading application data.
           </Text>
@@ -205,7 +205,7 @@ export default function Home() {
           >
             <Text style={homeStyles.downloadBtnText}>Download</Text>
           </TouchableOpacity>
-        </View>
+        </ScrollView>
       )}
       <MainBtnGroup />
       <TouchableOpacity

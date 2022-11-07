@@ -111,7 +111,7 @@ export default function Plan(props) {
           width={width}
           autoPlay={localImgs.length > 1}
           data={localImgs}
-          scrollAnimationDuration={3000}
+          scrollAnimationDuration={5000}
           renderItem={({ index, item }) => {
             return (
               <View style={planStyles.slideBox}>
