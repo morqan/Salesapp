@@ -5,8 +5,9 @@ import {
   Image,
   Platform,
   ActivityIndicator,
-  TouchableOpacity, ScrollView,
-} from "react-native"
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigate } from '@/Navigators/utils'
 import {
@@ -34,12 +35,13 @@ export default function Home() {
   const [heights, setHeights] = useState('')
   const [loading, setLoading] = useState(false)
   const [downloadedImg, setDownloadedImg] = useState(0)
+  const { localImagesUrls } = useAuth()
 
   const dispatch = useDispatch()
   const { homeItemPositions, pages, downloaded } = useAuth()
 
   const [getImages, result] = useLazyGetImagesQuery()
-  const { data: getImagesData, } = result
+  const { data: getImagesData } = result
   const onDownloadImages = async imgUrls => {
     let imgLocalUrls = []
     try {
@@ -172,7 +174,8 @@ export default function Home() {
       <View style={homeStyles.logoBox}>
         <Image source={logo} style={homeStyles.logo} />
       </View>
-      {downloaded && getImagesData?.length > 0 ? (
+      {(downloaded && getImagesData?.length > 0) ||
+      (downloaded && localImagesUrls?.length > 525) ? (
         <View>
           {(getPageIsSuccess || pages) && widths && (
             <SvgGenerator
@@ -191,7 +194,7 @@ export default function Home() {
           />
         </View>
       ) : (
-        <ScrollView style={homeStyles.downloadHint}>
+        <ScrollView contentContainerStyle={homeStyles.downloadHint}>
           <Text style={homeStyles.downloadHintText}>
             Please click button for downloading application data.
           </Text>
