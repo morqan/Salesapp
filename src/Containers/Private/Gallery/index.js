@@ -37,7 +37,7 @@ export default function Gallery(props) {
         width={width}
         autoPlay={localImg?.length > 1}
         data={localImg}
-        scrollAnimationDuration={2000}
+        scrollAnimationDuration={5000}
         // onSnapToItem={index => console.log('current index:', index)}
         renderItem={({ index, item }) => {
           return (
