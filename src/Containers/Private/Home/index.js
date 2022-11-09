@@ -5,8 +5,9 @@ import {
   Image,
   Platform,
   ActivityIndicator,
-  TouchableOpacity, ScrollView,
-} from "react-native"
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigate } from '@/Navigators/utils'
 import {
@@ -34,12 +35,13 @@ export default function Home() {
   const [heights, setHeights] = useState('')
   const [loading, setLoading] = useState(false)
   const [downloadedImg, setDownloadedImg] = useState(0)
+  const { localImagesUrls } = useAuth()
 
   const dispatch = useDispatch()
   const { homeItemPositions, pages, downloaded } = useAuth()
 
   const [getImages, result] = useLazyGetImagesQuery()
-  const { data: getImagesData, } = result
+  const { data: getImagesData } = result
   const onDownloadImages = async imgUrls => {
     let imgLocalUrls = []
     try {
@@ -97,7 +99,6 @@ export default function Home() {
   const image = {
     uri: `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.index?.img}`,
   }
-  console.log(image, 'imagess')
 
   useEffect(() => {
     if (!homeItemPositions.length) {
@@ -106,13 +107,13 @@ export default function Home() {
     if (!pages) {
       getPage()
     }
-    // if (localImagesUrls?.length) {
-    getImages()
-      .unwrap()
-      .then(res => {
-        console.log(res, 'getImages')
-      })
-    // }
+    if (localImagesUrls?.length < 525) {
+      getImages()
+        .unwrap()
+        .then(res => {
+          console.log(res, 'getImages')
+        })
+    }
   }, [])
 
   useEffect(() => {
@@ -132,28 +133,34 @@ export default function Home() {
   }, [isSuccess, isError])
 
   useEffect(() => {
-    if (getPageIsSuccess || pages) {
-      Image.getSize(image?.uri, (width, height) => {
-        setHeights(height)
-        setWidths(width)
+    if (pages && localImagesUrls.length > 525) {
+      localImagesUrls.filter(x => {
+        if (x?.id === image?.uri) {
+          Image.getSize(x?.localUrl, (width, height) => {
+            setHeights(height)
+            setWidths(width)
+          })
+        }
       })
     }
     if (getPageIsError) {
       console.log(error, 'getPosition error')
     }
-  }, [getPageIsSuccess, getPageIsError, pages])
+  }, [getPageIsSuccess, getPageIsError, pages, localImagesUrls])
 
   const onOpenProject = useCallback(item => {
     navigate('Project', { project: item })
   }, [])
-  console.log(pages, 'pagessss')
 
   const onOpenDownloadImages = useCallback(() => {
     setLoading(true)
-    getPosition()
-    getPage()
-    onDownloadImages(getImagesData)
-  }, [getImagesData])
+    const loadData = async () => {
+      await Promise.all([getImages(), getPosition(), getPage()]).finally(() =>
+        onDownloadImages(getImagesData),
+      )
+    }
+    loadData()
+  }, [])
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
@@ -172,7 +179,8 @@ export default function Home() {
       <View style={homeStyles.logoBox}>
         <Image source={logo} style={homeStyles.logo} />
       </View>
-      {downloaded && getImagesData?.length > 0 ? (
+      {(downloaded && getImagesData?.length > 0) ||
+      (downloaded && localImagesUrls?.length > 525) ? (
         <View>
           {(getPageIsSuccess || pages) && widths && (
             <SvgGenerator
@@ -191,7 +199,7 @@ export default function Home() {
           />
         </View>
       ) : (
-        <ScrollView style={homeStyles.downloadHint}>
+        <ScrollView contentContainerStyle={homeStyles.downloadHint}>
           <Text style={homeStyles.downloadHintText}>
             Please click button for downloading application data.
           </Text>

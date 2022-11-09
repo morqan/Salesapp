@@ -1,23 +1,32 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Dimensions, Image, Text, View } from 'react-native'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
-import MyBtn from '@/Components/MyBtn'
-import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import Carousel from 'react-native-reanimated-carousel'
 import RenderHtml from 'react-native-render-html'
 import { navigationRef } from '@/Navigators/utils'
 import BackBtn from '@/Components/BackBtn'
+import { useAuth } from '@/Hooks/useAuth'
 
 export default function PycScreen(props) {
   const { gallery, text } = props?.route?.params
   const width = Dimensions.get('window').width
+  const { localImagesUrls } = useAuth()
+  const [localImg, setLocalImg] = useState([])
   const source = {
     html: `${text}`,
   }
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
-  console.log(props?.route?.params, 'props?.route?.params')
+  useEffect(() => {
+    const newGallery = gallery.map(item => {
+      console.log(item?.original, 'newGallery')
+      let newImg = item?.original.replaceAll(' ', '%20')
+      return newImg
+    })
+    const localGallery = localImagesUrls.filter(i => newGallery.includes(i?.id))
+    setLocalImg(localGallery)
+  }, [])
   return (
     <View style={detailsStyles.container}>
       <View style={detailsStyles.header}>
@@ -27,11 +36,11 @@ export default function PycScreen(props) {
       <View style={detailsStyles.body}>
         <View style={detailsStyles.sliderBox}>
           <Carousel
-            loop
+            loop={localImg.length > 1}
             width={width / 2}
-            autoPlay={gallery.length > 1}
-            data={gallery}
-            scrollAnimationDuration={3000}
+            autoPlay={localImg.length > 1}
+            data={localImg}
+            scrollAnimationDuration={5000}
             // onSnapToItem={index => console.log('current index:', index)}
             renderItem={({ index, item }) => {
               return (
@@ -44,7 +53,7 @@ export default function PycScreen(props) {
                   <Image
                     style={detailsStyles.sliderImg}
                     source={{
-                      uri: item?.original,
+                      uri: item?.localUrl,
                     }}
                   />
                 </View>

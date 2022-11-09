@@ -26,10 +26,6 @@ export default function Floor(props) {
         })
       }
     })
-    // Image.getSize(img, (width, height) => {
-    //   setHeights(height)
-    //   setWidths(width)
-    // })
   }, [])
   const goBack = useCallback(() => {
     navigationRef.goBack()

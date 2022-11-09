@@ -11,7 +11,7 @@ import VideoModal from '@/Components/VideoModal'
 
 export default function Information(props) {
   const [showVideo, setShowVideo] = useState(false)
-  const { title, text, params } = props?.route?.params
+  const { title, text, params, location } = props?.route?.params
   const { catalog, gallery, information, video, pyc, name, pyc_gallery, map } =
     params
   const width = Dimensions.get('window').width
@@ -26,7 +26,7 @@ export default function Information(props) {
     setShowVideo(prevState => !prevState)
   }, [])
 
-  console.log(props?.route?.params, 'props?.route?.params')
+  console.log(location, 'location')
   return (
     <View style={infoStyles.container}>
       <Text style={infoStyles.title}>{title}</Text>
@@ -51,6 +51,7 @@ export default function Information(props) {
         params={params}
         onPressVideo={videoModalHandler}
         map={map}
+        location={location}
       />
       <MainBtnGroup />
       {showVideo && (

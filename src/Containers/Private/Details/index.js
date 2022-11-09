@@ -16,7 +16,7 @@ import { useAuth } from '@/Hooks/useAuth'
 import BackBtn from '@/Components/BackBtn'
 import SvgVideoIcon from '@/Assets/SvgVideoIcon'
 import VideoModal from '@/Components/VideoModal'
-import MainBtnGroup from "@/Components/MainBtnGroup"
+import MainBtnGroup from '@/Components/MainBtnGroup'
 
 export default function Details(props) {
   const [showVideo, setShowVideo] = useState(false)
@@ -39,7 +39,9 @@ export default function Details(props) {
   }, [])
 
   const source = {
-    html: is_plan ? `${info}` : `${content}`,
+    html: is_plan
+      ? `${info === null ? '' : info}`
+      : `${content === null ? '' : content}`,
   }
   console.log(props?.route?.params?.detail, 'props?.route?.params?.detail')
   useEffect(() => {
@@ -72,7 +74,7 @@ export default function Details(props) {
             width={width / 2}
             autoPlay={localImg.length > 1}
             data={localImg}
-            scrollAnimationDuration={3000}
+            scrollAnimationDuration={5000}
             // onSnapToItem={index => console.log('current index:', index)}
             renderItem={({ index, item }) => {
               return (
