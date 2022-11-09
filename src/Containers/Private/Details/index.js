@@ -74,7 +74,7 @@ export default function Details(props) {
             width={width / 2}
             autoPlay={localImg.length > 1}
             data={localImg}
-            scrollAnimationDuration={3000}
+            scrollAnimationDuration={5000}
             // onSnapToItem={index => console.log('current index:', index)}
             renderItem={({ index, item }) => {
               return (

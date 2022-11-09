@@ -19,7 +19,6 @@ export default function MainBtnGroup({ onPressVideo }) {
   const onPressLogOut = () => {
     dispatch(changeToken({ token: null }))
   }
-  console.log(pages, 'pagespages')
 
   const onPressPortonovi = useCallback(() => {
     const { content } = pages?.portonovi

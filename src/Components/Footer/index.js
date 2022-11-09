@@ -18,6 +18,7 @@ export default function Footer({
   montenegro,
   portonovi,
   map,
+  location,
 }) {
   const onPressInfo = useCallback(() => {
     navigate('Information', { text: information, title: name, params })
@@ -38,6 +39,7 @@ export default function Footer({
       text: content,
       title: 'PORTONOVI',
       params: portonovi,
+      location: 'portonovi',
     })
   }, [])
 
@@ -47,11 +49,12 @@ export default function Footer({
       text: content,
       title: 'MONTENEGRO',
       params: montenegro,
+      location: 'montenegro',
     })
   }, [])
 
   const onPressMap = useCallback(() => {
-    navigate('MapScreen', { img: map })
+    navigate('MapScreen', { img: map, location: location })
   }, [])
 
   const onPressGallery = useCallback(() => {
@@ -118,6 +121,16 @@ export default function Footer({
             btnStyle={[homeStyles.btn, { minWidth: 100 }]}
             textStyle={homeStyles.btnText}
             text={'MAP'}
+            onPress={onPressMap}
+          />
+        </View>
+      )}
+      {location && (
+        <View style={{ marginRight: 10 }}>
+          <MyBtn
+            btnStyle={[homeStyles.btn, { minWidth: 100 }]}
+            textStyle={homeStyles.btnText}
+            text={'LOCATION'}
             onPress={onPressMap}
           />
         </View>

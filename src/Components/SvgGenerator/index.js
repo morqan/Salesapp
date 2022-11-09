@@ -24,7 +24,6 @@ export default function SvgGenerator({
     const newImg = img.replace(' ', '%20')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
-        console.log(x, 'xxxs')
         setLocalImg(`${x?.localUrl}`)
       }
     })

@@ -10,7 +10,7 @@ import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
 
 export default function Montegro(props) {
-  const { title, text, params } = props?.route?.params
+  const { title, text, params, location } = props?.route?.params
   const {
     catalog,
     gallery,
@@ -98,6 +98,7 @@ export default function Montegro(props) {
         params={params}
         onPressVideo={videoModalHandler}
         map={map}
+        location={location}
       />
       <MainBtnGroup />
       {showVideo && (

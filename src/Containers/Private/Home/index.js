@@ -99,7 +99,6 @@ export default function Home() {
   const image = {
     uri: `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.index?.img}`,
   }
-  console.log(image, 'imagess')
 
   useEffect(() => {
     if (!homeItemPositions.length) {
@@ -108,13 +107,13 @@ export default function Home() {
     if (!pages) {
       getPage()
     }
-    // if (localImagesUrls?.length) {
-    getImages()
-      .unwrap()
-      .then(res => {
-        console.log(res, 'getImages')
-      })
-    // }
+    if (localImagesUrls?.length < 525) {
+      getImages()
+        .unwrap()
+        .then(res => {
+          console.log(res, 'getImages')
+        })
+    }
   }, [])
 
   useEffect(() => {
@@ -134,28 +133,34 @@ export default function Home() {
   }, [isSuccess, isError])
 
   useEffect(() => {
-    if (getPageIsSuccess || pages) {
-      Image.getSize(image?.uri, (width, height) => {
-        setHeights(height)
-        setWidths(width)
+    if (pages && localImagesUrls.length > 525) {
+      localImagesUrls.filter(x => {
+        if (x?.id === image?.uri) {
+          Image.getSize(x?.localUrl, (width, height) => {
+            setHeights(height)
+            setWidths(width)
+          })
+        }
       })
     }
     if (getPageIsError) {
       console.log(error, 'getPosition error')
     }
-  }, [getPageIsSuccess, getPageIsError, pages])
+  }, [getPageIsSuccess, getPageIsError, pages, localImagesUrls])
 
   const onOpenProject = useCallback(item => {
     navigate('Project', { project: item })
   }, [])
-  console.log(pages, 'pagessss')
 
   const onOpenDownloadImages = useCallback(() => {
     setLoading(true)
-    getPosition()
-    getPage()
-    onDownloadImages(getImagesData)
-  }, [getImagesData])
+    const loadData = async () => {
+      await Promise.all([getImages(), getPosition(), getPage()]).finally(() =>
+        onDownloadImages(getImagesData),
+      )
+    }
+    loadData()
+  }, [])
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
