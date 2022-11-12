@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { mainBtnStyles } from '@/Components/MainBtnGroup/index.style'
-import btnImg from '../../Assets/Images/40.png'
+import btnImg from '../../Assets/Images/pagesicon.png'
 import homeIcon from '../../Assets/Images/homeIcon.png'
 import mapIcon from '../../Assets/Images/mapIcon.png'
 import logoutIcon from '../../Assets/Images/logoutIcon.png'
@@ -11,8 +11,13 @@ import { changeToken } from '@/Store/Auth'
 import { useDispatch } from 'react-redux'
 import { navigate, navigateAndSimpleReset } from '@/Navigators/utils'
 import { useAuth } from '@/Hooks/useAuth'
+import downloadIcon from '@/Assets/Images/akar-icons_download.png'
 
-export default function MainBtnGroup({ onPressVideo }) {
+export default function MainBtnGroup({
+  onPressVideo,
+  onOpenDownloadImages,
+  home,
+}) {
   const { pages } = useAuth()
   const dispatch = useDispatch()
   const [hiddenBox, setHiddenBox] = useState(false)
@@ -47,9 +52,17 @@ export default function MainBtnGroup({ onPressVideo }) {
       <View
         style={[
           mainBtnStyles.hiddenBtnBox,
-          hiddenBox ? { height: 160 } : { height: 0, opacity: 0 },
+          hiddenBox ? { height: home ? 170 : 160 } : { height: 0, opacity: 0 },
         ]}
       >
+        {home && (
+          <TouchableOpacity
+            onPress={onOpenDownloadImages}
+            // style={homeStyles.downloadBtnLittle}
+          >
+            <Image source={downloadIcon} style={{ width: 23, height: 23 }} />
+          </TouchableOpacity>
+        )}
         <TouchableOpacity onPress={goToHome}>
           <Image source={homeIcon} style={mainBtnStyles.img} />
         </TouchableOpacity>
@@ -67,7 +80,7 @@ export default function MainBtnGroup({ onPressVideo }) {
         </TouchableOpacity>
       </View>
       <TouchableOpacity onPress={() => setHiddenBox(!hiddenBox)}>
-        <Image source={btnImg} style={mainBtnStyles.img} />
+        <Image source={btnImg} style={{ width: 40, height: 40 }} />
       </TouchableOpacity>
     </View>
   )

@@ -21,6 +21,7 @@ export const planStyles = StyleSheet.create({
     right: 15,
     zIndex: 999,
     height: 100,
+    // backgroundColor: 'red'
   },
   slideBox: {
     alignItems: 'center',
@@ -49,5 +50,15 @@ export const planStyles = StyleSheet.create({
     fontSize: 120,
     lineHeight: 120,
     textTransform: 'uppercase',
+  },
+  headerProjectName: {
+    color: '#9b8264',
+    marginTop: 10
+  },
+  tagsStyles: {
+    p: {
+      marginBottom: 0,
+      lineHeight: 15
+    },
   },
 })

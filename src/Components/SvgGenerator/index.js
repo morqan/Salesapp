@@ -81,8 +81,8 @@ export default function SvgGenerator({
                   key={index + 100}
                   fontSize={130}
                   fontWeight="500"
-                  // letterSpacing={-0.2}
-                  style={{ position: 'absolute', textTransform: 'uppercase' }}
+                  // letterSpacing={0.9}
+                  style={{ position: 'absolute', textTransform: 'uppercase', textAlign: 'center' }}
                 >
                   <TSpan
                     x={Number(item?.left) + 120}

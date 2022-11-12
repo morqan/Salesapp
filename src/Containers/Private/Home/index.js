@@ -28,11 +28,11 @@ import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
 import logo from '../../../Assets/Images/logo.png'
 import MainBtnGroup from '@/Components/MainBtnGroup'
-import downloadIcon from '../../../Assets/Images/akar-icons_download.png'
 
 export default function Home() {
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
+  const [homeImg, setHomeImg] = useState('')
   const [loading, setLoading] = useState(false)
   const [downloadedImg, setDownloadedImg] = useState(0)
   const { localImagesUrls } = useAuth()
@@ -96,9 +96,6 @@ export default function Home() {
     getPage,
     { data: getPageData, isSuccess: getPageIsSuccess, isError: getPageIsError },
   ] = useLazyGetPagesQuery()
-  const image = {
-    uri: `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.index?.img}`,
-  }
 
   useEffect(() => {
     if (!homeItemPositions.length) {
@@ -108,11 +105,7 @@ export default function Home() {
       getPage()
     }
     if (localImagesUrls?.length < 525) {
-      getImages()
-        .unwrap()
-        .then(res => {
-          console.log(res, 'getImages')
-        })
+      getImages().unwrap()
     }
   }, [])
 
@@ -134,8 +127,10 @@ export default function Home() {
 
   useEffect(() => {
     if (pages && localImagesUrls.length > 525) {
+      const image = `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.index?.img}`
+      setHomeImg(image)
       localImagesUrls.filter(x => {
-        if (x?.id === image?.uri) {
+        if (x?.id === image) {
           Image.getSize(x?.localUrl, (width, height) => {
             setHeights(height)
             setWidths(width)
@@ -155,12 +150,20 @@ export default function Home() {
   const onOpenDownloadImages = useCallback(() => {
     setLoading(true)
     const loadData = async () => {
-      await Promise.all([getImages(), getPosition(), getPage()]).finally(() =>
-        onDownloadImages(getImagesData),
-      )
+      await Promise.all([
+        getImages().unwrap(),
+        getPosition().unwrap(),
+        getPage().unwrap(),
+      ]).then(res => {
+        console.log(res, 'res')
+        dispatch(setPages({ page: res[2] }))
+        dispatch(setHomeItemPosition({ itemPosition: res[1]?.data }))
+        onDownloadImages(res[0])
+      })
     }
     loadData()
   }, [])
+
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
@@ -182,9 +185,9 @@ export default function Home() {
       {(downloaded && getImagesData?.length > 0) ||
       (downloaded && localImagesUrls?.length > 525) ? (
         <View>
-          {(getPageIsSuccess || pages) && widths && (
+          {pages && widths && (
             <SvgGenerator
-              img={image?.uri}
+              img={homeImg}
               path={homeItemPositions}
               onPress={onOpenProject}
               height={heights}
@@ -215,13 +218,7 @@ export default function Home() {
           </TouchableOpacity>
         </ScrollView>
       )}
-      <MainBtnGroup />
-      <TouchableOpacity
-        onPress={onOpenDownloadImages}
-        style={homeStyles.downloadBtnLittle}
-      >
-        <Image source={downloadIcon} style={homeStyles.downloadIcon} />
-      </TouchableOpacity>
+      <MainBtnGroup home onOpenDownloadImages={onOpenDownloadImages} />
     </View>
   )
 }

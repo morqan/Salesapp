@@ -17,11 +17,12 @@ import MainBtnGroup from '@/Components/MainBtnGroup'
 import MailSendModal from '@/Components/MailSendModal'
 import { useOnSendMailMutation } from '@/Services/modules/Auth'
 import SuccessModal from '@/Components/SuccessModal'
+import { detailsStyles } from '@/Containers/Private/Details/index.style'
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
   const { localImagesUrls, user } = useAuth()
-  const { gallery, name, info, is_reserved, is_sold, id } =
+  const { gallery, name, info, is_reserved, is_sold, id, project } =
     props?.route?.params?.plan
   const [headInfo, setHeadInfo] = useState([])
   const [localImgs, setLocalImgs] = useState([])
@@ -98,11 +99,19 @@ export default function Plan(props) {
         </TouchableOpacity>
       </View>
       <View style={planStyles.header}>
-        <View>
+        <View style={{ marginTop: 15 }}>
           <Text>{name}</Text>
+          <Text style={planStyles.headerProjectName}>{project}</Text>
         </View>
         {headInfo.map((item, index) => {
-          return <RenderHtml key={index} contentWidth={width} source={item} />
+          return (
+            <RenderHtml
+              tagsStyles={planStyles.tagsStyles}
+              key={index}
+              contentWidth={width}
+              source={item}
+            />
+          )
         })}
       </View>
       <View style={{ height: '80%' }}>
