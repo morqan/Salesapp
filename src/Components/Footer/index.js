@@ -76,16 +76,6 @@ export default function Footer({
           />
         </View>
       )}
-      {video && (
-        <View style={{ marginRight: 10 }}>
-          <MyBtn
-            btnStyle={[homeStyles.btn, { minWidth: 100 }]}
-            textStyle={homeStyles.btnText}
-            text={'video'}
-            onPress={onPressVideo}
-          />
-        </View>
-      )}
       {pyc && (
         <View style={{ marginRight: 10 }}>
           <MyBtn
@@ -93,6 +83,16 @@ export default function Footer({
             textStyle={homeStyles.btnText}
             text={'Portonovi Yacht Club'}
             onPress={onPressPyc}
+          />
+        </View>
+      )}
+      {video && (
+        <View style={{ marginRight: 10 }}>
+          <MyBtn
+            btnStyle={[homeStyles.btn, { minWidth: 100 }]}
+            textStyle={homeStyles.btnText}
+            text={'video'}
+            onPress={onPressVideo}
           />
         </View>
       )}

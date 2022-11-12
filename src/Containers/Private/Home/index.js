@@ -28,7 +28,6 @@ import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
 import logo from '../../../Assets/Images/logo.png'
 import MainBtnGroup from '@/Components/MainBtnGroup'
-import downloadIcon from '../../../Assets/Images/akar-icons_download.png'
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -106,11 +105,7 @@ export default function Home() {
       getPage()
     }
     if (localImagesUrls?.length < 525) {
-      getImages()
-        .unwrap()
-        .then(res => {
-          console.log(res, 'getImages')
-        })
+      getImages().unwrap()
     }
   }, [])
 
@@ -161,6 +156,8 @@ export default function Home() {
         getPage().unwrap(),
       ]).then(res => {
         console.log(res, 'res')
+        dispatch(setPages({ page: res[2] }))
+        dispatch(setHomeItemPosition({ itemPosition: res[1]?.data }))
         onDownloadImages(res[0])
       })
     }
@@ -188,7 +185,7 @@ export default function Home() {
       {(downloaded && getImagesData?.length > 0) ||
       (downloaded && localImagesUrls?.length > 525) ? (
         <View>
-          {(pages) && widths && (
+          {pages && widths && (
             <SvgGenerator
               img={homeImg}
               path={homeItemPositions}
@@ -221,13 +218,7 @@ export default function Home() {
           </TouchableOpacity>
         </ScrollView>
       )}
-      <MainBtnGroup />
-      <TouchableOpacity
-        onPress={onOpenDownloadImages}
-        style={homeStyles.downloadBtnLittle}
-      >
-        <Image source={downloadIcon} style={homeStyles.downloadIcon} />
-      </TouchableOpacity>
+      <MainBtnGroup home onOpenDownloadImages={onOpenDownloadImages} />
     </View>
   )
 }

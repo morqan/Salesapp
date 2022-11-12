@@ -17,16 +17,16 @@ export const styles = StyleSheet.create({
   },
   form: {
     paddingHorizontal: 50,
-    paddingTop: 10
+    paddingTop: 10,
   },
   inputBox: {
-    marginBottom: 30
+    marginBottom: 30,
   },
   errText: {
-    color: 'red',
+    color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: 20,
-    marginTop: 50
-  }
+    marginTop: 50,
+  },
 })

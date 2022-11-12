@@ -72,7 +72,6 @@ export const homeStyles = StyleSheet.create({
   },
   videoCloseBtnText: {
     color: '#fff',
-    fontWeight: 'bold',
     fontSize: 18,
   },
   spinnerBox: {
