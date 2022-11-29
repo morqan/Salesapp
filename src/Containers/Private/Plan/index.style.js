@@ -33,6 +33,7 @@ export const planStyles = StyleSheet.create({
     width: '90%',
     height: '90%',
     resizeMode: 'contain',
+    // backgroundColor: 'red'
   },
   sliderAbsoluteBox: {
     position: 'absolute',

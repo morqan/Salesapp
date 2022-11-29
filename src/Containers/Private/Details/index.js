@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import {
   Dimensions,
   Image,
@@ -19,6 +19,8 @@ import VideoModal from '@/Components/VideoModal'
 import MainBtnGroup from '@/Components/MainBtnGroup'
 
 export default function Details(props) {
+  const scrollRef = useRef()
+
   const [showVideo, setShowVideo] = useState(false)
   const [localImg, setLocalImg] = useState([])
 
@@ -60,6 +62,12 @@ export default function Details(props) {
   const videoModalHandler = useCallback(() => {
     setShowVideo(prevState => !prevState)
   }, [])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      scrollRef?.current?.flashScrollIndicators()
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <View style={detailsStyles.container}>
@@ -72,7 +80,7 @@ export default function Details(props) {
           <Carousel
             loop
             width={width / 2}
-            autoPlay={localImg.length > 1}
+            // autoPlay={localImg.length > 1}
             data={localImg}
             scrollAnimationDuration={5000}
             // onSnapToItem={index => console.log('current index:', index)}
@@ -133,7 +141,7 @@ export default function Details(props) {
                 })
               })}
           </View>
-          <ScrollView>
+          <ScrollView ref={scrollRef}>
             <RenderHtml
               contentWidth={width}
               source={source}

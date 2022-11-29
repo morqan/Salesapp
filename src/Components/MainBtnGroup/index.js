@@ -52,7 +52,7 @@ export default function MainBtnGroup({
       <View
         style={[
           mainBtnStyles.hiddenBtnBox,
-          hiddenBox ? { height: home ? 170 : 160 } : { height: 0, opacity: 0 },
+          hiddenBox ? { height: home ? 150 : 130 } : { height: 0, opacity: 0 },
         ]}
       >
         {home && (
@@ -75,9 +75,9 @@ export default function MainBtnGroup({
         <TouchableOpacity onPress={onPressPortonovi}>
           <Image source={portIcon} style={mainBtnStyles.img} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={onPressVideo}>
-          <Image source={moonIcon} style={mainBtnStyles.img} />
-        </TouchableOpacity>
+        {/*<TouchableOpacity onPress={onPressVideo}>*/}
+        {/*  <Image source={moonIcon} style={mainBtnStyles.img} />*/}
+        {/*</TouchableOpacity>*/}
       </View>
       <TouchableOpacity onPress={() => setHiddenBox(!hiddenBox)}>
         <Image source={btnImg} style={{ width: 40, height: 40 }} />

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Dimensions, ScrollView, Text, View } from 'react-native'
 import { infoStyles } from '@/Containers/Private/Information/index.style'
 import RenderHtml from 'react-native-render-html'
@@ -10,6 +10,7 @@ import MainBtnGroup from '@/Components/MainBtnGroup'
 import VideoModal from '@/Components/VideoModal'
 
 export default function Information(props) {
+  const scrollRef = useRef()
   const [showVideo, setShowVideo] = useState(false)
   const { title, text, params, location } = props?.route?.params
   const { catalog, gallery, information, video, pyc, name, pyc_gallery, map } =
@@ -25,12 +26,21 @@ export default function Information(props) {
   const videoModalHandler = useCallback(() => {
     setShowVideo(prevState => !prevState)
   }, [])
-
+  useEffect(() => {
+    const interval = setInterval(() => {
+      scrollRef?.current?.flashScrollIndicators()
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
   console.log(location, 'location')
   return (
     <View style={infoStyles.container}>
       <Text style={infoStyles.title}>{title}</Text>
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        showsVerticalScrollIndicator={true}
+        ref={scrollRef}
+      >
         <RenderHtml
           contentWidth={width}
           source={source}
