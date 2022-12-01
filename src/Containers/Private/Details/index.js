@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import {
   Dimensions,
   Image,
@@ -17,14 +17,18 @@ import BackBtn from '@/Components/BackBtn'
 import SvgVideoIcon from '@/Assets/SvgVideoIcon'
 import VideoModal from '@/Components/VideoModal'
 import MainBtnGroup from '@/Components/MainBtnGroup'
+import Pinchable from 'react-native-pinchable'
 
 export default function Details(props) {
+  const scrollRef = useRef()
+
   const [showVideo, setShowVideo] = useState(false)
   const [localImg, setLocalImg] = useState([])
 
   const { gallery, blocks, name, content, video, info, is_plan } =
     props?.route?.params?.detail
   const { width } = Dimensions.get('window')
+
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
@@ -61,6 +65,13 @@ export default function Details(props) {
     setShowVideo(prevState => !prevState)
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      scrollRef?.current?.flashScrollIndicators()
+    }, 2000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
     <View style={detailsStyles.container}>
       <View style={detailsStyles.header}>
@@ -70,9 +81,9 @@ export default function Details(props) {
       <View style={detailsStyles.body}>
         <View style={detailsStyles.sliderBox}>
           <Carousel
-            loop
+            // loop
             width={width / 2}
-            autoPlay={localImg.length > 1}
+            // autoPlay={localImg.length > 1}
             data={localImg}
             scrollAnimationDuration={5000}
             // onSnapToItem={index => console.log('current index:', index)}
@@ -86,12 +97,14 @@ export default function Details(props) {
                     // backgroundColor: 'green',
                   }}
                 >
-                  <Image
-                    style={detailsStyles.sliderImg}
-                    source={{
-                      uri: item?.localUrl,
-                    }}
-                  />
+                  <Pinchable>
+                    <Image
+                      style={detailsStyles.sliderImg}
+                      source={{
+                        uri: item?.localUrl,
+                      }}
+                    />
+                  </Pinchable>
                 </View>
               )
             }}
@@ -133,7 +146,7 @@ export default function Details(props) {
                 })
               })}
           </View>
-          <ScrollView>
+          <ScrollView ref={scrollRef}>
             <RenderHtml
               contentWidth={width}
               source={source}

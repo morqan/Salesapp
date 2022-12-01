@@ -118,9 +118,8 @@ export default function Plan(props) {
         <Carousel
           // loop
           width={width}
-          autoPlay={localImgs.length > 1}
           data={localImgs}
-          scrollAnimationDuration={5000}
+          scrollAnimationDuration={3000}
           renderItem={({ index, item }) => {
             return (
               <View style={planStyles.slideBox}>
