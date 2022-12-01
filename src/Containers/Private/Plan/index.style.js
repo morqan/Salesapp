@@ -26,8 +26,8 @@ export const planStyles = StyleSheet.create({
   slideBox: {
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'red',
-    // marginTop: -100
+    // flex: 1,
+    // backgroundColor: 'green',
   },
   sliderImg: {
     width: '90%',
@@ -54,12 +54,23 @@ export const planStyles = StyleSheet.create({
   },
   headerProjectName: {
     color: '#9b8264',
-    marginTop: 10
+    marginTop: 10,
   },
   tagsStyles: {
     p: {
       marginBottom: 0,
-      lineHeight: 15
+      lineHeight: 15,
     },
+  },
+  rightBtn: {
+    position: 'absolute',
+    top: '50%',
+    right: 20,
+    // backgroundColor: '#F2F5FA',
+    // width: 30,
+    // height: 30,
+    // borderRadius: 5,
+    // alignItems: 'center',
+    // justifyContent: 'center'
   },
 })

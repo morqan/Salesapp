@@ -25,6 +25,8 @@
     "react-native-flipper": "^0.156.0",
     "react-native-fs": "^2.20.0",
     "react-native-gesture-handler": "^2.5.0",
+    "react-native-image-viewing": "^0.2.2",
+    "react-native-pinchable": "^0.2.1",
     "react-native-reanimated": "^3.0.0-rc.3",
     "react-native-reanimated-carousel": "^3.1.0",
     "react-native-render-html": "^6.3.4",

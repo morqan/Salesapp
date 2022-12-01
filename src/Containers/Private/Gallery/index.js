@@ -1,13 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Dimensions, Image, View } from 'react-native'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native'
 import Carousel from 'react-native-reanimated-carousel'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
 import { navigationRef } from '@/Navigators/utils'
 import BackBtn from '@/Components/BackBtn'
 import { useAuth } from '@/Hooks/useAuth'
 import MainBtnGroup from '@/Components/MainBtnGroup'
+import Pinchable from 'react-native-pinchable'
+import SvgLeft from '@/Assets/SvgLeft'
+import SvgRight from '@/Assets/SvgRight'
 
 export default function Gallery(props) {
+  const sliderRef = useRef()
   const [localImg, setLocalImg] = useState([])
   const { localImagesUrls } = useAuth()
   const { gallery } = props?.route?.params
@@ -31,23 +35,23 @@ export default function Gallery(props) {
   console.log(localImg, 'localImg')
 
   return (
-    <View style={{ backgroundColor: '#fff', paddingTop: 50 }}>
+    <View style={{ backgroundColor: '#fff', paddingTop: 50, flex: 1 }}>
       <Carousel
-        // loop
+        ref={sliderRef}
         width={width}
-        autoPlay={localImg?.length > 1}
         data={localImg}
-        scrollAnimationDuration={5000}
-        // onSnapToItem={index => console.log('current index:', index)}
+        scrollAnimationDuration={3000}
         renderItem={({ index, item }) => {
           return (
-            <View style={planStyles.slideBox}>
-              <Image
-                style={planStyles.sliderImg}
-                source={{
-                  uri: item?.localUrl,
-                }}
-              />
+            <View>
+              <Pinchable style={planStyles.slideBox}>
+                <Image
+                  style={planStyles.sliderImg}
+                  source={{
+                    uri: item?.localUrl,
+                  }}
+                />
+              </Pinchable>
             </View>
           )
         }}
@@ -55,6 +59,22 @@ export default function Gallery(props) {
       <View style={planStyles.backBtnBox}>
         <BackBtn onPress={goBack} />
       </View>
+      <TouchableOpacity
+        style={{ position: 'absolute', top: '50%', left: 20 }}
+        onPress={() => {
+          sliderRef?.current?.prev()
+        }}
+      >
+        <SvgLeft />
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={planStyles.rightBtn}
+        onPress={() => {
+          sliderRef?.current?.next()
+        }}
+      >
+        <SvgRight />
+      </TouchableOpacity>
       <MainBtnGroup />
     </View>
   )

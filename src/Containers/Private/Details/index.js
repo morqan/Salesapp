@@ -17,6 +17,7 @@ import BackBtn from '@/Components/BackBtn'
 import SvgVideoIcon from '@/Assets/SvgVideoIcon'
 import VideoModal from '@/Components/VideoModal'
 import MainBtnGroup from '@/Components/MainBtnGroup'
+import Pinchable from 'react-native-pinchable'
 
 export default function Details(props) {
   const scrollRef = useRef()
@@ -27,6 +28,7 @@ export default function Details(props) {
   const { gallery, blocks, name, content, video, info, is_plan } =
     props?.route?.params?.detail
   const { width } = Dimensions.get('window')
+
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
@@ -62,6 +64,7 @@ export default function Details(props) {
   const videoModalHandler = useCallback(() => {
     setShowVideo(prevState => !prevState)
   }, [])
+
   useEffect(() => {
     const interval = setInterval(() => {
       scrollRef?.current?.flashScrollIndicators()
@@ -78,7 +81,7 @@ export default function Details(props) {
       <View style={detailsStyles.body}>
         <View style={detailsStyles.sliderBox}>
           <Carousel
-            loop
+            // loop
             width={width / 2}
             // autoPlay={localImg.length > 1}
             data={localImg}
@@ -94,12 +97,14 @@ export default function Details(props) {
                     // backgroundColor: 'green',
                   }}
                 >
-                  <Image
-                    style={detailsStyles.sliderImg}
-                    source={{
-                      uri: item?.localUrl,
-                    }}
-                  />
+                  <Pinchable>
+                    <Image
+                      style={detailsStyles.sliderImg}
+                      source={{
+                        uri: item?.localUrl,
+                      }}
+                    />
+                  </Pinchable>
                 </View>
               )
             }}
