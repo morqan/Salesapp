@@ -89,7 +89,7 @@ export default function Montegro(props) {
             <RenderHtml
               contentWidth={width}
               source={source}
-              tagsStyles={detailsStyles.tagsStyles}
+              tagsStyles={detailsStyles.tagsStylesMontenegro}
             />
           </View>
           <View />

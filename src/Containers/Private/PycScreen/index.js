@@ -36,11 +36,10 @@ export default function PycScreen(props) {
       <View style={detailsStyles.body}>
         <View style={detailsStyles.sliderBox}>
           <Carousel
-            loop={localImg.length > 1}
+            loop={false}
             width={width / 2}
-            autoPlay={localImg.length > 1}
             data={localImg}
-            scrollAnimationDuration={5000}
+            scrollAnimationDuration={3000}
             // onSnapToItem={index => console.log('current index:', index)}
             renderItem={({ index, item }) => {
               return (
@@ -66,7 +65,7 @@ export default function PycScreen(props) {
             <RenderHtml
               contentWidth={width}
               source={source}
-              tagsStyles={detailsStyles.tagsStyles}
+              tagsStyles={detailsStyles.tagsStylesPyc}
             />
           </View>
           <View />
