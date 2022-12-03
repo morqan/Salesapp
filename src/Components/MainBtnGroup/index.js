@@ -52,7 +52,7 @@ export default function MainBtnGroup({
       <View
         style={[
           mainBtnStyles.hiddenBtnBox,
-          hiddenBox ? { height: home ? 150 : 130 } : { height: 0, opacity: 0 },
+          hiddenBox ? { height: home ? 135 : 115 } : { height: 0, opacity: 0 },
         ]}
       >
         {home && (

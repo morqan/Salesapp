@@ -17,7 +17,8 @@ import MainBtnGroup from '@/Components/MainBtnGroup'
 import MailSendModal from '@/Components/MailSendModal'
 import { useOnSendMailMutation } from '@/Services/modules/Auth'
 import SuccessModal from '@/Components/SuccessModal'
-import { detailsStyles } from '@/Containers/Private/Details/index.style'
+import Pinchable from 'react-native-pinchable'
+
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
@@ -116,19 +117,21 @@ export default function Plan(props) {
       </View>
       <View style={{ height: '80%' }}>
         <Carousel
-          // loop
+          loop={false}
           width={width}
           data={localImgs}
           scrollAnimationDuration={3000}
           renderItem={({ index, item }) => {
             return (
-              <View style={planStyles.slideBox}>
-                <Image
-                  style={planStyles.sliderImg}
-                  source={{
-                    uri: item?.localUrl,
-                  }}
-                />
+              <View>
+                <Pinchable style={planStyles.slideBox}>
+                  <Image
+                    style={planStyles.sliderImg}
+                    source={{
+                      uri: item?.localUrl,
+                    }}
+                  />
+                </Pinchable>
               </View>
             )
           }}
