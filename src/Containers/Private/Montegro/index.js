@@ -1,5 +1,5 @@
-import React, { useCallback, useState, useEffect } from 'react'
-import { Dimensions, Image, Text, View } from 'react-native'
+import React, { useCallback, useState, useEffect, useRef } from 'react'
+import { Dimensions, Image, ScrollView, Text, View } from 'react-native'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import RenderHtml from 'react-native-render-html'
 import { navigationRef } from '@/Navigators/utils'
@@ -26,6 +26,8 @@ export default function Montegro(props) {
   const [showVideo, setShowVideo] = useState(false)
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
+  const scrollRef = useRef()
+
 
   useEffect(() => {
     console.log(left_img, 'newImg')
@@ -35,7 +37,6 @@ export default function Montegro(props) {
         ' ',
         '%20',
       )
-    console.log(newImg, 'newImg')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
         console.log(x, 'xxxs')
@@ -50,9 +51,16 @@ export default function Montegro(props) {
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
+
   console.log(props?.route?.params, 'props?.route?.params')
   const videoModalHandler = useCallback(() => {
     setShowVideo(prevState => !prevState)
+  }, [])
+  useEffect(() => {
+    const interval = setInterval(() => {
+      scrollRef?.current?.flashScrollIndicators()
+    }, 2000)
+    return () => clearInterval(interval)
   }, [])
   return (
     <View style={detailsStyles.container}>
@@ -76,7 +84,7 @@ export default function Montegro(props) {
             />
           )}
         </View>
-        <View style={detailsStyles.content}>
+        <ScrollView ref={scrollRef} style={detailsStyles.content}>
           <View>
             <RenderHtml
               contentWidth={width}
@@ -85,7 +93,7 @@ export default function Montegro(props) {
             />
           </View>
           <View />
-        </View>
+        </ScrollView>
       </View>
       <Footer
         catalog={catalog}
