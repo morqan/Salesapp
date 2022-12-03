@@ -34,7 +34,6 @@ export const detailsStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
     // backgroundColor: 'red'
-
   },
   contentHeader: {
     flexDirection: 'row',
@@ -77,7 +76,19 @@ export const detailsStyles = StyleSheet.create({
   tagsStyles: {
     p: {
       marginBottom: 0,
-      lineHeight: 15
+      lineHeight: 30,
+    },
+  },
+  tagsStylesPyc: {
+    p: {
+      marginBottom: 0,
+      lineHeight: 30,
+    },
+  },
+  tagsStylesMontenegro: {
+    p: {
+      marginBottom: 0,
+      lineHeight: 25,
     },
   },
   videoIconBox: {
