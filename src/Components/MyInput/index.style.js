@@ -5,10 +5,11 @@ export const inputStyles = StyleSheet.create({
     // backgroundColor: '#fff'
   },
   input: {
-    borderBottomColor: '#fff',
-    borderBottomWidth: 2,
-    paddingVertical: 10,
-    color: '#fff'
+    borderColor: '#E6E6E6',
+    borderWidth: 1,
+    padding: 10,
+    color: '#1E1E1E',
+    borderRadius: 3
   }
 
 });

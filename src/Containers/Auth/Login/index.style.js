@@ -4,11 +4,17 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#0d6a78',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  loginBox: {
+    width: "55%",
+    height: '65%',
+    backgroundColor: '#fff',
   },
   logoBox: {
     alignItems: 'center',
     paddingVertical: 30,
-    backgroundColor: '#fff',
   },
   logoText: {
     color: '#fff',
@@ -16,7 +22,7 @@ export const styles = StyleSheet.create({
     fontSize: 30,
   },
   form: {
-    paddingHorizontal: 50,
+    paddingHorizontal: 90,
     paddingTop: 10,
   },
   inputBox: {
@@ -29,4 +35,17 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 50,
   },
+  supportText: {
+    color: '#1E1E1E',
+    fontWeight: '400',
+    textAlign: 'center',
+    fontSize: 13,
+    marginTop: 25,
+
+  },
+  loginBntContainer:{
+    width: '100%',
+    backgroundColor: '#278590',
+    borderColor: '#278590',
+  }
 })

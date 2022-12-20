@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Image, ScrollView, Text, View } from "react-native"
+import { Image, ScrollView, Text, View } from 'react-native'
 import { styles } from '@/Containers/Auth/Login/index.style'
 import MyInput from '@/Components/MyInput'
 import MyBtn from '@/Components/MyBtn'
@@ -7,7 +7,7 @@ import { useOnLoginMutation } from '@/Services/modules/Auth'
 import { useDispatch } from 'react-redux'
 import { changeToken, changeUser } from '@/Store/Auth'
 import logo from '../../../Assets/Images/logo.png'
-import { homeStyles } from "@/Containers/Private/Home/Iindex.style"
+import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 
 export default function Login() {
   const dispatch = useDispatch()
@@ -44,33 +44,37 @@ export default function Login() {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.logoBox}>
-        <Image source={logo} style={homeStyles.logo} />
-      </View>
-      <View style={styles.form}>
-        <View style={styles.inputBox}>
-          <MyInput
-            value={login}
-            placeholder={'Login'}
-            onChangeText={text => onChangeLogin(text)}
+    <View style={styles.container}>
+      <View style={styles.loginBox}>
+        <View style={styles.logoBox}>
+          <Image source={logo} style={homeStyles.logo} />
+        </View>
+        <View style={styles.form}>
+          <View style={styles.inputBox}>
+            <MyInput
+              value={login}
+              placeholder={'Login'}
+              onChangeText={text => onChangeLogin(text)}
+            />
+          </View>
+          <View style={styles.inputBox}>
+            <MyInput
+              placeholder={'Password'}
+              value={pass}
+              onChangeText={text => onChangePass(text)}
+            />
+          </View>
+          <MyBtn
+            text={'SIGN IN'}
+            onPress={onPressLogin}
+            btnStyle={{ backgroundColor: '#278590', borderColor: '#278590' }}
+            textStyle={{ color: '#fff' }}
+            containerStyle={styles.loginBntContainer}
           />
         </View>
-        <View style={styles.inputBox}>
-          <MyInput
-            placeholder={'Password'}
-            value={pass}
-            onChangeText={text => onChangePass(text)}
-          />
-        </View>
-        <MyBtn
-          text={'SIGN IN'}
-          onPress={onPressLogin}
-          btnStyle={{ backgroundColor: '#fff' }}
-          textStyle={{ color: '#000' }}
-        />
+        <Text style={styles.supportText}>Can not login? contact us.</Text>
+        <Text style={styles.errText}>{error?.data?.error}</Text>
       </View>
-      <Text style={styles.errText}>{error?.data?.error}</Text>
-    </ScrollView>
+    </View>
   )
 }
