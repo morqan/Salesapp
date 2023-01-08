@@ -8,6 +8,8 @@ import Footer from '@/Components/Footer'
 import MainBtnGroup from '@/Components/MainBtnGroup'
 import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
+import LeftMenu from '@/Components/LeftMenu'
+import MyHeader from "@/Components/MyHeader"
 
 export default function Montegro(props) {
   const { title, text, params, location } = props?.route?.params
@@ -27,7 +29,6 @@ export default function Montegro(props) {
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
   const scrollRef = useRef()
-
 
   useEffect(() => {
     console.log(left_img, 'newImg')
@@ -56,25 +57,33 @@ export default function Montegro(props) {
   const videoModalHandler = useCallback(() => {
     setShowVideo(prevState => !prevState)
   }, [])
+
   useEffect(() => {
     const interval = setInterval(() => {
       scrollRef?.current?.flashScrollIndicators()
     }, 2000)
     return () => clearInterval(interval)
   }, [])
+
   return (
     <View style={detailsStyles.container}>
-      <View style={detailsStyles.header}>
-        <Text style={detailsStyles.headerTitle}>{title}</Text>
-        <BackBtn onPress={goBack} />
-      </View>
+      <MyHeader goBack={goBack} />
       <View style={detailsStyles.body}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-          }}
-        >
+        <LeftMenu
+          title={title}
+          catalog={catalog}
+          gallery={gallery}
+          information={information}
+          video={video}
+          pyc={pyc}
+          name={name}
+          pyc_gallery={pyc_gallery}
+          params={params}
+          onPressVideo={videoModalHandler}
+          map={map}
+          location={location}
+        />
+        <View style={{ flex: 1.5, justifyContent: 'center' }}>
           {localImg && (
             <Image
               style={detailsStyles.sliderImg}
@@ -95,20 +104,6 @@ export default function Montegro(props) {
           <View />
         </ScrollView>
       </View>
-      <Footer
-        catalog={catalog}
-        gallery={gallery}
-        information={information}
-        video={video}
-        pyc={pyc}
-        name={name}
-        pyc_gallery={pyc_gallery}
-        params={params}
-        onPressVideo={videoModalHandler}
-        map={map}
-        location={location}
-      />
-      <MainBtnGroup />
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />
       )}

@@ -28,12 +28,12 @@ export const navigateAndReset = (routes = [], index = 0) => {
   }
 }
 
-export const navigateAndSimpleReset = (name, index = 0) => {
+export const navigateAndSimpleReset = (name, params, index = 0) => {
   if (navigationRef.isReady()) {
     navigationRef.dispatch(
       CommonActions.reset({
         index,
-        routes: [{ name }],
+        routes: [{ name, params,  }],
       }),
     )
   }

@@ -62,6 +62,13 @@ export const planStyles = StyleSheet.create({
       lineHeight: 15,
     },
   },
+  tagsLeftStyles: {
+    p: {
+      marginBottom: 0,
+      lineHeight: 15,
+      textAlign: 'center'
+    },
+  },
   rightBtn: {
     position: 'absolute',
     top: '50%',

@@ -28,6 +28,7 @@ import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
 import logo from '../../../Assets/Images/logo.png'
 import MainBtnGroup from '@/Components/MainBtnGroup'
+import MyHeader from "@/Components/MyHeader"
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -179,9 +180,7 @@ export default function Home() {
   }
   return (
     <View style={homeStyles.container}>
-      <View style={homeStyles.logoBox}>
-        <Image source={logo} style={homeStyles.logo} />
-      </View>
+      <MyHeader/>
       {(downloaded && getImagesData?.length > 0) ||
       (downloaded && localImagesUrls?.length > 525) ? (
         <View>

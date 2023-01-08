@@ -6,7 +6,6 @@ import homeIcon from '../../Assets/Images/homeIcon.png'
 import mapIcon from '../../Assets/Images/mapIcon.png'
 import logoutIcon from '../../Assets/Images/logoutIcon.png'
 import portIcon from '../../Assets/Images/portonoviIcon.png'
-import moonIcon from '../../Assets/Images/moonIcon.png'
 import { changeToken } from '@/Store/Auth'
 import { useDispatch } from 'react-redux'
 import { navigate, navigateAndSimpleReset } from '@/Navigators/utils'
@@ -14,7 +13,6 @@ import { useAuth } from '@/Hooks/useAuth'
 import downloadIcon from '@/Assets/Images/akar-icons_download.png'
 
 export default function MainBtnGroup({
-  onPressVideo,
   onOpenDownloadImages,
   home,
 }) {

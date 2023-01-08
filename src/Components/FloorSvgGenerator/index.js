@@ -3,7 +3,6 @@ import Svg, { G, Path, Text, TSpan, Image } from 'react-native-svg'
 import { svgGeneratorStyles } from '@/Components/SvgGenerator/index.style'
 import { Dimensions, View } from 'react-native'
 import { useAuth } from '@/Hooks/useAuth'
-import MainBtnGroup from '@/Components/MainBtnGroup'
 
 export default function FloorSvgGenerator({
   img,
@@ -37,8 +36,8 @@ export default function FloorSvgGenerator({
       style={{
         width: windowWidth,
         aspectRatio,
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
       }}
     >
       <Svg
@@ -84,7 +83,6 @@ export default function FloorSvgGenerator({
             })}
         </G>
       </Svg>
-      <MainBtnGroup />
     </View>
   )
 }

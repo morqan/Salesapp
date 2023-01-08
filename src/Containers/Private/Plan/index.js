@@ -18,6 +18,8 @@ import MailSendModal from '@/Components/MailSendModal'
 import { useOnSendMailMutation } from '@/Services/modules/Auth'
 import SuccessModal from '@/Components/SuccessModal'
 import Pinchable from 'react-native-pinchable'
+import MyHeader from "@/Components/MyHeader"
+import LeftMenu from "@/Components/LeftMenu"
 
 
 export default function Plan(props) {
@@ -93,29 +95,30 @@ export default function Plan(props) {
   console.log(props?.route?.params?.plan, 'props?.route?.params?.plan')
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <View style={planStyles.backBtnBox}>
-        <BackBtn onPress={goBack} />
-        <TouchableOpacity onPress={setMailHandler}>
-          <Image source={letterImg} style={{ width: 30, height: 30 }} />
-        </TouchableOpacity>
-      </View>
-      <View style={planStyles.header}>
-        <View style={{ marginTop: 15 }}>
-          <Text>{name}</Text>
-          <Text style={planStyles.headerProjectName}>{project}</Text>
-        </View>
-        {headInfo.map((item, index) => {
-          return (
-            <RenderHtml
-              tagsStyles={planStyles.tagsStyles}
-              key={index}
-              contentWidth={width}
-              source={item}
-            />
-          )
-        })}
-      </View>
-      <View style={{ height: '80%' }}>
+      <MyHeader goBack={goBack} />
+      {/*<View style={planStyles.backBtnBox}>*/}
+      {/*  <TouchableOpacity onPress={setMailHandler}>*/}
+      {/*    <Image source={letterImg} style={{ width: 30, height: 30 }} />*/}
+      {/*  </TouchableOpacity>*/}
+      {/*</View>*/}
+      {/*<View style={planStyles.header}>*/}
+      {/*  <View style={{ marginTop: 15 }}>*/}
+      {/*    <Text>{name}</Text>*/}
+      {/*    <Text style={planStyles.headerProjectName}>{project}</Text>*/}
+      {/*  </View>*/}
+      {/*  {headInfo.map((item, index) => {*/}
+      {/*    return (*/}
+      {/*      <RenderHtml*/}
+      {/*        tagsStyles={planStyles.tagsStyles}*/}
+      {/*        key={index}*/}
+      {/*        contentWidth={width}*/}
+      {/*        source={item}*/}
+      {/*      />*/}
+      {/*    )*/}
+      {/*  })}*/}
+      {/*</View>*/}
+      <View style={{ height: '90%', flexDirection: 'row' }}>
+        <LeftMenu title={name} project={project} name={name} headInfo={headInfo} />
         <Carousel
           loop={false}
           width={width}
@@ -146,7 +149,6 @@ export default function Plan(props) {
             </Text>
           </View>
         ))}
-      <MainBtnGroup />
       {mailModal && (
         <MailSendModal
           onPressCancel={setMailHandler}

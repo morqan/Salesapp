@@ -5,7 +5,7 @@ export const detailsStyles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingBottom: 30,
+    // paddingBottom: 30,
   },
   header: {
     flexDirection: 'row',
@@ -32,7 +32,8 @@ export const detailsStyles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingRight: 10,
+    paddingLeft: 15,
     // backgroundColor: 'red'
   },
   contentHeader: {

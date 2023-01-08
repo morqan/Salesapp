@@ -13,15 +13,14 @@ import Carousel from 'react-native-reanimated-carousel'
 import { navigate, navigationRef } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
 import { useAuth } from '@/Hooks/useAuth'
-import BackBtn from '@/Components/BackBtn'
-import SvgVideoIcon from '@/Assets/SvgVideoIcon'
 import VideoModal from '@/Components/VideoModal'
-import MainBtnGroup from '@/Components/MainBtnGroup'
 import Pinchable from 'react-native-pinchable'
+import MyHeader from '@/Components/MyHeader'
+import LeftMenu from '@/Components/LeftMenu'
 
 export default function Details(props) {
   const scrollRef = useRef()
-
+  const { localImagesUrls } = useAuth()
   const [showVideo, setShowVideo] = useState(false)
   const [localImg, setLocalImg] = useState([])
 
@@ -32,13 +31,17 @@ export default function Details(props) {
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
-  const { localImagesUrls } = useAuth()
+
   const onOpenFloor = useCallback(item => {
     if (item?.is_plan) {
       console.log(item, 'item')
       navigate('Plan', { plan: item })
     } else {
-      navigate('Floor', { floor: item })
+      navigate('Floor', {
+        floor: item,
+        blocks: blocks,
+        detail: props?.route?.params?.detail,
+      })
     }
   }, [])
 
@@ -47,7 +50,9 @@ export default function Details(props) {
       ? `${info === null ? '' : info}`
       : `${content === null ? '' : content}`,
   }
-  console.log(props?.route?.params?.detail, 'props?.route?.params?.detail')
+
+  console.log(props?.route?.params?.detail, 'props?.route?.params?.details')
+
   useEffect(() => {
     const newGallery = gallery.map(item => {
       let newImg =
@@ -74,29 +79,24 @@ export default function Details(props) {
 
   return (
     <View style={detailsStyles.container}>
-      <View style={detailsStyles.header}>
-        <Text style={detailsStyles.headerTitle}>{name}</Text>
-        <BackBtn onPress={goBack} />
-      </View>
+      <MyHeader goBack={goBack} />
       <View style={detailsStyles.body}>
+        <LeftMenu
+          blocks={blocks}
+          title={name}
+          video={video}
+          onPressVideo={videoModalHandler}
+          onOpenFloor={onOpenFloor}
+        />
         <View style={detailsStyles.sliderBox}>
           <Carousel
-            // loop
-            width={width / 2}
-            // autoPlay={localImg.length > 1}
+            loop={false}
+            width={source?.html ? width / 2 : width}
             data={localImg}
-            scrollAnimationDuration={5000}
-            // onSnapToItem={index => console.log('current index:', index)}
+            scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {
               return (
-                <View
-                  style={{
-                    flex: 1,
-                    // borderWidth: 1,
-                    justifyContent: 'center',
-                    // backgroundColor: 'green',
-                  }}
-                >
+                <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Pinchable>
                     <Image
                       style={detailsStyles.sliderImg}
@@ -110,56 +110,56 @@ export default function Details(props) {
             }}
           />
         </View>
-
-        <View style={detailsStyles.content}>
-          <View style={detailsStyles.contentHeader}>
-            <View>
-              {blocks?.data.length > 0 && (
-                <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>
-              )}
-            </View>
-            {video && (
-              <TouchableOpacity
-                style={detailsStyles.videoBox}
-                onPress={videoModalHandler}
-              >
-                <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>
-                <View style={detailsStyles.videoIconBox}>
-                  <SvgVideoIcon />
-                </View>
-              </TouchableOpacity>
-            )}
+        {source?.html && (
+          <View style={detailsStyles.content}>
+            {/*<View style={detailsStyles.contentHeader}>*/}
+            {/*  <View>*/}
+            {/*    {blocks?.data.length > 0 && (*/}
+            {/*      <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>*/}
+            {/*    )}*/}
+            {/*  </View>*/}
+            {/*  {video && (*/}
+            {/*    <TouchableOpacity*/}
+            {/*      style={detailsStyles.videoBox}*/}
+            {/*      onPress={videoModalHandler}*/}
+            {/*    >*/}
+            {/*      <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>*/}
+            {/*      <View style={detailsStyles.videoIconBox}>*/}
+            {/*        <SvgVideoIcon />*/}
+            {/*      </View>*/}
+            {/*    </TouchableOpacity>*/}
+            {/*  )}*/}
+            {/*</View>*/}
+            {/*<View style={detailsStyles.btnBox}>*/}
+            {/*  {blocks?.data &&*/}
+            {/*    blocks?.data.map(item => {*/}
+            {/*      return item?.floors?.data.map(floor => {*/}
+            {/*        return (*/}
+            {/*          <MyBtn*/}
+            {/*            key={floor?.id}*/}
+            {/*            textStyle={detailsStyles.typeBtnText}*/}
+            {/*            containerStyle={detailsStyles.typeBtn}*/}
+            {/*            text={floor?.name}*/}
+            {/*            onPress={() => onOpenFloor(floor)}*/}
+            {/*          />*/}
+            {/*        )*/}
+            {/*      })*/}
+            {/*    })}*/}
+            {/*</View>*/}
+            <ScrollView ref={scrollRef}>
+              <RenderHtml
+                contentWidth={width}
+                source={source}
+                tagsStyles={detailsStyles.tagsStyles}
+              />
+            </ScrollView>
+            <View />
           </View>
-          <View style={detailsStyles.btnBox}>
-            {blocks?.data &&
-              blocks?.data.map(item => {
-                return item?.floors?.data.map(floor => {
-                  return (
-                    <MyBtn
-                      key={floor?.id}
-                      textStyle={detailsStyles.typeBtnText}
-                      containerStyle={detailsStyles.typeBtn}
-                      text={floor?.name}
-                      onPress={() => onOpenFloor(floor)}
-                    />
-                  )
-                })
-              })}
-          </View>
-          <ScrollView ref={scrollRef}>
-            <RenderHtml
-              contentWidth={width}
-              source={source}
-              tagsStyles={detailsStyles.tagsStyles}
-            />
-          </ScrollView>
-          <View />
-        </View>
+        )}
       </View>
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />
       )}
-      <MainBtnGroup />
     </View>
   )
 }

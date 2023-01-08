@@ -8,6 +8,9 @@ import BackBtn from '@/Components/BackBtn'
 import MainBtnGroup from '@/Components/MainBtnGroup'
 import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
+import MyHeader from "@/Components/MyHeader"
+import LeftMenu from "@/Components/LeftMenu"
+import { detailsStyles } from "@/Containers/Private/Details/index.style"
 
 export default function Project(props) {
   const [widths, setWidths] = useState('')
@@ -39,19 +42,12 @@ export default function Project(props) {
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
         console.log(x, 'xxxs')
-        // setLocalImg(`${x?.localUrl}`)
         Image.getSize(x?.localUrl, (width, height) => {
-          console.log(height, 'localimgHeite')
-          console.log(width, 'localimgwidth')
           setHeights(height)
           setWidths(width)
         })
       }
     })
-    // Image.getSize(img, (width, height) => {
-    //   setHeights(height)
-    //   setWidths(width)
-    // })
     console.log(props?.route?.params?.project, 'props?.route?.params?.project')
   }, [])
   const goBack = useCallback(() => {
@@ -60,11 +56,23 @@ export default function Project(props) {
 
   return (
     <View style={projectStyles.container}>
-      <View style={projectStyles.absoluteHead}>
-        <BackBtn onPress={goBack} />
-      </View>
+      <MyHeader goBack={goBack} />
       {widths && (
-        <View style={{ paddingTop: 45 }}>
+        <View style={detailsStyles.body}>
+          <LeftMenu
+            title={name}
+            catalog={catalog}
+            gallery={gallery}
+            information={information}
+            video={video}
+            pyc={pyc}
+            name={name}
+            pyc_gallery={pyc_gallery}
+            params={props?.route?.params?.project}
+            onPressVideo={videoModalHandler}
+            // map={map}
+            // location={location}
+          />
           <SvgGenerator
             img={img}
             path={items?.data}
@@ -76,20 +84,6 @@ export default function Project(props) {
           />
         </View>
       )}
-      <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
-        <Footer
-          catalog={catalog}
-          gallery={gallery}
-          information={information}
-          video={video}
-          pyc={pyc}
-          name={name}
-          pyc_gallery={pyc_gallery}
-          onPressVideo={videoModalHandler}
-          params={props?.route?.params?.project}
-        />
-      </View>
-      <MainBtnGroup />
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />
       )}
