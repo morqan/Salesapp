@@ -8,9 +8,9 @@ import BackBtn from '@/Components/BackBtn'
 import MainBtnGroup from '@/Components/MainBtnGroup'
 import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
-import MyHeader from "@/Components/MyHeader"
-import LeftMenu from "@/Components/LeftMenu"
-import { detailsStyles } from "@/Containers/Private/Details/index.style"
+import MyHeader from '@/Components/MyHeader'
+import LeftMenu from '@/Components/LeftMenu'
+import { detailsStyles } from '@/Containers/Private/Details/index.style'
 
 export default function Project(props) {
   const [widths, setWidths] = useState('')
@@ -69,19 +69,25 @@ export default function Project(props) {
             name={name}
             pyc_gallery={pyc_gallery}
             params={props?.route?.params?.project}
-            onPressVideo={videoModalHandler} path={items?.data} onOpenPlan={onOpenDetails}
+            onPressVideo={videoModalHandler}
+            path={items?.data}
+            onOpenPlan={onOpenDetails}
             // map={map}
             // location={location}
           />
-          <SvgGenerator
-            img={img}
-            path={items?.data}
-            onPress={item => onOpenDetails(item)}
-            width={widths}
-            height={heights}
-            top={1600}
-            backgroundColor="#0d6a78"
-          />
+          <View style={detailsStyles.sliderBox}>
+            <SvgGenerator
+              img={img}
+              path={items?.data}
+              onPress={item => onOpenDetails(item)}
+              width={widths}
+              height={heights}
+              top={1600}
+              backgroundColor="#0d6a78"
+              imgWidth={0.75}
+            />
+          </View>
+
         </View>
       )}
       {showVideo && (

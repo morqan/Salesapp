@@ -6,6 +6,7 @@ export const detailsStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     // paddingBottom: 30,
+    // alignItems: 'flex-start',
   },
   header: {
     flexDirection: 'row',
@@ -22,19 +23,25 @@ export const detailsStyles = StyleSheet.create({
   body: {
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'flex-start',
+    // alignItems: 'flex-start',
     paddingHorizontal: 5,
   },
   sliderBox: {
-    width: '75%'
+    maxWidth: '75%',
+    // width: '40%',
     // backgroundColor: 'blue',
+    // flex: 1
     // width: (width * 2) / 3,
   },
   content: {
     flex: 1,
     paddingRight: 10,
     paddingLeft: 15,
-    // backgroundColor: 'red'
+    backgroundColor: 'red',
+    width: 500,
+
+
   },
   contentHeader: {
     flexDirection: 'row',
@@ -70,7 +77,7 @@ export const detailsStyles = StyleSheet.create({
     lineHeight: 25,
   },
   sliderImg: {
-    width: '100%',
+    width: '90%',
     height: '100%',
     // resizeMode: 'stretch',
   },
@@ -78,6 +85,7 @@ export const detailsStyles = StyleSheet.create({
     p: {
       marginBottom: 0,
       lineHeight: 30,
+      // width: 300
     },
   },
   tagsStylesPyc: {

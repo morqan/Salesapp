@@ -16,7 +16,7 @@ export default function FloorSvgGenerator({
   const originalWidth = Number(width) * 8.6
   const originalHeight = Number(height) * 8.6
   const aspectRatio = originalWidth / originalHeight
-  const windowWidth = Dimensions.get('window').width * 0.9
+  const windowWidth = Dimensions.get('window').width
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
 
@@ -36,13 +36,13 @@ export default function FloorSvgGenerator({
       style={{
         width: windowWidth,
         aspectRatio,
-        // alignItems: 'center',
+        alignItems: 'center',
         // justifyContent: 'center',
       }}
     >
       <Svg
-        width="85%"
-        height="85%"
+        width="93%"
+        height="93%"
         viewBox={`0 0 ${originalWidth} ${originalHeight}`}
         xmlns="http://www.w3.org/2000/svg"
         xmlSpace="preserve"

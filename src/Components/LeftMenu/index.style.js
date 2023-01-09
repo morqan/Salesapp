@@ -2,12 +2,13 @@ import { StyleSheet } from 'react-native'
 
 export const sideMenuStyles = StyleSheet.create({
   side: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#F2F2F2',
     alignItems: 'center',
     paddingTop: 50,
     paddingHorizontal: 15,
-    // width: '100%'
+    width: 300,
+    height: '100%'
   },
   title: {
     color: '#555555',

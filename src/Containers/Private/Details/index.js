@@ -88,15 +88,16 @@ export default function Details(props) {
           onPressVideo={videoModalHandler}
           onOpenFloor={onOpenFloor}
         />
+
         <View style={detailsStyles.sliderBox}>
           <Carousel
             loop={false}
-            width={source?.html ? width / 2 : width}
+            width={source?.html ? width / 2.3 : width}
             data={localImg}
             scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {
               return (
-                <View style={{ flex: 1, justifyContent: 'center' }}>
+                <View style={{ flex: 1,justifyContent:'flex-start'  }}>
                   <Pinchable>
                     <Image
                       style={detailsStyles.sliderImg}
@@ -111,50 +112,13 @@ export default function Details(props) {
           />
         </View>
         {source?.html && (
-          <View style={detailsStyles.content}>
-            {/*<View style={detailsStyles.contentHeader}>*/}
-            {/*  <View>*/}
-            {/*    {blocks?.data.length > 0 && (*/}
-            {/*      <Text style={detailsStyles.contentHeaderText}>FLOOR PLANS</Text>*/}
-            {/*    )}*/}
-            {/*  </View>*/}
-            {/*  {video && (*/}
-            {/*    <TouchableOpacity*/}
-            {/*      style={detailsStyles.videoBox}*/}
-            {/*      onPress={videoModalHandler}*/}
-            {/*    >*/}
-            {/*      <Text style={detailsStyles.contentHeaderText}>WATCH VIDEO</Text>*/}
-            {/*      <View style={detailsStyles.videoIconBox}>*/}
-            {/*        <SvgVideoIcon />*/}
-            {/*      </View>*/}
-            {/*    </TouchableOpacity>*/}
-            {/*  )}*/}
-            {/*</View>*/}
-            {/*<View style={detailsStyles.btnBox}>*/}
-            {/*  {blocks?.data &&*/}
-            {/*    blocks?.data.map(item => {*/}
-            {/*      return item?.floors?.data.map(floor => {*/}
-            {/*        return (*/}
-            {/*          <MyBtn*/}
-            {/*            key={floor?.id}*/}
-            {/*            textStyle={detailsStyles.typeBtnText}*/}
-            {/*            containerStyle={detailsStyles.typeBtn}*/}
-            {/*            text={floor?.name}*/}
-            {/*            onPress={() => onOpenFloor(floor)}*/}
-            {/*          />*/}
-            {/*        )*/}
-            {/*      })*/}
-            {/*    })}*/}
-            {/*</View>*/}
-            <ScrollView ref={scrollRef}>
-              <RenderHtml
-                contentWidth={width}
-                source={source}
-                tagsStyles={detailsStyles.tagsStyles}
-              />
-            </ScrollView>
-            <View />
-          </View>
+          <ScrollView style={{width:"30%",}} ref={scrollRef}>
+            <RenderHtml
+              contentWidth={width}
+              source={source}
+              tagsStyles={detailsStyles.tagsStyles}
+            />
+          </ScrollView>
         )}
       </View>
       {showVideo && (

@@ -62,13 +62,13 @@ export default function Floor(props) {
     <View style={{ flex: 1 }}>
       <MyHeader goBack={goBack} />
       <View style={detailsStyles.body}>
-        <LeftMenu
-          // blocks={blocks}
-          // onOpenFloor={onOpenFloor}
-          path={plans?.data}
-          onOpenPlan={onOpenPlan}
-          title={name}
-        />
+        {/*<LeftMenu*/}
+        {/*  // blocks={blocks}*/}
+        {/*  // onOpenFloor={onOpenFloor}*/}
+        {/*  path={plans?.data}*/}
+        {/*  onOpenPlan={onOpenPlan}*/}
+        {/*  title={name}*/}
+        {/*/>*/}
         <View style={detailsStyles.sliderBox}>
         {widths && (
             <FloorSvgGenerator

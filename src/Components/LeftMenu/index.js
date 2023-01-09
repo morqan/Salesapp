@@ -2,8 +2,6 @@ import React, { useCallback } from 'react'
 import { ScrollView, Text, TouchableOpacity, useWindowDimensions, View } from "react-native"
 import { sideMenuStyles } from '@/Components/LeftMenu/index.style'
 import { navigate } from '@/Navigators/utils'
-import { Path } from 'react-native-svg'
-import { svgGeneratorStyles } from '@/Components/SvgGenerator/index.style'
 import RenderHtml from 'react-native-render-html'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
 

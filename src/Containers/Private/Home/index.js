@@ -23,12 +23,12 @@ import {
   setPages,
 } from '@/Store/Auth'
 import { useAuth } from '@/Hooks/useAuth'
-import Footer from '@/Components/Footer'
 import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
-import logo from '../../../Assets/Images/logo.png'
-import MainBtnGroup from '@/Components/MainBtnGroup'
-import MyHeader from "@/Components/MyHeader"
+import gallery from '../../../Assets/Images/gallery.png'
+import MyHeader from '@/Components/MyHeader'
+import HomeFooter from '@/Components/HomeFooter'
+import { hfStyles } from '@/Components/HomeFooter/index.style'
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -164,7 +164,7 @@ export default function Home() {
     }
     loadData()
   }, [])
-
+  console.log(homeItemPositions, 'homeItemPositions')
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
@@ -180,7 +180,7 @@ export default function Home() {
   }
   return (
     <View style={homeStyles.container}>
-      <MyHeader/>
+      <MyHeader onDownloadImages={onOpenDownloadImages} />
       {(downloaded && getImagesData?.length > 0) ||
       (downloaded && localImagesUrls?.length > 525) ? (
         <View>
@@ -192,13 +192,9 @@ export default function Home() {
               height={heights}
               width={widths}
               top={2600}
+              backgroundColor={'#1F6B6B'}
             />
           )}
-          <Footer
-            lifestyle={pages?.lifestyle}
-            montenegro={pages?.montenegro}
-            portonovi={pages?.portonovi}
-          />
         </View>
       ) : (
         <ScrollView contentContainerStyle={homeStyles.downloadHint}>
@@ -217,7 +213,8 @@ export default function Home() {
           </TouchableOpacity>
         </ScrollView>
       )}
-      <MainBtnGroup home onOpenDownloadImages={onOpenDownloadImages} />
+      <HomeFooter homeItems={homeItemPositions} />
+      <Image source={gallery} style={hfStyles.img} />
     </View>
   )
 }

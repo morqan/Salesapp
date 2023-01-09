@@ -12,11 +12,14 @@ export default function SvgGenerator({
   height,
   top,
   backgroundColor,
+  imgWidth,
 }) {
   const originalWidth = Number(width) * 8.6
   const originalHeight = Number(height) * 8.6
   const aspectRatio = originalWidth / originalHeight
-  const windowWidth = Dimensions.get('window').width * 0.75
+  const windowWidth = imgWidth
+    ? Dimensions.get('window').width * imgWidth
+    : Dimensions.get('window').width
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
 
@@ -40,6 +43,7 @@ export default function SvgGenerator({
         style={{ width: '100%', height: '100%' }}
         // viewBox="0 0 20970 7800"
         xmlnsXlink="http://www.w3.org/1999/xlink"
+        preserveAspectRatio="none"
       >
         <G id="Layer_x0020_1">
           {localImg && (
@@ -62,11 +66,9 @@ export default function SvgGenerator({
                     item?.is_active === 0 && { opacity: 0.5 },
                   ]}
                   onPress={() => (item?.is_active === 1 ? onPress(item) : {})}
-                  d={`M${Number(item?.left)} ${Number(item?.top - top)}h${
-                    item?.name.length > 2
-                      ? item?.name.length * 90
-                      : item?.name.length * 220
-                  }v330H${Number(item?.left)}z`}
+                  d={`M${Number(item?.left)} ${Number(
+                    item?.top - top,
+                  )}h${330}v330H${Number(item?.left)}z`}
                   stroke="#AC7D3A"
                   strokeWidth={10}
                   strokeLinecap="round"
@@ -82,14 +84,18 @@ export default function SvgGenerator({
                   fontSize={130}
                   fontWeight="500"
                   // letterSpacing={0.9}
-                  style={{ position: 'absolute', textTransform: 'uppercase', textAlign: 'center' }}
+                  style={{
+                    position: 'absolute',
+                    textTransform: 'uppercase',
+                    textAlign: 'center',
+                  }}
                 >
                   <TSpan
                     x={Number(item?.left) + 120}
                     y={Number(item?.top) - top + 200}
                     fill={backgroundColor ? '#fff' : '#000'}
                   >
-                    {item?.name}
+                    {item?.id}
                   </TSpan>
                 </Text>
               )

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Image, Text, TouchableOpacity, View } from "react-native"
 import { headerStyles } from '@/Components/MyHeader/index.style'
 import SvgShortLogo from '@/Assets/Images/SvgShortLogo'
 import SvgLogout from '@/Assets/SvgLogout'
@@ -8,8 +8,9 @@ import { useAuth } from '@/Hooks/useAuth'
 import { useDispatch } from 'react-redux'
 import { changeToken } from '@/Store/Auth'
 import { navigate, navigateAndSimpleReset } from '@/Navigators/utils'
+import downloadIcon from "@/Assets/Images/akar-icons_download.png"
 
-export default function MyHeader({ goBack }) {
+export default function MyHeader({ goBack, onDownloadImages }) {
   const { pages } = useAuth()
   const dispatch = useDispatch()
 
@@ -73,6 +74,14 @@ export default function MyHeader({ goBack }) {
         {goBack && (
           <TouchableOpacity style={headerStyles.backBtn} onPress={goBack}>
             <SvgArrowLeft />
+          </TouchableOpacity>
+        )}
+        {onDownloadImages && (
+          <TouchableOpacity
+            onPress={onDownloadImages}
+            style={headerStyles.backBtn}
+          >
+            <Image source={downloadIcon} style={{ width: 23, height: 23 }} />
           </TouchableOpacity>
         )}
         <TouchableOpacity
