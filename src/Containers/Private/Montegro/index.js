@@ -9,7 +9,7 @@ import MainBtnGroup from '@/Components/MainBtnGroup'
 import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
 import LeftMenu from '@/Components/LeftMenu'
-import MyHeader from "@/Components/MyHeader"
+import MyHeader from '@/Components/MyHeader'
 
 export default function Montegro(props) {
   const { title, text, params, location } = props?.route?.params
@@ -64,7 +64,8 @@ export default function Montegro(props) {
     }, 2000)
     return () => clearInterval(interval)
   }, [])
-
+  console.log(location, 'location')
+  console.log(map, 'map')
   return (
     <View style={detailsStyles.container}>
       <MyHeader goBack={goBack} />
@@ -83,26 +84,28 @@ export default function Montegro(props) {
           map={map}
           location={location}
         />
-        <View style={{ flex: 1.5, justifyContent: 'center' }}>
-          {localImg && (
-            <Image
-              style={detailsStyles.sliderImg}
-              source={{
-                uri: localImg,
-              }}
-            />
-          )}
-        </View>
-        <ScrollView ref={scrollRef} style={detailsStyles.content}>
-          <View>
-            <RenderHtml
-              contentWidth={width}
-              source={source}
-              tagsStyles={detailsStyles.tagsStylesMontenegro}
-            />
+        <View style={[detailsStyles.sliderBox, { flexDirection: 'row' }]}>
+          <View style={{ flex: 1.5, justifyContent: 'center' }}>
+            {localImg && (
+              <Image
+                style={detailsStyles.sliderImg}
+                source={{
+                  uri: localImg,
+                }}
+              />
+            )}
           </View>
-          <View />
-        </ScrollView>
+          <ScrollView ref={scrollRef} style={detailsStyles.content}>
+            <View>
+              <RenderHtml
+                contentWidth={width}
+                source={source}
+                tagsStyles={detailsStyles.tagsStylesMontenegro}
+              />
+            </View>
+            <View />
+          </ScrollView>
+        </View>
       </View>
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />

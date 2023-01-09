@@ -69,7 +69,7 @@ export default function Project(props) {
             name={name}
             pyc_gallery={pyc_gallery}
             params={props?.route?.params?.project}
-            onPressVideo={videoModalHandler}
+            onPressVideo={videoModalHandler} path={items?.data} onOpenPlan={onOpenDetails}
             // map={map}
             // location={location}
           />

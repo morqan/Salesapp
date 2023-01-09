@@ -6,10 +6,14 @@ export const planStyles = StyleSheet.create({
   },
   backBtnBox: {
     position: 'absolute',
-    top: 5,
-    right: 15,
+    bottom: 0,
+    right: 0,
     zIndex: 9999,
-    // width: 50,
+    width: 70,
+    height: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#278590'
   },
   header: {
     // marginTop: -30,
@@ -24,14 +28,20 @@ export const planStyles = StyleSheet.create({
     // backgroundColor: 'red'
   },
   slideBox: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    // flex: 1,
+    // backgroundColor: 'green',
+  },
+  slideBoxGallery: {
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     // flex: 1,
     // backgroundColor: 'green',
   },
   sliderImg: {
-    width: '90%',
-    height: '90%',
+    width: '75%',
+    height: '100%',
     resizeMode: 'contain',
     // backgroundColor: 'red'
   },
@@ -40,7 +50,7 @@ export const planStyles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    top: 0,
+    top: '10%',
     backgroundColor: 'rgba(0,139,160,.4)',
     alignItems: 'center',
     justifyContent: 'center',

@@ -16,7 +16,7 @@ export default function SvgGenerator({
   const originalWidth = Number(width) * 8.6
   const originalHeight = Number(height) * 8.6
   const aspectRatio = originalWidth / originalHeight
-  const windowWidth = Dimensions.get('window').width
+  const windowWidth = Dimensions.get('window').width * 0.75
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
 

@@ -63,7 +63,6 @@ export default function Information(props) {
         map={map}
         location={location}
       />
-      <MainBtnGroup />
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />
       )}

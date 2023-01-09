@@ -20,6 +20,7 @@ import SuccessModal from '@/Components/SuccessModal'
 import Pinchable from 'react-native-pinchable'
 import MyHeader from "@/Components/MyHeader"
 import LeftMenu from "@/Components/LeftMenu"
+import { detailsStyles } from "@/Containers/Private/Details/index.style"
 
 
 export default function Plan(props) {
@@ -96,49 +97,37 @@ export default function Plan(props) {
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <MyHeader goBack={goBack} />
-      {/*<View style={planStyles.backBtnBox}>*/}
-      {/*  <TouchableOpacity onPress={setMailHandler}>*/}
-      {/*    <Image source={letterImg} style={{ width: 30, height: 30 }} />*/}
-      {/*  </TouchableOpacity>*/}
-      {/*</View>*/}
-      {/*<View style={planStyles.header}>*/}
-      {/*  <View style={{ marginTop: 15 }}>*/}
-      {/*    <Text>{name}</Text>*/}
-      {/*    <Text style={planStyles.headerProjectName}>{project}</Text>*/}
-      {/*  </View>*/}
-      {/*  {headInfo.map((item, index) => {*/}
-      {/*    return (*/}
-      {/*      <RenderHtml*/}
-      {/*        tagsStyles={planStyles.tagsStyles}*/}
-      {/*        key={index}*/}
-      {/*        contentWidth={width}*/}
-      {/*        source={item}*/}
-      {/*      />*/}
-      {/*    )*/}
-      {/*  })}*/}
-      {/*</View>*/}
+      <View style={planStyles.backBtnBox}>
+        <TouchableOpacity onPress={setMailHandler}>
+          <Image source={letterImg} style={{ width: 30, height: 30 }} />
+        </TouchableOpacity>
+      </View>
       <View style={{ height: '90%', flexDirection: 'row' }}>
         <LeftMenu title={name} project={project} name={name} headInfo={headInfo} />
-        <Carousel
-          loop={false}
-          width={width}
-          data={localImgs}
-          scrollAnimationDuration={3000}
-          renderItem={({ index, item }) => {
-            return (
-              <View>
-                <Pinchable style={planStyles.slideBox}>
-                  <Image
-                    style={planStyles.sliderImg}
-                    source={{
-                      uri: item?.localUrl,
-                    }}
-                  />
-                </Pinchable>
-              </View>
-            )
-          }}
-        />
+        <View style={detailsStyles.sliderBox}>
+          <Carousel
+            loop={false}
+            width={width}
+            data={localImgs}
+            scrollAnimationDuration={3000}
+            renderItem={({ index, item }) => {
+              return (
+                <View>
+                  <Pinchable style={planStyles.slideBox}>
+                    <Image
+                      style={planStyles.sliderImg}
+                      source={{
+                        uri: item?.localUrl,
+                      }}
+                    />
+                  </Pinchable>
+                </View>
+              )
+            }}
+          />
+        </View>
+
+
       </View>
       {is_reserved !== 0 ||
         (is_sold !== 0 && (

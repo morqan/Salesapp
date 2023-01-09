@@ -26,7 +26,7 @@ export const detailsStyles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   sliderBox: {
-    // flex: 1,
+    width: '75%'
     // backgroundColor: 'blue',
     // width: (width * 2) / 3,
   },

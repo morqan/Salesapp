@@ -9,6 +9,9 @@ import MainBtnGroup from '@/Components/MainBtnGroup'
 import Pinchable from 'react-native-pinchable'
 import SvgLeft from '@/Assets/SvgLeft'
 import SvgRight from '@/Assets/SvgRight'
+import MyHeader from "@/Components/MyHeader"
+import LeftMenu from "@/Components/LeftMenu"
+import { detailsStyles } from "@/Containers/Private/Details/index.style"
 
 export default function Gallery(props) {
   const sliderRef = useRef()
@@ -35,47 +38,49 @@ export default function Gallery(props) {
   console.log(localImg, 'localImg')
 
   return (
-    <View style={{ backgroundColor: '#fff', paddingTop: 50, flex: 1 }}>
-      <Carousel
-        ref={sliderRef}
-        width={width}
-        data={localImg}
-        scrollAnimationDuration={3000}
-        renderItem={({ index, item }) => {
-          return (
-            <View>
-              <Pinchable style={planStyles.slideBox}>
-                <Image
-                  style={planStyles.sliderImg}
-                  source={{
-                    uri: item?.localUrl,
-                  }}
-                />
-              </Pinchable>
-            </View>
-          )
-        }}
-      />
-      <View style={planStyles.backBtnBox}>
-        <BackBtn onPress={goBack} />
+    <View style={{ flex: 1 }}>
+      <MyHeader goBack={goBack} />
+      <View style={{ height: '90%', flexDirection: 'row' }}>
+        <LeftMenu  />
+        <View style={detailsStyles.sliderBox}>
+        <Carousel
+            ref={sliderRef}
+            width={width}
+            data={localImg}
+            scrollAnimationDuration={3000}
+            renderItem={({ index, item }) => {
+              return (
+                <View>
+                  <Pinchable style={planStyles.slideBoxGallery}>
+                    <Image
+                      style={planStyles.sliderImg}
+                      source={{
+                        uri: item?.localUrl,
+                      }}
+                    />
+                  </Pinchable>
+                </View>
+              )
+            }}
+          />
+          <TouchableOpacity
+            style={{ position: 'absolute', top: '50%', left: 20 }}
+            onPress={() => {
+              sliderRef?.current?.prev()
+            }}
+          >
+            <SvgLeft />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={planStyles.rightBtn}
+            onPress={() => {
+              sliderRef?.current?.next()
+            }}
+          >
+            <SvgRight />
+          </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity
-        style={{ position: 'absolute', top: '50%', left: 20 }}
-        onPress={() => {
-          sliderRef?.current?.prev()
-        }}
-      >
-        <SvgLeft />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={planStyles.rightBtn}
-        onPress={() => {
-          sliderRef?.current?.next()
-        }}
-      >
-        <SvgRight />
-      </TouchableOpacity>
-      <MainBtnGroup />
     </View>
   )
 }

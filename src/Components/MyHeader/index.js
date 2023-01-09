@@ -23,6 +23,7 @@ export default function MyHeader({ goBack }) {
       text: content,
       title: 'PORTONOVI',
       params: pages?.portonovi,
+      location: 'portonovi',
     })
   }, [])
 
@@ -41,6 +42,8 @@ export default function MyHeader({ goBack }) {
       text: content,
       title: 'MONTENEGRO',
       params: pages?.montenegro,
+      location: 'montenegro',
+
     })
   }, [])
 

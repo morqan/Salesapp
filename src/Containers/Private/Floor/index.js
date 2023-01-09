@@ -69,17 +69,19 @@ export default function Floor(props) {
           onOpenPlan={onOpenPlan}
           title={name}
         />
+        <View style={detailsStyles.sliderBox}>
         {widths && (
-          <FloorSvgGenerator
-            img={img}
-            path={plans?.data}
-            onPress={onOpenPlan}
-            width={widths}
-            height={heights}
-            top={0}
-            backgroundColor={'#AC7D3A'}
-          />
-        )}
+            <FloorSvgGenerator
+              img={img}
+              path={plans?.data}
+              onPress={onOpenPlan}
+              width={widths}
+              height={heights}
+              top={0}
+              backgroundColor={'#AC7D3A'}
+            />
+          )}
+        </View>
       </View>
     </View>
   )

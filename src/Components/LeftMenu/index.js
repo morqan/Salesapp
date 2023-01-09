@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { Text, TouchableOpacity, useWindowDimensions, View } from "react-native"
+import { ScrollView, Text, TouchableOpacity, useWindowDimensions, View } from "react-native"
 import { sideMenuStyles } from '@/Components/LeftMenu/index.style'
 import { navigate } from '@/Navigators/utils'
 import { Path } from 'react-native-svg'
@@ -41,8 +41,12 @@ export default function LeftMenu({
     navigate('Information', { text: information, title: name, params })
   }, [])
 
+  const onPressMap = useCallback(() => {
+    navigate('MapScreen', { img: map, location: location })
+  }, [])
+
   return (
-    <View style={sideMenuStyles.side}>
+    <ScrollView contentContainerStyle={sideMenuStyles.side}>
       <Text style={sideMenuStyles.title}>{title}</Text>
       {project && (
         <View style={sideMenuStyles.planNameBox}>
@@ -93,12 +97,12 @@ export default function LeftMenu({
         </TouchableOpacity>
       )}
       {map && (
-        <TouchableOpacity style={sideMenuStyles.menuLink}>
+        <TouchableOpacity onPress={onPressMap} style={sideMenuStyles.menuLink}>
           <Text style={sideMenuStyles.menuLinkText}>map</Text>
         </TouchableOpacity>
       )}
       {location && (
-        <TouchableOpacity style={sideMenuStyles.menuLink}>
+        <TouchableOpacity onPress={onPressMap} style={sideMenuStyles.menuLink}>
           <Text style={sideMenuStyles.menuLinkText}>location</Text>
         </TouchableOpacity>
       )}
@@ -129,6 +133,6 @@ export default function LeftMenu({
             </TouchableOpacity>
           )
         })}
-    </View>
+    </ScrollView>
   )
 }
