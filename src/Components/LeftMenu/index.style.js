@@ -7,14 +7,16 @@ export const sideMenuStyles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 50,
     paddingHorizontal: 15,
-    width: 300,
-    height: '100%'
+    maxWidth: 300,
+    height: '100%',
   },
   title: {
     color: '#555555',
     fontWeight: '500',
     textTransform: 'uppercase',
     fontSize: 20,
+    minWidth: 300,
+    textAlign: 'center',
   },
   menuLink: {
     marginTop: 15,

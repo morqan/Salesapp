@@ -92,12 +92,12 @@ export default function Details(props) {
         <View style={detailsStyles.sliderBox}>
           <Carousel
             loop={false}
-            width={source?.html ? width / 2.3 : width}
+            width={source?.html ? width / 2.3 : width * 0.8}
             data={localImg}
             scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {
               return (
-                <View style={{ flex: 1,justifyContent:'flex-start'  }}>
+                <View style={{ flex: 1}}>
                   <Pinchable>
                     <Image
                       style={detailsStyles.sliderImg}
@@ -111,15 +111,15 @@ export default function Details(props) {
             }}
           />
         </View>
-        {source?.html && (
-          <ScrollView style={{width:"30%",}} ref={scrollRef}>
-            <RenderHtml
-              contentWidth={width}
-              source={source}
-              tagsStyles={detailsStyles.tagsStyles}
-            />
-          </ScrollView>
-        )}
+        {/*{source?.html && (*/}
+        {/*  <ScrollView style={{width:"30%",}} ref={scrollRef}>*/}
+        {/*    <RenderHtml*/}
+        {/*      contentWidth={width}*/}
+        {/*      source={source}*/}
+        {/*      tagsStyles={detailsStyles.tagsStyles}*/}
+        {/*    />*/}
+        {/*  </ScrollView>*/}
+        {/*)}*/}
       </View>
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />

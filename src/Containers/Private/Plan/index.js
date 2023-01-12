@@ -18,10 +18,9 @@ import MailSendModal from '@/Components/MailSendModal'
 import { useOnSendMailMutation } from '@/Services/modules/Auth'
 import SuccessModal from '@/Components/SuccessModal'
 import Pinchable from 'react-native-pinchable'
-import MyHeader from "@/Components/MyHeader"
-import LeftMenu from "@/Components/LeftMenu"
-import { detailsStyles } from "@/Containers/Private/Details/index.style"
-
+import MyHeader from '@/Components/MyHeader'
+import LeftMenu from '@/Components/LeftMenu'
+import { detailsStyles } from '@/Containers/Private/Details/index.style'
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
@@ -103,11 +102,16 @@ export default function Plan(props) {
         </TouchableOpacity>
       </View>
       <View style={{ height: '90%', flexDirection: 'row' }}>
-        <LeftMenu title={name} project={project} name={name} headInfo={headInfo} />
+        <LeftMenu
+          title={name}
+          project={project}
+          name={name}
+          headInfo={headInfo}
+        />
         <View style={detailsStyles.sliderBox}>
           <Carousel
             loop={false}
-            width={width}
+            width={ width * 0.75}
             data={localImgs}
             scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {
@@ -126,8 +130,6 @@ export default function Plan(props) {
             }}
           />
         </View>
-
-
       </View>
       {is_reserved !== 0 ||
         (is_sold !== 0 && (

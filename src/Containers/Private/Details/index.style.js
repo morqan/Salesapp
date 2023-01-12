@@ -28,20 +28,15 @@ export const detailsStyles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   sliderBox: {
-    maxWidth: '75%',
-    // width: '40%',
+    // flex: 1,
     // backgroundColor: 'blue',
-    // flex: 1
-    // width: (width * 2) / 3,
   },
   content: {
-    flex: 1,
+    // flex: 1,
     paddingRight: 10,
     paddingLeft: 15,
-    backgroundColor: 'red',
+    // backgroundColor: 'red',
     width: 500,
-
-
   },
   contentHeader: {
     flexDirection: 'row',
@@ -77,7 +72,7 @@ export const detailsStyles = StyleSheet.create({
     lineHeight: 25,
   },
   sliderImg: {
-    width: '90%',
+    width: '100%',
     height: '100%',
     // resizeMode: 'stretch',
   },

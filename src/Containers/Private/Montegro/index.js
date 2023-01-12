@@ -66,6 +66,7 @@ export default function Montegro(props) {
   }, [])
   console.log(location, 'location')
   console.log(map, 'map')
+  console.log(localImg, 'localImg')
   return (
     <View style={detailsStyles.container}>
       <MyHeader goBack={goBack} />
@@ -84,28 +85,26 @@ export default function Montegro(props) {
           map={map}
           location={location}
         />
-        <View style={[detailsStyles.sliderBox, { flexDirection: 'row' }]}>
-          <View style={{ flex: 1.5, justifyContent: 'center' }}>
-            {localImg && (
-              <Image
-                style={detailsStyles.sliderImg}
-                source={{
-                  uri: localImg,
-                }}
-              />
-            )}
-          </View>
-          <ScrollView ref={scrollRef} style={detailsStyles.content}>
-            <View>
-              <RenderHtml
-                contentWidth={width}
-                source={source}
-                tagsStyles={detailsStyles.tagsStylesMontenegro}
-              />
-            </View>
-            <View />
-          </ScrollView>
+        <View style={{ width: 400}}>
+          {localImg && (
+            <Image
+              style={detailsStyles.sliderImg}
+              source={{
+                uri: localImg,
+              }}
+            />
+          )}
         </View>
+        <ScrollView ref={scrollRef} style={detailsStyles.content}>
+          <View>
+            <RenderHtml
+              contentWidth={width}
+              source={source}
+              tagsStyles={detailsStyles.tagsStylesMontenegro}
+            />
+          </View>
+          <View />
+        </ScrollView>
       </View>
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />

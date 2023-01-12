@@ -67,6 +67,9 @@ export default function Home() {
             toFile: fileName,
           })
           const downloadResult = await download.promise
+          console.log(sourceUrl, 'imgLocalUrls.length')
+          console.log(downloadResult, 'downloadResult')
+
           if (downloadResult.statusCode === 200) {
             const newPath = {
               id: sourceUrl,

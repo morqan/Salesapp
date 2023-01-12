@@ -40,7 +40,7 @@ export const planStyles = StyleSheet.create({
     // backgroundColor: 'green',
   },
   sliderImg: {
-    width: '75%',
+    width: '100%',
     height: '100%',
     resizeMode: 'contain',
     // backgroundColor: 'red'
