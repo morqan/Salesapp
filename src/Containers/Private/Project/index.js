@@ -72,8 +72,6 @@ export default function Project(props) {
             onPressVideo={videoModalHandler}
             path={items?.data}
             onOpenPlan={onOpenDetails}
-            // map={map}
-            // location={location}
           />
           <View style={detailsStyles.sliderBox}>
             <SvgGenerator
@@ -83,11 +81,10 @@ export default function Project(props) {
               width={widths}
               height={heights}
               top={1600}
-              backgroundColor="#0d6a78"
+              backgroundColor={'#0d6a78'}
               imgWidth={0.75}
             />
           </View>
-
         </View>
       )}
       {showVideo && (

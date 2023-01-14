@@ -19,32 +19,20 @@ export default function MyHeader({ goBack, onDownloadImages }) {
   }
 
   const onPressPortonovi = useCallback(() => {
-    const { content } = pages?.portonovi
     navigate('Information', {
-      text: content,
-      title: 'PORTONOVI',
       params: pages?.portonovi,
-      location: 'portonovi',
     })
   }, [])
 
   const onPressLifestyle = useCallback(() => {
-    const { content } = pages?.lifestyle
     navigate('Information', {
-      text: content,
-      title: 'LIFESTYLE',
       params: pages?.lifestyle,
     })
   }, [])
 
   const onPressMontenegro = useCallback(() => {
-    const { content } = pages?.montenegro
     navigate('Montegro', {
-      text: content,
-      title: 'MONTENEGRO',
       params: pages?.montenegro,
-      location: 'montenegro',
-
     })
   }, [])
 

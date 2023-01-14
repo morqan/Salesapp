@@ -17,6 +17,7 @@ import VideoModal from '@/Components/VideoModal'
 import Pinchable from 'react-native-pinchable'
 import MyHeader from '@/Components/MyHeader'
 import LeftMenu from '@/Components/LeftMenu'
+import { Config } from "@/Config"
 
 export default function Details(props) {
   const scrollRef = useRef()
@@ -56,7 +57,7 @@ export default function Details(props) {
   useEffect(() => {
     const newGallery = gallery.map(item => {
       let newImg =
-        `https://app-portonovi-test.gocreative.az/storage/app/media${item?.img}`.replaceAll(
+        `${Config.IMG_PATH}${item?.img}`.replaceAll(
           ' ',
           '%20',
         )
@@ -97,7 +98,7 @@ export default function Details(props) {
             scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {
               return (
-                <View style={{ flex: 1}}>
+                <View style={{ flex: 1 }}>
                   <Pinchable>
                     <Image
                       style={detailsStyles.sliderImg}
@@ -111,15 +112,15 @@ export default function Details(props) {
             }}
           />
         </View>
-        {/*{source?.html && (*/}
-        {/*  <ScrollView style={{width:"30%",}} ref={scrollRef}>*/}
-        {/*    <RenderHtml*/}
-        {/*      contentWidth={width}*/}
-        {/*      source={source}*/}
-        {/*      tagsStyles={detailsStyles.tagsStyles}*/}
-        {/*    />*/}
-        {/*  </ScrollView>*/}
-        {/*)}*/}
+        {source?.html && (
+          <ScrollView style={{ width: '30%' }} ref={scrollRef}>
+            <RenderHtml
+              contentWidth={width}
+              source={source}
+              tagsStyles={detailsStyles.tagsStyles}
+            />
+          </ScrollView>
+        )}
       </View>
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />

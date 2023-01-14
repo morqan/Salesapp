@@ -25,7 +25,7 @@ export const hfStyles = StyleSheet.create({
     width: 30,
     height: 30,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   linkName: {
     fontSize: 12,

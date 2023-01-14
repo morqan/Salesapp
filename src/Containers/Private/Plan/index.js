@@ -21,6 +21,7 @@ import Pinchable from 'react-native-pinchable'
 import MyHeader from '@/Components/MyHeader'
 import LeftMenu from '@/Components/LeftMenu'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
+import { Config } from "@/Config"
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
@@ -82,7 +83,7 @@ export default function Plan(props) {
   useEffect(() => {
     const newGallery = gallery.map(item => {
       let newImg =
-        `https://app-portonovi-test.gocreative.az/storage/app/media${item?.img}`.replaceAll(
+        `${Config.IMG_PATH}${item?.img}`.replaceAll(
           ' ',
           '%20',
         )

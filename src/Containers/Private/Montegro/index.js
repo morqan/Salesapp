@@ -10,9 +10,10 @@ import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
 import LeftMenu from '@/Components/LeftMenu'
 import MyHeader from '@/Components/MyHeader'
+import { Config } from '@/Config'
 
 export default function Montegro(props) {
-  const { title, text, params, location } = props?.route?.params
+  const { params } = props?.route?.params
   const {
     catalog,
     gallery,
@@ -23,6 +24,9 @@ export default function Montegro(props) {
     pyc_gallery,
     map,
     left_img,
+    content,
+    header_title,
+    location,
   } = params
   const width = Dimensions.get('window').width
   const [showVideo, setShowVideo] = useState(false)
@@ -33,11 +37,7 @@ export default function Montegro(props) {
   useEffect(() => {
     console.log(left_img, 'newImg')
 
-    let newImg =
-      `https://app-portonovi-test.gocreative.az/storage/app/media${left_img}`.replaceAll(
-        ' ',
-        '%20',
-      )
+    let newImg = `${Config?.IMG_PATH}${left_img}`.replaceAll(' ', '%20')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
         console.log(x, 'xxxs')
@@ -47,7 +47,7 @@ export default function Montegro(props) {
   }, [])
 
   const source = {
-    html: `${text}`,
+    html: `${content}`,
   }
   const goBack = useCallback(() => {
     navigationRef.goBack()
@@ -64,18 +64,17 @@ export default function Montegro(props) {
     }, 2000)
     return () => clearInterval(interval)
   }, [])
-  console.log(location, 'location')
-  console.log(map, 'map')
-  console.log(localImg, 'localImg')
+
   return (
     <View style={detailsStyles.container}>
       <MyHeader goBack={goBack} />
       <View style={detailsStyles.body}>
         <LeftMenu
-          title={title}
+          title={header_title}
           catalog={catalog}
           gallery={gallery}
-          information={information}
+          information={information || content}
+          content={content}
           video={video}
           pyc={pyc}
           name={name}
@@ -85,7 +84,7 @@ export default function Montegro(props) {
           map={map}
           location={location}
         />
-        <View style={{ width: 400}}>
+        <View style={{ width: 400 }}>
           {localImg && (
             <Image
               style={detailsStyles.sliderImg}

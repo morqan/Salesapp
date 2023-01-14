@@ -1,5 +1,4 @@
 import { Dimensions, StyleSheet } from 'react-native'
-const width = Dimensions.get('window').width
 
 export const detailsStyles = StyleSheet.create({
   container: {
@@ -80,6 +79,7 @@ export const detailsStyles = StyleSheet.create({
     p: {
       marginBottom: 0,
       lineHeight: 30,
+      paddingHorizontal: 15
       // width: 300
     },
   },

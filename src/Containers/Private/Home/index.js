@@ -29,6 +29,7 @@ import gallery from '../../../Assets/Images/gallery.png'
 import MyHeader from '@/Components/MyHeader'
 import HomeFooter from '@/Components/HomeFooter'
 import { hfStyles } from '@/Components/HomeFooter/index.style'
+import { Config } from "@/Config"
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -131,7 +132,7 @@ export default function Home() {
 
   useEffect(() => {
     if (pages && localImagesUrls.length > 525) {
-      const image = `https://app-portonovi-test.gocreative.az/storage/app/media${pages?.index?.img}`
+      const image = `${Config.IMG_PATH}${pages?.index?.img}`
       setHomeImg(image)
       localImagesUrls.filter(x => {
         if (x?.id === image) {
@@ -167,7 +168,7 @@ export default function Home() {
     }
     loadData()
   }, [])
-  console.log(homeItemPositions, 'homeItemPositions')
+
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
@@ -216,7 +217,7 @@ export default function Home() {
           </TouchableOpacity>
         </ScrollView>
       )}
-      <HomeFooter homeItems={homeItemPositions} />
+      <HomeFooter homeItems={homeItemPositions} onPress={onOpenProject} />
       <Image source={gallery} style={hfStyles.img} />
     </View>
   )

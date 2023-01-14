@@ -62,7 +62,7 @@ export default function SvgGenerator({
                   className="fil0"
                   style={[
                     svgGeneratorStyles.path,
-                    backgroundColor && { fill: backgroundColor },
+                    backgroundColor && { fill: item?.color },
                     item?.is_active === 0 && { opacity: 0.5 },
                   ]}
                   onPress={() => (item?.is_active === 1 ? onPress(item) : {})}
@@ -95,7 +95,7 @@ export default function SvgGenerator({
                     y={Number(item?.top) - top + 200}
                     fill={backgroundColor ? '#fff' : '#000'}
                   >
-                    {item?.id}
+                    {item?.map_name}
                   </TSpan>
                 </Text>
               )

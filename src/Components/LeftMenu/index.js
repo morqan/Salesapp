@@ -1,5 +1,11 @@
 import React, { useCallback } from 'react'
-import { ScrollView, Text, TouchableOpacity, useWindowDimensions, View } from "react-native"
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from 'react-native'
 import { sideMenuStyles } from '@/Components/LeftMenu/index.style'
 import { navigate } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
@@ -28,7 +34,7 @@ export default function LeftMenu({
   const { width } = useWindowDimensions()
 
   const onPressGallery = useCallback(() => {
-    navigate('Gallery', { gallery: gallery })
+    navigate('Gallery', { gallery: gallery, params })
   }, [])
 
   const onPressPyc = useCallback(() => {
@@ -36,11 +42,15 @@ export default function LeftMenu({
   }, [])
 
   const onPressInfo = useCallback(() => {
-    navigate('Information', { text: information, title: name, params })
+    if (title === 'MONTENEGRO') {
+      navigate('Montegro', { params })
+    } else {
+      navigate('Information', { text: information, title: name, params })
+    }
   }, [])
 
   const onPressMap = useCallback(() => {
-    navigate('MapScreen', { img: map, location: location })
+    navigate('MapScreen', { img: map, location: location, params })
   }, [])
 
   return (
@@ -108,6 +118,7 @@ export default function LeftMenu({
       {blocks?.data &&
         blocks?.data.map(item => {
           return item?.floors?.data.map(floor => {
+            console.log(floor, 'flasd')
             return (
               <TouchableOpacity
                 key={floor?.id}
@@ -121,10 +132,12 @@ export default function LeftMenu({
         })}
       {path &&
         path.map((item, index) => {
+          console.log(item, 'item')
+
           return (
             <TouchableOpacity
               key={item?.id}
-              onPress={() => onOpenPlan(item)}
+              onPress={() => (item?.is_active === 1 ? onOpenPlan(item) : {})}
               style={sideMenuStyles.menuLink}
             >
               <Text style={sideMenuStyles.menuLinkText}>{item?.name}</Text>
