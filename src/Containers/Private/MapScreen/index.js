@@ -8,6 +8,7 @@ import montonegroGif from '@/Assets/Images/montenegro-1.gif'
 import MyHeader from '@/Components/MyHeader'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import LeftMenu from '@/Components/LeftMenu'
+import Pinchable from 'react-native-pinchable'
 
 export default function MapScreen(props) {
   const { img, params } = props?.route?.params
@@ -23,7 +24,7 @@ export default function MapScreen(props) {
     left_img,
     header_title,
     location,
-    content
+    content,
   } = params
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
@@ -51,13 +52,11 @@ export default function MapScreen(props) {
     <View
       style={{
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center',
         backgroundColor: '#fff',
       }}
     >
       <MyHeader goBack={goBack} />
-      <View style={detailsStyles.body}>
+      <View style={{ flex: 1, flexDirection: 'row' }}>
         <LeftMenu
           title={header_title}
           catalog={catalog}
@@ -72,9 +71,11 @@ export default function MapScreen(props) {
           map={map}
           location={location}
         />
-        <View style={{ width: width - 300 }}>
+        <View style={{ width: width * 0.78 }}>
           {localImg && (
-            <Image source={{ uri: localImg }} style={planStyles.sliderImg} />
+            <Pinchable style={planStyles.slideBox}>
+              <Image source={{ uri: localImg }} style={planStyles.sliderImg} />
+            </Pinchable>
           )}
           {location && location === 'montenegro' && (
             <Image source={montonegroGif} style={planStyles.sliderImg} />

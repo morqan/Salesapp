@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Image, View } from 'react-native'
+import { Dimensions, Image, View } from 'react-native'
 import SvgGenerator from '@/Components/SvgGenerator'
 import { navigate, navigationRef } from '@/Navigators/utils'
 import { projectStyles } from '@/Containers/Private/Project/index.style'
-import Footer from '@/Components/Footer'
-import BackBtn from '@/Components/BackBtn'
-import MainBtnGroup from '@/Components/MainBtnGroup'
 import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
 import MyHeader from '@/Components/MyHeader'
@@ -13,6 +10,7 @@ import LeftMenu from '@/Components/LeftMenu'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 
 export default function Project(props) {
+  const width = Dimensions.get('window').width
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
   const [showVideo, setShowVideo] = useState(false)
@@ -38,7 +36,9 @@ export default function Project(props) {
   }, [])
 
   useEffect(() => {
-    const newImg = img.replace(' ', '%20')
+    const newImg = img.replaceAll(' ', '%20')
+    console.log(img, 'img')
+    console.log(newImg, 'newImg')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
         console.log(x, 'xxxs')
@@ -73,7 +73,7 @@ export default function Project(props) {
             path={items?.data}
             onOpenPlan={onOpenDetails}
           />
-          <View style={detailsStyles.sliderBox}>
+          <View style={[detailsStyles.sliderBox, { width: width * 0.74 }]}>
             <SvgGenerator
               img={img}
               path={items?.data}

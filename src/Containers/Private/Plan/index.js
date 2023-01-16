@@ -21,7 +21,7 @@ import Pinchable from 'react-native-pinchable'
 import MyHeader from '@/Components/MyHeader'
 import LeftMenu from '@/Components/LeftMenu'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
-import { Config } from "@/Config"
+import { Config } from '@/Config'
 
 export default function Plan(props) {
   const { width } = useWindowDimensions()
@@ -82,11 +82,7 @@ export default function Plan(props) {
 
   useEffect(() => {
     const newGallery = gallery.map(item => {
-      let newImg =
-        `${Config.IMG_PATH}${item?.img}`.replaceAll(
-          ' ',
-          '%20',
-        )
+      let newImg = `${Config.IMG_PATH}${item?.img}`.replaceAll(' ', '%20')
       return newImg
     })
     const localGallery = localImagesUrls.filter(i => newGallery.includes(i?.id))
@@ -99,7 +95,10 @@ export default function Plan(props) {
       <MyHeader goBack={goBack} />
       <View style={planStyles.backBtnBox}>
         <TouchableOpacity onPress={setMailHandler}>
-          <Image source={letterImg} style={{ width: 30, height: 30 }} />
+          <Image
+            source={letterImg}
+            style={{ width: 30, height: 25, resizeMode: 'cover' }}
+          />
         </TouchableOpacity>
       </View>
       <View style={{ height: '90%', flexDirection: 'row' }}>
@@ -112,7 +111,7 @@ export default function Plan(props) {
         <View style={detailsStyles.sliderBox}>
           <Carousel
             loop={false}
-            width={ width * 0.75}
+            width={width * 0.75}
             data={localImgs}
             scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {

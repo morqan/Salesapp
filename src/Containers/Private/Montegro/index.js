@@ -84,26 +84,28 @@ export default function Montegro(props) {
           map={map}
           location={location}
         />
-        <View style={{ width: 400 }}>
-          {localImg && (
-            <Image
-              style={detailsStyles.sliderImg}
-              source={{
-                uri: localImg,
-              }}
-            />
-          )}
-        </View>
-        <ScrollView ref={scrollRef} style={detailsStyles.content}>
-          <View>
-            <RenderHtml
-              contentWidth={width}
-              source={source}
-              tagsStyles={detailsStyles.tagsStylesMontenegro}
-            />
+        <View style={{ flexDirection: 'row', width: width * 0.74 }}>
+          <View style={{ width: width * 0.40 }}>
+            {localImg && (
+              <Image
+                style={detailsStyles.sliderImg}
+                source={{
+                  uri: localImg,
+                }}
+              />
+            )}
           </View>
-          <View />
-        </ScrollView>
+          <ScrollView ref={scrollRef} style={detailsStyles.content}>
+            <View>
+              <RenderHtml
+                contentWidth={width}
+                source={source}
+                tagsStyles={detailsStyles.tagsStylesMontenegro}
+              />
+            </View>
+            <View />
+          </ScrollView>
+        </View>
       </View>
       {showVideo && (
         <VideoModal video={video} onPressClose={videoModalHandler} />

@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native'
 export const sideMenuStyles = StyleSheet.create({
   side: {
     // flex: 1,
-    backgroundColor: '#F2F2F2',
+    backgroundColor: '#f2f2f2',
     alignItems: 'center',
     paddingTop: 50,
     paddingHorizontal: 15,
-    maxWidth: 300,
+    width: '100%',
     height: '100%',
   },
   title: {
@@ -15,8 +15,9 @@ export const sideMenuStyles = StyleSheet.create({
     fontWeight: '500',
     textTransform: 'uppercase',
     fontSize: 20,
-    minWidth: 300,
+    minWidth: 200,
     textAlign: 'center',
+    flexWrap: "wrap"
   },
   menuLink: {
     marginTop: 15,
@@ -26,6 +27,7 @@ export const sideMenuStyles = StyleSheet.create({
     fontWeight: '400',
     textTransform: 'uppercase',
     fontSize: 16,
+    textAlign: 'center'
     // backgroundColor: 'red',
     // minWidth: 200
   },

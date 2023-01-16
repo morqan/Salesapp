@@ -7,9 +7,11 @@ export const svgGeneratorStyles = StyleSheet.create({
   path: {
     // opacity: 0.6,
     fill: '#fff',
-    textAlign: "center",
+    textAlign: 'center',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderWidth:5,
+    borderColor: '#000'
   },
   pathBtn: {
     opacity: 1,

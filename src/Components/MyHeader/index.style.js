@@ -9,7 +9,8 @@ export const headerStyles = StyleSheet.create({
     height: '10%',
   },
   logoBtn: {
-    paddingHorizontal: 15,
+    paddingLeft: 15,
+    paddingRight: 20,
     backgroundColor: '#278590',
     height: '100%',
     justifyContent: 'center',
@@ -17,7 +18,6 @@ export const headerStyles = StyleSheet.create({
   linkBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 50,
     backgroundColor: '#fff',
     height: '100%',
   },

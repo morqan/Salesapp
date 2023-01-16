@@ -32,6 +32,7 @@ export default function Gallery(props) {
     content
   } = params
   const width = Dimensions.get('window').width
+  const height = Dimensions.get('window').height
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
@@ -76,7 +77,8 @@ export default function Gallery(props) {
         <View style={detailsStyles.sliderBox}>
           <Carousel
             ref={sliderRef}
-            width={width * 0.75}
+            width={width * 0.78}
+            // height={800}
             data={localImg}
             scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {

@@ -29,7 +29,7 @@ import gallery from '../../../Assets/Images/gallery.png'
 import MyHeader from '@/Components/MyHeader'
 import HomeFooter from '@/Components/HomeFooter'
 import { hfStyles } from '@/Components/HomeFooter/index.style'
-import { Config } from "@/Config"
+import { Config } from '@/Config'
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -37,10 +37,9 @@ export default function Home() {
   const [homeImg, setHomeImg] = useState('')
   const [loading, setLoading] = useState(false)
   const [downloadedImg, setDownloadedImg] = useState(0)
-  const { localImagesUrls } = useAuth()
+  const { localImagesUrls, homeItemPositions, pages, downloaded } = useAuth()
 
   const dispatch = useDispatch()
-  const { homeItemPositions, pages, downloaded } = useAuth()
 
   const [getImages, result] = useLazyGetImagesQuery()
   const { data: getImagesData } = result
@@ -169,6 +168,13 @@ export default function Home() {
     loadData()
   }, [])
 
+  const onGoPortonoviGallery = useCallback(() => {
+    navigate('Gallery', {
+      gallery: pages?.portonovi?.gallery,
+      params: pages?.portonovi,
+    })
+  }, [])
+
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
@@ -218,7 +224,9 @@ export default function Home() {
         </ScrollView>
       )}
       <HomeFooter homeItems={homeItemPositions} onPress={onOpenProject} />
-      <Image source={gallery} style={hfStyles.img} />
+      <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+        <Image source={gallery} style={hfStyles.img} />
+      </TouchableOpacity>
     </View>
   )
 }

@@ -28,14 +28,16 @@ export const detailsStyles = StyleSheet.create({
   },
   sliderBox: {
     // flex: 1,
-    // backgroundColor: 'blue',
+    backgroundColor: '#f8f8f8',
+    // alignItems: 'flex-start',
+    // justifyContent: 'flex-start'
   },
   content: {
     // flex: 1,
     paddingRight: 10,
     paddingLeft: 15,
     // backgroundColor: 'red',
-    width: 500,
+    // width: 450,
   },
   contentHeader: {
     flexDirection: 'row',

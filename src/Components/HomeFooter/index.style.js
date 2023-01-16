@@ -36,7 +36,7 @@ export const hfStyles = StyleSheet.create({
   },
   img: {
     width: '100%',
-    height: '22%',
+    height: '48%',
     // resizeMode: 'contain',
   },
 })

@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Svg, { G, Path, Text, TSpan, Image } from 'react-native-svg'
+import Svg, {
+  G,
+  Path,
+  Text,
+  TSpan,
+  Image,
+  Circle,
+  Rect,
+} from 'react-native-svg'
 import { svgGeneratorStyles } from '@/Components/SvgGenerator/index.style'
 import { Dimensions, View } from 'react-native'
 import { useAuth } from '@/Hooks/useAuth'
@@ -24,7 +32,7 @@ export default function SvgGenerator({
   const [localImg, setLocalImg] = useState('')
 
   useEffect(() => {
-    const newImg = img.replace(' ', '%20')
+    const newImg = img.replaceAll(' ', '%20')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
         setLocalImg(`${x?.localUrl}`)
@@ -54,25 +62,43 @@ export default function SvgGenerator({
               // href={localImg}
             />
           )}
+          {/*{path &&*/}
+          {/*  path.map((item, index) => {*/}
+          {/*    return (*/}
+          {/*      <G key={index} strokeWidth={2} stroke="#789" stroke-width="30">*/}
+          {/*        <Path*/}
+          {/*          className="fil0"*/}
+          {/*          style={[*/}
+          {/*            svgGeneratorStyles.path,*/}
+          {/*            backgroundColor && { fill: item?.color },*/}
+          {/*            item?.is_active === 0 && { opacity: 0.5, zIndex:99999 },*/}
+          {/*          ]}*/}
+          {/*          onPress={() => (item?.is_active === 1 ? onPress(item) : {})}*/}
+          {/*          d={`M${Number(item?.left)} ${Number(*/}
+          {/*            item?.top - top,*/}
+          {/*          )}h${330}v330H${Number(item?.left)}z`}*/}
+          {/*        />*/}
+          {/*      </G>*/}
+          {/*    )*/}
+          {/*  })}*/}
           {path &&
             path.map((item, index) => {
               return (
-                <Path
+                <Rect
                   key={index}
-                  className="fil0"
+                  x={Number(item?.left) - 30}
+                  y={Number(item?.top) - top - 40}
+                  rx={5}
+                  width={400}
+                  height={400}
+                  fill={item?.color}
+                  strokeWidth={35}
+                  stroke={'#fff'}
                   style={[
                     svgGeneratorStyles.path,
-                    backgroundColor && { fill: item?.color },
                     item?.is_active === 0 && { opacity: 0.5 },
                   ]}
                   onPress={() => (item?.is_active === 1 ? onPress(item) : {})}
-                  d={`M${Number(item?.left)} ${Number(
-                    item?.top - top,
-                  )}h${330}v330H${Number(item?.left)}z`}
-                  stroke="#AC7D3A"
-                  strokeWidth={10}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
                 />
               )
             })}

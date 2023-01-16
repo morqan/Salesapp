@@ -67,7 +67,7 @@ export default function Information(props) {
           name={title}
         />
         <ScrollView
-          style={{ paddingHorizontal: 15 }}
+          style={{ paddingHorizontal: 15, width: width * 0.74, backgroundColor: '#f8f8f8', }}
           showsVerticalScrollIndicator={true}
           ref={scrollRef}
         >
