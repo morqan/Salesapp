@@ -6,7 +6,6 @@ import { navigationRef } from '@/Navigators/utils'
 import portonoviGif from '@/Assets/Images/portonovi.gif'
 import montonegroGif from '@/Assets/Images/montenegro-1.gif'
 import MyHeader from '@/Components/MyHeader'
-import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import LeftMenu from '@/Components/LeftMenu'
 import Pinchable from 'react-native-pinchable'
 
@@ -40,13 +39,13 @@ export default function MapScreen(props) {
         }
       })
     }
-  }, [])
+  }, [location, header_title])
 
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
 
-  console.log(props?.route?.params, 'props?.route?.params')
+  console.log(props?.route?.params, 'props?.route?.paramss')
 
   return (
     <View
@@ -71,8 +70,8 @@ export default function MapScreen(props) {
           map={map}
           location={location}
         />
-        <View style={{ width: width * 0.78 }}>
-          {localImg && (
+        <View style={{ width: width * 0.75 }}>
+          {localImg && header_title === 'LIFESTYLE' && (
             <Pinchable style={planStyles.slideBox}>
               <Image source={{ uri: localImg }} style={planStyles.sliderImg} />
             </Pinchable>

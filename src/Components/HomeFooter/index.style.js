@@ -33,6 +33,8 @@ export const hfStyles = StyleSheet.create({
     textTransform: 'uppercase',
     color: '#555555',
     width: 160,
+    fontFamily: 'GothamPro',
+    lineHeight: 15
   },
   img: {
     width: '100%',

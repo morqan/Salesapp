@@ -37,12 +37,12 @@ export const planStyles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     // flex: 1,
-    // backgroundColor: 'green',
+    backgroundColor: 'green',
   },
   sliderImg: {
     width: '100%',
     height: '100%',
-    resizeMode: 'contain',
+    resizeMode: 'stretch',
     // backgroundColor: 'red'
   },
   sliderAbsoluteBox: {
@@ -75,8 +75,10 @@ export const planStyles = StyleSheet.create({
   tagsLeftStyles: {
     p: {
       marginBottom: 0,
-      lineHeight: 15,
-      textAlign: 'center'
+      lineHeight: 20,
+      textAlign: 'center',
+      fontFamily: 'GothamPro',
+      fontSize: 18
     },
   },
   rightBtn: {

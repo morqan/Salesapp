@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Dimensions, ScrollView, Text, View } from 'react-native'
 import { infoStyles } from '@/Containers/Private/Information/index.style'
-import RenderHtml from 'react-native-render-html'
+import RenderHtml, { defaultSystemFonts } from 'react-native-render-html'
 import { navigate, navigationRef } from '@/Navigators/utils'
 import VideoModal from '@/Components/VideoModal'
 import MyHeader from '@/Components/MyHeader'
 import LeftMenu from '@/Components/LeftMenu'
 
 export default function Information(props) {
+  const systemFonts = [...defaultSystemFonts, 'GothamPro', 'NoeDisplay-Medium']
   const scrollRef = useRef()
   const [showVideo, setShowVideo] = useState(false)
   const { title, text, params } = props?.route?.params
@@ -45,11 +46,11 @@ export default function Information(props) {
   const onOpenDetails = useCallback(item => {
     navigate('Details', { detail: item })
   }, [])
-  console.log(params, 'informations')
+  console.log(params, 'informationsa')
   return (
     <View style={infoStyles.container}>
       <MyHeader goBack={goBack} />
-      <View style={{ flexDirection: 'row' }}>
+      <View style={{ flexDirection: 'row', backgroundColor: '#f8f8f8' }}>
         <LeftMenu
           catalog={catalog}
           gallery={gallery}
@@ -67,7 +68,13 @@ export default function Information(props) {
           name={title}
         />
         <ScrollView
-          style={{ paddingHorizontal: 15, width: width * 0.74, backgroundColor: '#f8f8f8', }}
+          style={{
+            paddingHorizontal: 15,
+            width: width * 0.74,
+            backgroundColor: '#f8f8f8',
+            paddingTop: 30,
+            paddingLeft: 30,
+          }}
           showsVerticalScrollIndicator={true}
           ref={scrollRef}
         >
@@ -75,6 +82,7 @@ export default function Information(props) {
             contentWidth={width}
             source={source}
             tagsStyles={infoStyles.tagStyle}
+            systemFonts={systemFonts}
           />
         </ScrollView>
       </View>

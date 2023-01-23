@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { headerStyles } from '@/Components/MyHeader/index.style'
-import SvgShortLogo from '@/Assets/Images/SvgShortLogo'
-import SvgLogout from '@/Assets/SvgLogout'
 import SvgArrowLeft from '@/Assets/SvgArrowLeft'
 import { useAuth } from '@/Hooks/useAuth'
 import { useDispatch } from 'react-redux'
@@ -10,6 +8,7 @@ import { changeToken } from '@/Store/Auth'
 import { navigate, navigateAndSimpleReset } from '@/Navigators/utils'
 import downloadIcon from '@/Assets/Images/akar-icons_download.png'
 import plogo from '@/Assets/Images/plogo.png'
+import logoutImg from '@/Assets/Images/logout.png'
 
 export default function MyHeader({ goBack, onDownloadImages }) {
   const { pages } = useAuth()
@@ -46,7 +45,10 @@ export default function MyHeader({ goBack, onDownloadImages }) {
       <View style={headerStyles.rightBox}>
         <TouchableOpacity onPress={goToHome} style={headerStyles.logoBtn}>
           {/*<SvgShortLogo />*/}
-          <Image source={plogo} style={{width: 35, height: 35, resizeMode: 'contain'}} />
+          <Image
+            source={plogo}
+            style={{ width: 35, height: 35, resizeMode: 'contain' }}
+          />
         </TouchableOpacity>
         <View style={headerStyles.linkBox}>
           <TouchableOpacity onPress={onPressMontenegro}>
@@ -78,7 +80,11 @@ export default function MyHeader({ goBack, onDownloadImages }) {
           onPress={onPressLogOut}
           style={headerStyles.logoutBtn}
         >
-          <SvgLogout />
+          {/*<SvgLogout />*/}
+          <Image
+            source={logoutImg}
+            style={{ width: 24, height: 24, resizeMode: 'contain' }}
+          />
         </TouchableOpacity>
       </View>
     </View>

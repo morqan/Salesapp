@@ -18,7 +18,7 @@ export default function Gallery(props) {
   const [localImg, setLocalImg] = useState([])
   const [showVideo, setShowVideo] = useState(false)
   const { localImagesUrls } = useAuth()
-  const { gallery, params } = props?.route?.params
+  const { params } = props?.route?.params
   const {
     items,
     catalog,
@@ -29,7 +29,8 @@ export default function Gallery(props) {
     pyc_gallery,
     location,
     header_title,
-    content
+    content,
+    gallery
   } = params
   const width = Dimensions.get('window').width
   const height = Dimensions.get('window').height
@@ -37,7 +38,7 @@ export default function Gallery(props) {
     navigationRef.goBack()
   }, [])
   useEffect(() => {
-    const newGallery = gallery.map(item => {
+    const newGallery = gallery?.map(item => {
       let newImg = `${Config.IMG_PATH}${item?.img}`.replaceAll(' ', '%20')
       return newImg
     })
@@ -77,10 +78,10 @@ export default function Gallery(props) {
         <View style={detailsStyles.sliderBox}>
           <Carousel
             ref={sliderRef}
-            width={width * 0.78}
+            width={width * 0.75}
             // height={800}
             data={localImg}
-            scrollAnimationDuration={3000}
+            scrollAnimationDuration={1000}
             renderItem={({ index, item }) => {
               return (
                 <View>

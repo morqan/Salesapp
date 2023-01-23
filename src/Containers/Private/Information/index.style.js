@@ -13,9 +13,12 @@ export const infoStyles = StyleSheet.create({
   },
   tagStyle: {
     p: {
-      lineHeight: 30,
-      fontSize: 15,
-      // color: 'red'
+      lineHeight: 25,
+      fontSize: 18,
+      fontFamily: 'GothamPro',
+      // color: 'red',
+      marginVertical: 5,
+
     },
     br: {
       opacity: 0

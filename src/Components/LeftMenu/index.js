@@ -38,7 +38,7 @@ export default function LeftMenu({
   }, [])
 
   const onPressPyc = useCallback(() => {
-    navigate('PycScreen', { gallery: pyc_gallery, text: pyc })
+    navigate('PycScreen', { gallery: pyc_gallery, text: pyc, params })
   }, [])
 
   const onPressInfo = useCallback(() => {
@@ -50,8 +50,11 @@ export default function LeftMenu({
   }, [])
 
   const onPressMap = useCallback(() => {
-    navigate('MapScreen', { img: map, location: location, params })
+    const loc = title === 'LIFESTYLE' ? 'LIFESTYLE' : location
+    navigate('MapScreen', { img: map, location: loc, params })
   }, [])
+
+  console.log(location, 'location left menu')
 
   return (
     <ScrollView contentContainerStyle={sideMenuStyles.side}>
@@ -96,7 +99,7 @@ export default function LeftMenu({
       )}
       {pyc && (
         <TouchableOpacity style={sideMenuStyles.menuLink} onPress={onPressPyc}>
-          <Text style={sideMenuStyles.menuLinkText}>pyc</Text>
+          <Text style={sideMenuStyles.menuLinkText}>PORTONOVI YACHT CLUB</Text>
         </TouchableOpacity>
       )}
       {catalog && (

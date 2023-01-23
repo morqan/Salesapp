@@ -93,7 +93,7 @@ export default function Details(props) {
         <View style={detailsStyles.sliderBox}>
           <Carousel
             loop={false}
-            width={source?.html ? width / 2.3 : width * 0.8}
+            width={source?.html ? width / 2.3 : width * 0.75}
             data={localImg}
             scrollAnimationDuration={3000}
             renderItem={({ index, item }) => {
@@ -113,7 +113,7 @@ export default function Details(props) {
           />
         </View>
         {source?.html && (
-          <ScrollView style={{ width: '30%' }} ref={scrollRef}>
+          <ScrollView style={{ width: '31%' }} ref={scrollRef}>
             <RenderHtml
               contentWidth={width}
               source={source}

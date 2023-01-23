@@ -75,13 +75,15 @@ export const detailsStyles = StyleSheet.create({
   sliderImg: {
     width: '100%',
     height: '100%',
-    // resizeMode: 'stretch',
+    resizeMode: 'cover',
   },
   tagsStyles: {
     p: {
       marginBottom: 0,
-      lineHeight: 30,
-      paddingHorizontal: 15
+      lineHeight: 25,
+      paddingHorizontal: 20,
+      fontFamily: 'GothamPro',
+      fontSize: 15
       // width: 300
     },
   },
@@ -89,12 +91,15 @@ export const detailsStyles = StyleSheet.create({
     p: {
       marginBottom: 0,
       lineHeight: 30,
+      fontFamily: 'GothamPro',
     },
   },
   tagsStylesMontenegro: {
     p: {
       marginBottom: 0,
       lineHeight: 25,
+      fontFamily: 'GothamPro',
+      fontSize: 18
     },
   },
   videoIconBox: {

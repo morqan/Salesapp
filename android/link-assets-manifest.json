@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/Assets/fonts/GothamPro.ttf",
+      "sha1": "974242ec46659f8cf09d1631499c7ad9f61ce06d"
+    },
+    {
+      "path": "src/Assets/fonts/NoeDisplay-Medium.ttf",
+      "sha1": "52efb5e4d77a92dfd3b5c4014e8ff96868fe22ab"
+    }
+  ]
+}

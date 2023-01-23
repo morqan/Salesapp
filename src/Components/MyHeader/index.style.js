@@ -12,7 +12,7 @@ export const headerStyles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 20,
     backgroundColor: '#278590',
-    height: '100%',
+    // height: '100%',
     justifyContent: 'center',
   },
   linkBox: {
@@ -28,13 +28,14 @@ export const headerStyles = StyleSheet.create({
     lineHeight: 16,
     textTransform: 'uppercase',
     paddingLeft: 50,
+    fontFamily: 'GothamPro',
   },
   logoutBtn: {
     backgroundColor: '#555555',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 30,
-    height: '100%',
+    paddingHorizontal: 25,
+    // height: '100%',
   },
   backBtn: {
     backgroundColor: '#fff',
