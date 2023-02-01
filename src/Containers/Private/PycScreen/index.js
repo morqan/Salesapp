@@ -57,7 +57,7 @@ export default function PycScreen(props) {
           <Carousel
             loop={false}
             // width={width / 2}
-            width={source?.html ? width / 2.3 : width * 0.75}
+            width={source?.html ? width / 2.2 : width * 0.75}
             data={localImg}
             scrollAnimationDuration={3000}
             // onSnapToItem={index => console.log('current index:', index)}

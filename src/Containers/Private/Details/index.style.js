@@ -22,9 +22,10 @@ export const detailsStyles = StyleSheet.create({
   body: {
     flex: 1,
     flexDirection: 'row',
+    backgroundColor: '#f8f8f8',
     // justifyContent: 'flex-start',
     // alignItems: 'flex-start',
-    paddingHorizontal: 5,
+    // paddingHorizontal: 5,
   },
   sliderBox: {
     // flex: 1,

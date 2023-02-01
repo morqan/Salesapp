@@ -13,7 +13,7 @@ export const planStyles = StyleSheet.create({
     height: 70,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#278590'
+    backgroundColor: '#278590',
   },
   header: {
     // marginTop: -30,
@@ -28,8 +28,8 @@ export const planStyles = StyleSheet.create({
     // backgroundColor: 'red'
   },
   slideBox: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    alignItems: 'center',
+    justifyContent: 'center',
     // flex: 1,
     // backgroundColor: 'green',
   },
@@ -42,8 +42,13 @@ export const planStyles = StyleSheet.create({
   sliderImg: {
     width: '100%',
     height: '100%',
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     // backgroundColor: 'red'
+  },
+  mapImg: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
   },
   sliderAbsoluteBox: {
     position: 'absolute',
@@ -78,7 +83,7 @@ export const planStyles = StyleSheet.create({
       lineHeight: 20,
       textAlign: 'center',
       fontFamily: 'GothamPro',
-      fontSize: 18
+      fontSize: 18,
     },
   },
   rightBtn: {

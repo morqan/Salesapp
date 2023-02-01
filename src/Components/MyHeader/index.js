@@ -19,19 +19,19 @@ export default function MyHeader({ goBack, onDownloadImages }) {
   }
 
   const onPressPortonovi = useCallback(() => {
-    navigate('Information', {
+    navigateAndSimpleReset('Information', {
       params: pages?.portonovi,
     })
   }, [])
 
   const onPressLifestyle = useCallback(() => {
-    navigate('Information', {
+    navigateAndSimpleReset('Information', {
       params: pages?.lifestyle,
     })
   }, [])
 
   const onPressMontenegro = useCallback(() => {
-    navigate('Montegro', {
+    navigateAndSimpleReset('Montegro', {
       params: pages?.montenegro,
     })
   }, [])

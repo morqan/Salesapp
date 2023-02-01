@@ -82,7 +82,7 @@ export default function Project(props) {
               height={heights}
               top={1600}
               backgroundColor={'#0d6a78'}
-              imgWidth={0.75}
+              imgWidth={0.76}
             />
           </View>
         </View>

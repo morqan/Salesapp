@@ -8,6 +8,7 @@ import montonegroGif from '@/Assets/Images/montenegro-1.gif'
 import MyHeader from '@/Components/MyHeader'
 import LeftMenu from '@/Components/LeftMenu'
 import Pinchable from 'react-native-pinchable'
+import VideoModal from "@/Components/VideoModal"
 
 export default function MapScreen(props) {
   const { img, params } = props?.route?.params
@@ -27,6 +28,8 @@ export default function MapScreen(props) {
   } = params
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
+  const [showVideo, setShowVideo] = useState(false)
+
   const width = Dimensions.get('window').width
 
   useEffect(() => {
@@ -46,7 +49,9 @@ export default function MapScreen(props) {
   }, [])
 
   console.log(props?.route?.params, 'props?.route?.paramss')
-
+  const videoModalHandler = useCallback(() => {
+    setShowVideo(prevState => !prevState)
+  }, [])
   return (
     <View
       style={{
@@ -66,24 +71,27 @@ export default function MapScreen(props) {
           name={name}
           pyc_gallery={pyc_gallery}
           params={params}
-          // onPressVideo={videoModalHandler}
+          onPressVideo={videoModalHandler}
           map={map}
           location={location}
         />
         <View style={{ width: width * 0.75 }}>
           {localImg && header_title === 'LIFESTYLE' && (
             <Pinchable style={planStyles.slideBox}>
-              <Image source={{ uri: localImg }} style={planStyles.sliderImg} />
+              <Image source={{ uri: localImg }} style={planStyles.mapImg} />
             </Pinchable>
           )}
           {location && location === 'montenegro' && (
-            <Image source={montonegroGif} style={planStyles.sliderImg} />
+            <Image source={montonegroGif} style={planStyles.mapImg} />
           )}
           {location && location === 'portonovi' && (
-            <Image source={portonoviGif} style={planStyles.sliderImg} />
+            <Image source={portonoviGif} style={planStyles.mapImg} />
           )}
         </View>
       </View>
+      {showVideo && (
+        <VideoModal video={video} onPressClose={videoModalHandler} />
+      )}
     </View>
   )
 }
