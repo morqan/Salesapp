@@ -31,7 +31,7 @@ export const planStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // flex: 1,
-    // backgroundColor: 'green',
+
   },
   slideBoxGallery: {
     alignItems: 'flex-start',

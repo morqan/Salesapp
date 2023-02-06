@@ -84,15 +84,17 @@ export const detailsStyles = StyleSheet.create({
       lineHeight: 25,
       paddingHorizontal: 20,
       fontFamily: 'GothamPro',
-      fontSize: 15
+      fontSize: 16,
       // width: 300
     },
   },
   tagsStylesPyc: {
     p: {
       marginBottom: 0,
-      lineHeight: 30,
+      lineHeight: 25,
       fontFamily: 'GothamPro',
+      fontSize: 16,
+      fontWeight: 'bold'
     },
   },
   tagsStylesMontenegro: {
@@ -100,7 +102,7 @@ export const detailsStyles = StyleSheet.create({
       marginBottom: 0,
       lineHeight: 25,
       fontFamily: 'GothamPro',
-      fontSize: 18
+      fontSize: 16
     },
   },
   videoIconBox: {

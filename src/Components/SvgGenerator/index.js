@@ -119,7 +119,14 @@ export default function SvgGenerator({
                   }}
                 >
                   <TSpan
-                    x={Number(item?.left) + (item?.map_name.length > 2 ? 70 : 120)}
+                    x={
+                      Number(item?.left) +
+                      (item?.map_name.length === 2
+                        ? 85
+                        : item?.map_name.length > 2
+                        ? 60
+                        : 120)
+                    }
                     y={Number(item?.top) - top + 200}
                     fill={backgroundColor ? '#fff' : '#000'}
                   >

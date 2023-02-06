@@ -73,7 +73,7 @@ export default function Project(props) {
             path={items?.data}
             onOpenPlan={onOpenDetails}
           />
-          <View style={[detailsStyles.sliderBox, ]}>
+          <View style={[detailsStyles.sliderBox]}>
             <SvgGenerator
               img={img}
               path={items?.data}

@@ -15,7 +15,7 @@ export default function VideoModal({ video, onPressClose }) {
       <View
         style={[
           btnStyles.container,
-          { position: 'absolute', top: 60, right: 15 },
+          { position: 'absolute', top: '13.1%', right: '1.99%' },
         ]}
       >
         <TouchableOpacity

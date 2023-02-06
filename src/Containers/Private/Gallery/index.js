@@ -58,7 +58,7 @@ export default function Gallery(props) {
 
   return (
     <View style={{ flex: 1 }}>
-      <MyHeader goBack={goBack} />
+      <MyHeader goBack={goBack} headerTitle={header_title} />
       <View style={{ height: '90%', flexDirection: 'row' }}>
         <LeftMenu
           title={name || header_title}

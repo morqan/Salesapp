@@ -8,7 +8,7 @@ import montonegroGif from '@/Assets/Images/montenegro-1.gif'
 import MyHeader from '@/Components/MyHeader'
 import LeftMenu from '@/Components/LeftMenu'
 import Pinchable from 'react-native-pinchable'
-import VideoModal from "@/Components/VideoModal"
+import VideoModal from '@/Components/VideoModal'
 
 export default function MapScreen(props) {
   const { img, params } = props?.route?.params
@@ -21,10 +21,10 @@ export default function MapScreen(props) {
     name,
     pyc_gallery,
     map,
-    left_img,
     header_title,
     location,
     content,
+    location_img,
   } = params
   const { localImagesUrls } = useAuth()
   const [localImg, setLocalImg] = useState('')
@@ -35,6 +35,7 @@ export default function MapScreen(props) {
   useEffect(() => {
     if (img) {
       const newImg = img.replace(' ', '%20')
+      console.log(newImg, 'newImg')
       localImagesUrls.filter(x => {
         if (x?.id === newImg) {
           console.log(x, 'MapScreen')
@@ -49,6 +50,7 @@ export default function MapScreen(props) {
   }, [])
 
   console.log(props?.route?.params, 'props?.route?.paramss')
+  console.log(location_img, 'location_img')
   const videoModalHandler = useCallback(() => {
     setShowVideo(prevState => !prevState)
   }, [])
@@ -59,7 +61,7 @@ export default function MapScreen(props) {
         backgroundColor: '#fff',
       }}
     >
-      <MyHeader goBack={goBack} />
+      <MyHeader goBack={goBack} headerTitle={header_title} />
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <LeftMenu
           title={header_title}
@@ -76,17 +78,17 @@ export default function MapScreen(props) {
           location={location}
         />
         <View style={{ width: width * 0.75 }}>
-          {localImg && header_title === 'LIFESTYLE' && (
+          {localImg && (
             <Pinchable style={planStyles.slideBox}>
               <Image source={{ uri: localImg }} style={planStyles.mapImg} />
             </Pinchable>
           )}
-          {location && location === 'montenegro' && (
-            <Image source={montonegroGif} style={planStyles.mapImg} />
-          )}
-          {location && location === 'portonovi' && (
-            <Image source={portonoviGif} style={planStyles.mapImg} />
-          )}
+          {/*{location && location === 'montenegro' && (*/}
+          {/*  <Image source={montonegroGif} style={planStyles.mapImg} />*/}
+          {/*)}*/}
+          {/*{location && location === 'portonovi' && (*/}
+          {/*  <Image source={portonoviGif} style={planStyles.mapImg} />*/}
+          {/*)}*/}
         </View>
       </View>
       {showVideo && (

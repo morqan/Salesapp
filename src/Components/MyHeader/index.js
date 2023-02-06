@@ -10,7 +10,7 @@ import downloadIcon from '@/Assets/Images/akar-icons_download.png'
 import plogo from '@/Assets/Images/plogo.png'
 import logoutImg from '@/Assets/Images/logout.png'
 
-export default function MyHeader({ goBack, onDownloadImages }) {
+export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
   const { pages } = useAuth()
   const dispatch = useDispatch()
 
@@ -40,6 +40,13 @@ export default function MyHeader({ goBack, onDownloadImages }) {
     navigateAndSimpleReset('Home')
   }, [])
   console.log(pages, 'pages')
+  const onPressGoBack = () => {
+    if (headerTitle) {
+      goToHome()
+    } else {
+      goBack()
+    }
+  }
   return (
     <View style={headerStyles.headerBox}>
       <View style={headerStyles.rightBox}>
@@ -64,7 +71,10 @@ export default function MyHeader({ goBack, onDownloadImages }) {
       </View>
       <View style={headerStyles.rightBox}>
         {goBack && (
-          <TouchableOpacity style={headerStyles.backBtn} onPress={goBack}>
+          <TouchableOpacity
+            style={headerStyles.backBtn}
+            onPress={onPressGoBack}
+          >
             <SvgArrowLeft />
           </TouchableOpacity>
         )}

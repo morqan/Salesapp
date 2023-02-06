@@ -117,9 +117,11 @@ export default function Plan(props) {
             renderItem={({ index, item }) => {
               return (
                 <View>
-                  <Pinchable style={planStyles.slideBox}>
+                  <Pinchable
+                    style={[planStyles.slideBox, { backgroundColor: '#fff' }]}
+                  >
                     <Image
-                      style={planStyles.sliderImg}
+                      style={planStyles.mapImg}
                       source={{
                         uri: item?.localUrl,
                       }}

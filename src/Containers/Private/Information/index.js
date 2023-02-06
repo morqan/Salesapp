@@ -47,9 +47,10 @@ export default function Information(props) {
     navigate('Details', { detail: item })
   }, [])
   console.log(params, 'informationsa')
+  console.log(header_title, 'header_title')
   return (
     <View style={infoStyles.container}>
-      <MyHeader goBack={goBack} />
+      <MyHeader goBack={goBack} headerTitle={header_title} />
       <View style={{ flexDirection: 'row', backgroundColor: '#f8f8f8' }}>
         <LeftMenu
           catalog={catalog}

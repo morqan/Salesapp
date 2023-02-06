@@ -7,7 +7,7 @@ import { navigationRef } from '@/Navigators/utils'
 import { useAuth } from '@/Hooks/useAuth'
 import MyHeader from '@/Components/MyHeader'
 import LeftMenu from '@/Components/LeftMenu'
-import VideoModal from "@/Components/VideoModal"
+import VideoModal from '@/Components/VideoModal'
 
 export default function PycScreen(props) {
   const systemFonts = [...defaultSystemFonts, 'GothamPro', 'NoeDisplay-Medium']

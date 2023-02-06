@@ -67,7 +67,7 @@ export default function Montegro(props) {
 
   return (
     <View style={detailsStyles.container}>
-      <MyHeader goBack={goBack} />
+      <MyHeader goBack={goBack} headerTitle={header_title} />
       <View style={detailsStyles.body}>
         <LeftMenu
           title={header_title}

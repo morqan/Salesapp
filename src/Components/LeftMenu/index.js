@@ -109,15 +109,11 @@ export default function LeftMenu({
       )}
       {map && (
         <TouchableOpacity onPress={onPressMap} style={sideMenuStyles.menuLink}>
-          <Text style={sideMenuStyles.menuLinkText}>map</Text>
+          <Text style={sideMenuStyles.menuLinkText}>
+            {title === 'LIFESTYLE' ? 'map' : 'location'}
+          </Text>
         </TouchableOpacity>
       )}
-      {location && (
-        <TouchableOpacity onPress={onPressMap} style={sideMenuStyles.menuLink}>
-          <Text style={sideMenuStyles.menuLinkText}>location</Text>
-        </TouchableOpacity>
-      )}
-
       {blocks?.data &&
         blocks?.data.map(item => {
           return item?.floors?.data.map(floor => {
