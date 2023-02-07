@@ -1,13 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Svg, {
-  G,
-  Path,
-  Text,
-  TSpan,
-  Image,
-  Circle,
-  Rect,
-} from 'react-native-svg'
+import Svg, { G, Text, TSpan, Image, Rect } from 'react-native-svg'
 import { svgGeneratorStyles } from '@/Components/SvgGenerator/index.style'
 import { Dimensions, View } from 'react-native'
 import { useAuth } from '@/Hooks/useAuth'
@@ -48,7 +40,7 @@ export default function SvgGenerator({
         viewBox={`0 0 ${originalWidth} ${originalHeight}`}
         xmlns="http://www.w3.org/2000/svg"
         xmlSpace="preserve"
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%', height: '100%', resizeMode: 'cover' }}
         // viewBox="0 0 20970 7800"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         preserveAspectRatio="none"
@@ -62,25 +54,6 @@ export default function SvgGenerator({
               // href={localImg}
             />
           )}
-          {/*{path &&*/}
-          {/*  path.map((item, index) => {*/}
-          {/*    return (*/}
-          {/*      <G key={index} strokeWidth={2} stroke="#789" stroke-width="30">*/}
-          {/*        <Path*/}
-          {/*          className="fil0"*/}
-          {/*          style={[*/}
-          {/*            svgGeneratorStyles.path,*/}
-          {/*            backgroundColor && { fill: item?.color },*/}
-          {/*            item?.is_active === 0 && { opacity: 0.5, zIndex:99999 },*/}
-          {/*          ]}*/}
-          {/*          onPress={() => (item?.is_active === 1 ? onPress(item) : {})}*/}
-          {/*          d={`M${Number(item?.left)} ${Number(*/}
-          {/*            item?.top - top,*/}
-          {/*          )}h${330}v330H${Number(item?.left)}z`}*/}
-          {/*        />*/}
-          {/*      </G>*/}
-          {/*    )*/}
-          {/*  })}*/}
           {path &&
             path.map((item, index) => {
               return (
@@ -104,8 +77,6 @@ export default function SvgGenerator({
             })}
           {path &&
             path.map((item, index) => {
-              console.log(item?.map_name, 'item?.map_name')
-              console.log(item?.map_name.length, 'item?.map_name')
               return (
                 <Text
                   key={index + 100}

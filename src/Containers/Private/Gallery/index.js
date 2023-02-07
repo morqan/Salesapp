@@ -30,7 +30,8 @@ export default function Gallery(props) {
     location,
     header_title,
     content,
-    gallery
+    gallery,
+    map,
   } = params
   const width = Dimensions.get('window').width
   const height = Dimensions.get('window').height
@@ -74,6 +75,7 @@ export default function Gallery(props) {
           path={items?.data}
           onOpenPlan={onOpenDetails}
           location={location}
+          map={map}
         />
         <View style={detailsStyles.sliderBox}>
           <Carousel
