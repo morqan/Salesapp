@@ -117,4 +117,8 @@ export const homeStyles = StyleSheet.create({
     height: 20,
     resizeMode: 'contain',
   },
+  footerGallery: {
+    flexDirection: 'row',
+    height: '48%',
+  },
 })

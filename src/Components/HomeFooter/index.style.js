@@ -34,11 +34,11 @@ export const hfStyles = StyleSheet.create({
     color: '#555555',
     width: 160,
     fontFamily: 'GothamPro',
-    lineHeight: 15
+    lineHeight: 15,
   },
   img: {
-    width: '100%',
-    height: '48%',
-    // resizeMode: 'contain',
+    width: 200,
+    height: '46%',
+    resizeMode: 'cover',
   },
 })

@@ -25,7 +25,16 @@ import {
 import { useAuth } from '@/Hooks/useAuth'
 import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
-import gallery from '../../../Assets/Images/gallery.png'
+import gallery from '../../../Assets/Images/footerGallery.jpg'
+import footerGallery from '../../../Assets/Images/footerGallery1.jpg'
+import footerGallery1 from '../../../Assets/Images/footerGallery2.jpg'
+import footerGallery2 from '../../../Assets/Images/footerGallery3.jpg'
+import footerGallery3 from '../../../Assets/Images/footerGallery4.jpeg'
+import footerGallery4 from '../../../Assets/Images/footerGallery5.jpg'
+import footerGallery5 from '../../../Assets/Images/footerGallery6.jpg'
+import footerGallery6 from '../../../Assets/Images/footerGallery7.jpg'
+import footerGallery7 from '../../../Assets/Images/footerGallery8.jpg'
+import footerGallery8 from '../../../Assets/Images/footerGallery9.jpg'
 import MyHeader from '@/Components/MyHeader'
 import HomeFooter from '@/Components/HomeFooter'
 import { hfStyles } from '@/Components/HomeFooter/index.style'
@@ -224,9 +233,40 @@ export default function Home() {
         </ScrollView>
       )}
       <HomeFooter homeItems={homeItemPositions} onPress={onOpenProject} />
-      <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-        <Image source={gallery} style={hfStyles.img} />
-      </TouchableOpacity>
+      <View style={homeStyles.footerGallery}>
+        <ScrollView horizontal={true}>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={gallery} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery8} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery7} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery6} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery5} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery4} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery3} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery2} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery1} style={hfStyles.img} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
+            <Image source={footerGallery} style={hfStyles.img} />
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
     </View>
   )
 }
