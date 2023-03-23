@@ -5,11 +5,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#0d6a78',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+
   },
   loginBox: {
-    width: "55%",
-    height: '65%',
+    width: 600,
+    height: 500,
     backgroundColor: '#fff',
   },
   logoBox: {
@@ -41,11 +42,10 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 13,
     marginTop: 25,
-
   },
-  loginBntContainer:{
+  loginBntContainer: {
     width: '100%',
     backgroundColor: '#278590',
     borderColor: '#278590',
-  }
+  },
 })

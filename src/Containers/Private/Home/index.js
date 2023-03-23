@@ -120,14 +120,21 @@ export default function Home() {
     if (localImagesUrls?.length < 525) {
       getImages().unwrap()
     }
-  }, [])
+  }, [
+    getImages,
+    getPage,
+    getPosition,
+    homeItemPositions.length,
+    localImagesUrls?.length,
+    pages,
+  ])
 
   useEffect(() => {
     if (getPageIsSuccess) {
       // console.log(getPageData, 'getPageData')
       dispatch(setPages({ page: getPageData }))
     }
-  }, [getPageIsSuccess, getPageIsError])
+  }, [getPageIsSuccess, getPageIsError, dispatch, getPageData])
 
   useEffect(() => {
     if (isSuccess) {
@@ -136,7 +143,7 @@ export default function Home() {
     if (isError) {
       console.log(error, 'getPosition error')
     }
-  }, [isSuccess, isError])
+  }, [isSuccess, isError, dispatch, data?.data, error])
 
   useEffect(() => {
     if (pages && localImagesUrls.length > 525) {
@@ -154,7 +161,7 @@ export default function Home() {
     if (getPageIsError) {
       console.log(error, 'getPosition error')
     }
-  }, [getPageIsSuccess, getPageIsError, pages, localImagesUrls])
+  }, [getPageIsSuccess, getPageIsError, pages, localImagesUrls, error])
 
   const onOpenProject = useCallback(item => {
     navigate('Project', { project: item })
@@ -175,15 +182,15 @@ export default function Home() {
       })
     }
     loadData()
-  }, [])
+  }, [dispatch, getImages, getPage, getPosition])
 
   const onGoPortonoviGallery = useCallback(() => {
     navigate('Gallery', {
       gallery: pages?.portonovi?.gallery,
       params: pages?.portonovi,
     })
-  }, [])
-
+  }, [pages?.portonovi])
+  console.log(pages, 'pagess')
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
@@ -235,36 +242,26 @@ export default function Home() {
       <HomeFooter homeItems={homeItemPositions} onPress={onOpenProject} />
       <View style={homeStyles.footerGallery}>
         <ScrollView horizontal={true}>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={gallery} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery8} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery7} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery6} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery5} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery4} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery3} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery2} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery1} style={hfStyles.img} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onGoPortonoviGallery} activeOpacity={0.95}>
-            <Image source={footerGallery} style={hfStyles.img} />
-          </TouchableOpacity>
+          {pages?.portonovi?.gallery.map(imgUrl => {
+            let newImg = `${Config.IMG_PATH}${imgUrl?.img}`.replaceAll(
+              ' ',
+              '%20',
+            )
+            return (
+              <TouchableOpacity
+                onPress={onGoPortonoviGallery}
+                activeOpacity={0.95}
+                key={newImg}
+              >
+                <Image
+                  source={{
+                    uri: newImg,
+                  }}
+                  style={hfStyles.img}
+                />
+              </TouchableOpacity>
+            )
+          })}
         </ScrollView>
       </View>
     </View>

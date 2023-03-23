@@ -10,6 +10,7 @@ import { sideMenuStyles } from '@/Components/LeftMenu/index.style'
 import { navigate } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
+import { useNetInfo } from '@react-native-community/netinfo'
 
 export default function LeftMenu({
   title,
@@ -32,14 +33,14 @@ export default function LeftMenu({
   headInfo,
 }) {
   const { width } = useWindowDimensions()
-
+  const netInfo = useNetInfo()
   const onPressGallery = useCallback(() => {
     navigate('Gallery', { gallery: gallery, params })
-  }, [])
+  }, [gallery, params])
 
   const onPressPyc = useCallback(() => {
     navigate('PycScreen', { gallery: pyc_gallery, text: pyc, params })
-  }, [])
+  }, [params, pyc, pyc_gallery])
 
   const onPressInfo = useCallback(() => {
     if (title === 'MONTENEGRO') {
@@ -47,14 +48,15 @@ export default function LeftMenu({
     } else {
       navigate('Information', { text: information, title: name, params })
     }
-  }, [])
+  }, [information, name, params, title])
 
   const onPressMap = useCallback(() => {
     const loc = title === 'LIFESTYLE' ? 'LIFESTYLE' : location
     navigate('MapScreen', { img: map, location: loc, params })
-  }, [])
+  }, [location, map, params, title])
 
   console.log(location, 'location left menu')
+  console.log(netInfo, 'netInfo left menu')
 
   return (
     <ScrollView contentContainerStyle={sideMenuStyles.side}>
@@ -89,7 +91,7 @@ export default function LeftMenu({
           <Text style={sideMenuStyles.menuLinkText}>gallery</Text>
         </TouchableOpacity>
       )}
-      {video && (
+      {video && netInfo?.isConnected && (
         <TouchableOpacity
           style={sideMenuStyles.menuLink}
           onPress={onPressVideo}
@@ -130,9 +132,7 @@ export default function LeftMenu({
           })
         })}
       {path &&
-        path.map((item, index) => {
-          console.log(item, 'item')
-
+        path.map(item => {
           return (
             <TouchableOpacity
               key={item?.id}

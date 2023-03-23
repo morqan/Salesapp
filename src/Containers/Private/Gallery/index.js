@@ -34,7 +34,7 @@ export default function Gallery(props) {
     map,
   } = params
   const width = Dimensions.get('window').width
-  const height = Dimensions.get('window').height
+
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])

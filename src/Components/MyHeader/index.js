@@ -5,7 +5,7 @@ import SvgArrowLeft from '@/Assets/SvgArrowLeft'
 import { useAuth } from '@/Hooks/useAuth'
 import { useDispatch } from 'react-redux'
 import { changeToken } from '@/Store/Auth'
-import { navigate, navigateAndSimpleReset } from '@/Navigators/utils'
+import { navigateAndSimpleReset } from '@/Navigators/utils'
 import downloadIcon from '@/Assets/Images/akar-icons_download.png'
 import plogo from '@/Assets/Images/plogo.png'
 import logoutImg from '@/Assets/Images/logout.png'
@@ -22,19 +22,19 @@ export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
     navigateAndSimpleReset('Information', {
       params: pages?.portonovi,
     })
-  }, [])
+  }, [pages?.portonovi])
 
   const onPressLifestyle = useCallback(() => {
     navigateAndSimpleReset('Information', {
       params: pages?.lifestyle,
     })
-  }, [])
+  }, [pages?.lifestyle])
 
   const onPressMontenegro = useCallback(() => {
     navigateAndSimpleReset('Montegro', {
       params: pages?.montenegro,
     })
-  }, [])
+  }, [pages?.montenegro])
 
   const goToHome = useCallback(() => {
     navigateAndSimpleReset('Home')
