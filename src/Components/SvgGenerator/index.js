@@ -27,11 +27,13 @@ export default function SvgGenerator({
     const newImg = img.replaceAll(' ', '%20')
     localImagesUrls.filter(x => {
       if (x?.id === newImg) {
+        console.log(x, 'x')
         setLocalImg(`${x?.localUrl}`)
       }
     })
-  }, [])
+  }, [img, localImagesUrls])
   // console.log(localImagesUrls, 'localImagesUrlslocalImagesUrls')
+  console.log(localImg, 'localImgd')
   return (
     <View style={{ width: windowWidth, aspectRatio }}>
       <Svg

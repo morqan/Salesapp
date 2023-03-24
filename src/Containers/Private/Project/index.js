@@ -10,7 +10,6 @@ import LeftMenu from '@/Components/LeftMenu'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 
 export default function Project(props) {
-  const width = Dimensions.get('window').width
   const [widths, setWidths] = useState('')
   const [heights, setHeights] = useState('')
   const [showVideo, setShowVideo] = useState(false)

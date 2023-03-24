@@ -25,16 +25,6 @@ import {
 import { useAuth } from '@/Hooks/useAuth'
 import SvgGenerator from '@/Components/SvgGenerator'
 import * as RNFS from 'react-native-fs'
-import gallery from '../../../Assets/Images/footerGallery.jpg'
-import footerGallery from '../../../Assets/Images/footerGallery1.jpg'
-import footerGallery1 from '../../../Assets/Images/footerGallery2.jpg'
-import footerGallery2 from '../../../Assets/Images/footerGallery3.jpg'
-import footerGallery3 from '../../../Assets/Images/footerGallery4.jpeg'
-import footerGallery4 from '../../../Assets/Images/footerGallery5.jpg'
-import footerGallery5 from '../../../Assets/Images/footerGallery6.jpg'
-import footerGallery6 from '../../../Assets/Images/footerGallery7.jpg'
-import footerGallery7 from '../../../Assets/Images/footerGallery8.jpg'
-import footerGallery8 from '../../../Assets/Images/footerGallery9.jpg'
 import MyHeader from '@/Components/MyHeader'
 import HomeFooter from '@/Components/HomeFooter'
 import { hfStyles } from '@/Components/HomeFooter/index.style'
@@ -53,51 +43,52 @@ export default function Home() {
   const [getImages, result] = useLazyGetImagesQuery()
   const { data: getImagesData } = result
   const onDownloadImages = async imgUrls => {
-    let imgLocalUrls = []
     try {
       const FILE = Platform.OS === 'ios' ? '' : 'file://'
-      for (let i = 0; i < imgUrls?.length; ) {
-        let fileName = FILE + RNFS.DocumentDirectoryPath + '/' + `img${i}.jpg`
-        let sourceUrl = imgUrls[i]
-        if (await RNFS.exists(fileName)) {
-          // await RNFS.unlink(fileName)
-          const newPath = {
-            id: sourceUrl,
-            localUrl: fileName,
-            imgName: `img${i}.jpg`,
-          }
-          console.log(imgLocalUrls.length, 'oldPath')
-          setDownloadedImg(prevState => prevState + 1)
-          imgLocalUrls.push(newPath)
-          i++
-        } else {
-          const download = RNFS.downloadFile({
-            fromUrl: sourceUrl,
-            toFile: fileName,
-          })
-          const downloadResult = await download.promise
-          console.log(sourceUrl, 'imgLocalUrls.length')
-          console.log(downloadResult, 'downloadResult')
-
-          if (downloadResult.statusCode === 200) {
-            const newPath = {
+      const imgLocalUrls = await Promise.all(
+        imgUrls.map(async (sourceUrl, i) => {
+          const imgName = sourceUrl.slice(
+            sourceUrl.lastIndexOf('/') + 1,
+            sourceUrl.lastIndexOf('.'),
+          )
+          const fileName = `${FILE}${RNFS.DocumentDirectoryPath}/img${imgName}${i}.jpg`
+          // Check if file already exists
+          const exists = await RNFS.exists(fileName)
+          if (exists) {
+            console.log('old')
+            setDownloadedImg(prevState => prevState + 1)
+            return {
               id: sourceUrl,
               localUrl: fileName,
-              imgName: `img${i}.jpg`,
+              imgName: `img${imgName}${i}.jpg`,
             }
-            console.log(imgLocalUrls.length, 'newPath')
-            setDownloadedImg(prevState => prevState + 1)
-            imgLocalUrls.push(newPath)
-            i++
+          } else {
+            // Download the image file
+            const download = RNFS.downloadFile({
+              fromUrl: sourceUrl,
+              toFile: fileName,
+            })
+            const downloadResult = await download.promise
+            if (downloadResult.statusCode === 200) {
+              console.log('new')
+              setDownloadedImg(prevState => prevState + 1)
+              return {
+                id: sourceUrl,
+                localUrl: fileName,
+                imgName: `img${imgName}${i}.jpg`,
+              }
+            }
           }
-        }
-      }
+        }),
+      )
+      // Filter out any undefined values in the array (in case of download failure)
+      const filteredImgLocalUrls = imgLocalUrls.filter(url => url)
+      dispatch(setLocalImgUrls({ localUrls: filteredImgLocalUrls }))
+      dispatch(setDownloaded({ download: true }))
+      setLoading(false)
     } catch (err) {
       console.log(err, 'down err')
     } finally {
-      dispatch(setLocalImgUrls({ localUrls: imgLocalUrls }))
-      dispatch(setDownloaded({ download: true }))
-      setLoading(false)
       setDownloadedImg(0)
     }
   }
@@ -164,6 +155,7 @@ export default function Home() {
   }, [getPageIsSuccess, getPageIsError, pages, localImagesUrls, error])
 
   const onOpenProject = useCallback(item => {
+    console.log(item, 'item')
     navigate('Project', { project: item })
   }, [])
 
@@ -190,7 +182,6 @@ export default function Home() {
       params: pages?.portonovi,
     })
   }, [pages?.portonovi])
-  console.log(pages, 'pagess')
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
