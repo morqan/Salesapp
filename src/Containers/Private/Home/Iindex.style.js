@@ -84,6 +84,7 @@ export const homeStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 100,
+    height: '50.6%'
   },
   downloadHintText: {
     color: '#000',

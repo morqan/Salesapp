@@ -55,8 +55,8 @@ export default function LeftMenu({
     navigate('MapScreen', { img: map, location: loc, params })
   }, [location, map, params, title])
 
-  console.log(location, 'location left menu')
-  console.log(netInfo, 'netInfo left menu')
+  // console.log(location, 'location left menu')
+  // console.log(netInfo, 'netInfo left menu')
 
   return (
     <ScrollView contentContainerStyle={sideMenuStyles.side}>
@@ -119,7 +119,7 @@ export default function LeftMenu({
       {blocks?.data &&
         blocks?.data.map(item => {
           return item?.floors?.data.map(floor => {
-            console.log(floor, 'flasd')
+            // console.log(floor, 'flasd')
             return (
               <TouchableOpacity
                 key={floor?.id}

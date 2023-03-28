@@ -45,53 +45,55 @@ export default function Home() {
   const onDownloadImages = async imgUrls => {
     try {
       const FILE = Platform.OS === 'ios' ? '' : 'file://'
-      const imgLocalUrls = await Promise.all(
-        imgUrls.map(async (sourceUrl, i) => {
-          const imgName = sourceUrl.slice(
-            sourceUrl.lastIndexOf('/') + 1,
-            sourceUrl.lastIndexOf('.'),
-          )
-          const fileName = `${FILE}${RNFS.DocumentDirectoryPath}/img${imgName}${i}.jpg`
-          // Check if file already exists
-          const exists = await RNFS.exists(fileName)
-          if (exists) {
-            console.log('old')
-            setDownloadedImg(prevState => prevState + 1)
-            return {
+      const imgLocalUrls = []
+      for (let i = 0; i < imgUrls?.length; i++) {
+        const sourceUrl = imgUrls[i]
+        const decodedUrl = decodeURIComponent(sourceUrl) // decode URL-encoded characters
+        const lastSlashIndex = decodedUrl.lastIndexOf('/')
+        const lastDotIndex = decodedUrl.lastIndexOf('.')
+        const imgName = decodedUrl
+          .slice(lastSlashIndex + 1, lastDotIndex)
+          .trim()
+          .split(' ')
+          .pop()
+
+        const fileName = `${FILE}${RNFS.DocumentDirectoryPath}/img${imgName}${i}.jpg`
+        const exists = await RNFS.exists(fileName)
+        if (exists) {
+          console.log(fileName, 'old')
+          imgLocalUrls.push({
+            id: sourceUrl,
+            localUrl: fileName,
+            imgName: `img${imgName}${i}.jpg`,
+          })
+          setDownloadedImg(prevState => prevState + 1)
+        } else {
+          const download = RNFS.downloadFile({
+            fromUrl: sourceUrl,
+            toFile: fileName,
+          })
+          const downloadResult = await download.promise
+          if (downloadResult.statusCode === 200) {
+            console.log(fileName, 'new')
+            imgLocalUrls.push({
               id: sourceUrl,
               localUrl: fileName,
               imgName: `img${imgName}${i}.jpg`,
-            }
-          } else {
-            // Download the image file
-            const download = RNFS.downloadFile({
-              fromUrl: sourceUrl,
-              toFile: fileName,
             })
-            const downloadResult = await download.promise
-            if (downloadResult.statusCode === 200) {
-              console.log('new')
-              setDownloadedImg(prevState => prevState + 1)
-              return {
-                id: sourceUrl,
-                localUrl: fileName,
-                imgName: `img${imgName}${i}.jpg`,
-              }
-            }
+            setDownloadedImg(prevState => prevState + 1)
           }
-        }),
-      )
-      // Filter out any undefined values in the array (in case of download failure)
-      const filteredImgLocalUrls = imgLocalUrls.filter(url => url)
-      dispatch(setLocalImgUrls({ localUrls: filteredImgLocalUrls }))
+        }
+      }
+      dispatch(setLocalImgUrls({ localUrls: imgLocalUrls }))
       dispatch(setDownloaded({ download: true }))
-      setLoading(false)
     } catch (err) {
       console.log(err, 'down err')
     } finally {
+      setLoading(false)
       setDownloadedImg(0)
     }
   }
+
 
   const [getPosition, { data, isSuccess, isError, error }] =
     useLazyGetPositionQuery()
@@ -119,7 +121,7 @@ export default function Home() {
     localImagesUrls?.length,
     pages,
   ])
-
+  // console.log(getImagesData.filter(x => x === 'https://app-portonovi.gocreative.az/storage/app/media/project/marina%20residences.jpg'), 'getImagesData')
   useEffect(() => {
     if (getPageIsSuccess) {
       // console.log(getPageData, 'getPageData')
@@ -214,7 +216,7 @@ export default function Home() {
           )}
         </View>
       ) : (
-        <ScrollView contentContainerStyle={homeStyles.downloadHint}>
+        <View style={homeStyles.downloadHint}>
           <Text style={homeStyles.downloadHintText}>
             Please click button for downloading application data.
           </Text>
@@ -228,7 +230,7 @@ export default function Home() {
           >
             <Text style={homeStyles.downloadBtnText}>Download</Text>
           </TouchableOpacity>
-        </ScrollView>
+        </View>
       )}
       <HomeFooter homeItems={homeItemPositions} onPress={onOpenProject} />
       <View style={homeStyles.footerGallery}>
