@@ -29,6 +29,7 @@ import MyHeader from '@/Components/MyHeader'
 import HomeFooter from '@/Components/HomeFooter'
 import { hfStyles } from '@/Components/HomeFooter/index.style'
 import { Config } from '@/Config'
+// import WebView from "react-native-webview"
 
 export default function Home() {
   const [widths, setWidths] = useState('')
@@ -184,6 +185,7 @@ export default function Home() {
       params: pages?.portonovi,
     })
   }, [pages?.portonovi])
+
   if (loading) {
     return (
       <View style={homeStyles.spinnerBox}>
@@ -197,6 +199,9 @@ export default function Home() {
       </View>
     )
   }
+  // if ('360deg') {
+  //   return <WebView source={{ uri: 'https://portonovi.com/360/3/' }} />;
+  // }
   return (
     <View style={homeStyles.container}>
       <MyHeader onDownloadImages={onOpenDownloadImages} />

@@ -12,10 +12,7 @@ import { navigate, navigateAndSimpleReset } from '@/Navigators/utils'
 import { useAuth } from '@/Hooks/useAuth'
 import downloadIcon from '@/Assets/Images/akar-icons_download.png'
 
-export default function MainBtnGroup({
-  onOpenDownloadImages,
-  home,
-}) {
+export default function MainBtnGroup({ onOpenDownloadImages, home }) {
   const { pages } = useAuth()
   const dispatch = useDispatch()
   const [hiddenBox, setHiddenBox] = useState(false)
