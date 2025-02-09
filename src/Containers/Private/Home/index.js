@@ -37,8 +37,9 @@ export default function Home() {
   const [homeImg, setHomeImg] = useState('')
   const [loading, setLoading] = useState(false)
   const [downloadedImg, setDownloadedImg] = useState(0)
-  const { localImagesUrls, homeItemPositions, pages, downloaded } = useAuth()
-
+  const { localImagesUrls, homeItemPositions, pages, downloaded, user } =
+    useAuth()
+  console.log(user, 'user')
   const dispatch = useDispatch()
 
   const [getImages, result] = useLazyGetImagesQuery()
@@ -95,10 +96,9 @@ export default function Home() {
     }
   }
 
-
   const [getPosition, { data, isSuccess, isError, error }] =
     useLazyGetPositionQuery()
-
+  console.log(data, 'data')
   const [
     getPage,
     { data: getPageData, isSuccess: getPageIsSuccess, isError: getPageIsError },

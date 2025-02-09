@@ -29,7 +29,7 @@ export default function FloorSvgGenerator({
       }
     })
   }, [])
-  console.log(localImg, 'localImg')
+  console.log(localImg, 'localImgsdf')
   // console.log(localImagesUrls, 'localImagesUrlslocalImagesUrls')
   return (
     <View

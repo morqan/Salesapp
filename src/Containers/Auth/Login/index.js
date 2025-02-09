@@ -11,7 +11,7 @@ import MyInput from '@/Components/MyInput'
 import MyBtn from '@/Components/MyBtn'
 import { useOnLoginMutation } from '@/Services/modules/Auth'
 import { useDispatch } from 'react-redux'
-import { changeToken, changeUser } from '@/Store/Auth'
+import { changeNeedReLogin, changeToken, changeUser } from "@/Store/Auth"
 import logo from '../../../Assets/Images/logo.png'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 
@@ -26,6 +26,7 @@ export default function Login() {
     if (isSuccess) {
       const { token, user } = data
       dispatch(changeToken({ token }))
+      dispatch(changeNeedReLogin({ needReLogin: false }))
       dispatch(changeUser({ userData: user }))
     }
     if (isError) {

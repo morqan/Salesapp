@@ -11,6 +11,7 @@ import { navigate } from '@/Navigators/utils'
 import RenderHtml from 'react-native-render-html'
 import { planStyles } from '@/Containers/Private/Plan/index.style'
 import { useNetInfo } from '@react-native-community/netinfo'
+import { useAuth } from '@/Hooks/useAuth'
 
 export default function LeftMenu({
   title,
@@ -34,6 +35,7 @@ export default function LeftMenu({
 }) {
   const { width } = useWindowDimensions()
   const netInfo = useNetInfo()
+  const { user } = useAuth()
   const onPressGallery = useCallback(() => {
     navigate('Gallery', { gallery: gallery, params })
   }, [gallery, params])
@@ -54,10 +56,7 @@ export default function LeftMenu({
     const loc = title === 'LIFESTYLE' ? 'LIFESTYLE' : location
     navigate('MapScreen', { img: map, location: loc, params })
   }, [location, map, params, title])
-
-  // console.log(location, 'location left menu')
-  // console.log(netInfo, 'netInfo left menu')
-
+  console.log(user, 'user')
   return (
     <ScrollView contentContainerStyle={sideMenuStyles.side}>
       <Text style={sideMenuStyles.title}>{title}</Text>
@@ -69,14 +68,23 @@ export default function LeftMenu({
       )}
       {headInfo &&
         headInfo.map((item, index) => {
-          return (
-            <RenderHtml
-              tagsStyles={planStyles.tagsLeftStyles}
-              key={index}
-              contentWidth={width}
-              source={item}
-            />
-          )
+          const content = item?.html || ''
+          const canShowPrice = user?.is_show_price
+          const parts = content.split(/(<p class="priceonlyios">.*?<\/p>)/gs)
+
+          return parts.map((part, partIndex) => {
+            if (!canShowPrice && /class="priceonlyios"/.test(part)) {
+              return null
+            }
+            return (
+              <RenderHtml
+                tagsStyles={planStyles.tagsLeftStyles}
+                key={`${index}-${partIndex}`}
+                contentWidth={width}
+                source={{ html: part }}
+              />
+            )
+          })
         })}
       {information && (
         <TouchableOpacity style={sideMenuStyles.menuLink} onPress={onPressInfo}>

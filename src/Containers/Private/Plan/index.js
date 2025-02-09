@@ -36,7 +36,7 @@ export default function Plan(props) {
 
   const [sendMail, { data, isSuccess, isError, error }] =
     useOnSendMailMutation()
-
+  console.log(user, 'user')
   const goBack = useCallback(() => {
     navigationRef.goBack()
   }, [])
@@ -89,7 +89,7 @@ export default function Plan(props) {
 
     setLocalImgs(localGallery)
   }, [])
-  console.log(props?.route?.params?.plan, 'props?.route?.params?.plan')
+  console.log(props?.route?.params?.plan, 'props?.route?.params?.planasdasdasd')
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
       <MyHeader goBack={goBack} />

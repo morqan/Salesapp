@@ -41,22 +41,6 @@ export default function Floor(props) {
     navigate('Plan', { plan: item })
   }, [])
 
-  const onOpenFloor = useCallback(item => {
-    console.log(item, 'item')
-    console.log(img, 'img')
-
-    if (item?.is_plan) {
-      console.log(item, 'item')
-      navigate('Plan', { plan: item })
-    } else {
-      navigateAndSimpleReset('Floor', {
-        floor: item,
-        blocks: blocks,
-        detail: detail,
-      })
-    }
-  }, [])
-
   console.log(props, 'props')
   return (
     <View style={{ flex: 1 }}>

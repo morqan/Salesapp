@@ -1,5 +1,3 @@
-import { api } from '@/Services/api'
-
 const { createSlice } = require('@reduxjs/toolkit')
 
 const authSlice = createSlice({
@@ -10,6 +8,7 @@ const authSlice = createSlice({
     homeItemPosition: [],
     pages: null,
     downloadStatus: false,
+    needReLogin: true,
     localImagesUrls: [],
   },
   reducers: {
@@ -20,6 +19,11 @@ const authSlice = createSlice({
     changeToken: (state, { payload: { token } }) => {
       if (typeof token !== 'undefined') {
         state.accessToken = token
+      }
+    },
+    changeNeedReLogin: (state, { payload: { needReLogin } }) => {
+      if (typeof needReLogin !== 'undefined') {
+        state.needReLogin = needReLogin
       }
     },
     changeUser: (state, { payload: { userData } }) => {
@@ -62,6 +66,7 @@ const authSlice = createSlice({
 export const {
   removeCredentials,
   changeToken,
+  changeNeedReLogin,
   setHomeItemPosition,
   setPages,
   setLocalImgUrls,
@@ -72,10 +77,10 @@ export const {
 export default authSlice.reducer
 
 export const selectCurrentUser = state => state.auth.user
+export const selectCurrentNeedReLogin = state => state.auth.needReLogin
 export const selectCurrentAccessToken = state => state.auth.accessToken
 export const selectCurrentHomeItemPosition = state =>
   state.auth.homeItemPosition
 export const selectCurrentPages = state => state.auth.pages
 export const selectCurrentLocalImagesUrls = state => state.auth.localImagesUrls
 export const selectCurrentDownloaded = state => state.auth.downloadStatus
-export const selectCurrentChangeUser = state => state.auth.user

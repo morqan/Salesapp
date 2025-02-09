@@ -3,6 +3,7 @@ import {
   selectCurrentDownloaded,
   selectCurrentHomeItemPosition,
   selectCurrentLocalImagesUrls,
+  selectCurrentNeedReLogin,
   selectCurrentPages,
   selectCurrentUser,
 } from '@/Store/Auth'
@@ -16,6 +17,7 @@ export const useAuth = () => {
   const pages = useSelector(selectCurrentPages)
   const localImagesUrls = useSelector(selectCurrentLocalImagesUrls)
   const downloaded = useSelector(selectCurrentDownloaded)
+  const needReLogin = useSelector(selectCurrentNeedReLogin)
 
   return useMemo(
     () => ({
@@ -25,7 +27,16 @@ export const useAuth = () => {
       pages,
       localImagesUrls,
       downloaded,
+      needReLogin,
     }),
-    [user, token, homeItemPositions, pages, localImagesUrls, downloaded],
+    [
+      user,
+      token,
+      homeItemPositions,
+      pages,
+      localImagesUrls,
+      downloaded,
+      needReLogin,
+    ],
   )
 }

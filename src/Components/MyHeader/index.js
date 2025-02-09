@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { headerStyles } from '@/Components/MyHeader/index.style'
 import SvgArrowLeft from '@/Assets/SvgArrowLeft'
@@ -11,12 +11,12 @@ import plogo from '@/Assets/Images/plogo.png'
 import logoutImg from '@/Assets/Images/logout.png'
 
 export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
-  const { pages } = useAuth()
+  const { pages, needReLogin } = useAuth()
   const dispatch = useDispatch()
 
-  const onPressLogOut = () => {
+  const onPressLogOut = useCallback(() => {
     dispatch(changeToken({ token: null }))
-  }
+  }, [dispatch])
 
   const onPressPortonovi = useCallback(() => {
     navigateAndSimpleReset('Information', {
@@ -40,6 +40,12 @@ export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
     navigateAndSimpleReset('Home')
   }, [])
   console.log(pages, 'pages')
+  console.log(needReLogin, 'needReLogin')
+  useEffect(() => {
+    if (needReLogin) {
+      onPressLogOut()
+    }
+  }, [needReLogin, onPressLogOut])
   const onPressGoBack = () => {
     if (headerTitle) {
       goToHome()
@@ -51,7 +57,6 @@ export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
     <View style={headerStyles.headerBox}>
       <View style={headerStyles.rightBox}>
         <TouchableOpacity onPress={goToHome} style={headerStyles.logoBtn}>
-          {/*<SvgShortLogo />*/}
           <Image
             source={plogo}
             style={{ width: 35, height: 35, resizeMode: 'contain' }}
@@ -90,7 +95,6 @@ export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
           onPress={onPressLogOut}
           style={headerStyles.logoutBtn}
         >
-          {/*<SvgLogout />*/}
           <Image
             source={logoutImg}
             style={{ width: 24, height: 24, resizeMode: 'contain' }}
