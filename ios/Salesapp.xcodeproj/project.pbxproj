@@ -665,7 +665,7 @@
 				INFOPLIST_FILE = Salesapp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PSalesApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.1.3;
 				OTHER_LDFLAGS = (
@@ -693,7 +693,7 @@
 				INFOPLIST_FILE = Salesapp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PSalesApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.1.3;
 				OTHER_LDFLAGS = (
