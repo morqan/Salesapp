@@ -1,17 +1,26 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react'
-import { Dimensions, Image, ScrollView, Text, View } from 'react-native'
+import { Dimensions, Image, ScrollView, View } from 'react-native'
 import { detailsStyles } from '@/Containers/Private/Details/index.style'
 import RenderHtml from 'react-native-render-html'
 import { navigationRef } from '@/Navigators/utils'
-import BackBtn from '@/Components/BackBtn'
-import Footer from '@/Components/Footer'
-import MainBtnGroup from '@/Components/MainBtnGroup'
 import VideoModal from '@/Components/VideoModal'
 import { useAuth } from '@/Hooks/useAuth'
 import LeftMenu from '@/Components/LeftMenu'
 import MyHeader from '@/Components/MyHeader'
 import { Config } from '@/Config'
-
+import {
+  AccessibilityText,
+  AccessibilityView,
+  AccessibilityButton,
+  AccessibilityImage,
+  AccessibilityTextInput,
+  AccessibilityScrollView,
+  AccessibilityTouchableOpacity,
+  AccessibilityPressable,
+  AccessibilityKeyboardAvoiding,
+  AccessibilityRenderImageExternal,
+  AccessibilityRenderHtmlExternal,
+} from '@corpowid/accessibility-widget'
 export default function Montegro(props) {
   const { params } = props?.route?.params
   const {
@@ -85,7 +94,7 @@ export default function Montegro(props) {
           location={location}
         />
         <View style={{ flexDirection: 'row', width: width * 0.74 }}>
-          <View style={{ width: width * 0.40 }}>
+          <View style={{ width: width * 0.4 }}>
             {localImg && (
               <Image
                 style={detailsStyles.sliderImg}
@@ -97,11 +106,13 @@ export default function Montegro(props) {
           </View>
           <ScrollView ref={scrollRef} style={detailsStyles.content}>
             <View>
-              <RenderHtml
-                contentWidth={width}
-                source={source}
-                tagsStyles={detailsStyles.tagsStylesMontenegro}
-              />
+              <AccessibilityRenderHtmlExternal>
+                <RenderHtml
+                  contentWidth={width}
+                  source={source}
+                  tagsStyles={detailsStyles.tagsStylesMontenegro}
+                />
+              </AccessibilityRenderHtmlExternal>
             </View>
             <View />
           </ScrollView>

@@ -1,13 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import {
-  Text,
-  View,
   Image,
   Platform,
   ActivityIndicator,
-  TouchableOpacity,
-  ScrollView,
 } from 'react-native'
+import {
+  AccessibilityText,
+  AccessibilityView,
+  AccessibilityButton,
+  AccessibilityImage,
+  AccessibilityTextInput,
+  AccessibilityScrollView,
+  AccessibilityTouchableOpacity,
+  AccessibilityPressable,
+  AccessibilityKeyboardAvoiding,
+  AccessibilityRenderImageExternal,
+} from '@corpowid/accessibility-widget'
 import { homeStyles } from '@/Containers/Private/Home/Iindex.style'
 import { navigate } from '@/Navigators/utils'
 import {
@@ -188,80 +196,84 @@ export default function Home() {
 
   if (loading) {
     return (
-      <View style={homeStyles.spinnerBox}>
+      <AccessibilityView style={homeStyles.spinnerBox}>
         <ActivityIndicator size="large" color="#000" />
-        <Text style={{ fontSize: 20 }}>
+        <AccessibilityText style={{ fontSize: 20 }}>
           Image size: {getImagesData?.length}{' '}
-        </Text>
-        <Text style={{ fontSize: 20 }}>
+        </AccessibilityText>
+        <AccessibilityText style={{ fontSize: 20 }}>
           Downloaded image count: {downloadedImg}{' '}
-        </Text>
-      </View>
+        </AccessibilityText>
+      </AccessibilityView>
     )
   }
   // if ('360deg') {
   //   return <WebView source={{ uri: 'https://portonovi.com/360/3/' }} />;
   // }
   return (
-    <View style={homeStyles.container}>
+    <AccessibilityView style={homeStyles.container}>
       <MyHeader onDownloadImages={onOpenDownloadImages} />
       {(downloaded && getImagesData?.length > 0) ||
       (downloaded && localImagesUrls?.length > 525) ? (
-        <View>
+        <AccessibilityView>
           {pages && widths && (
-            <SvgGenerator
-              img={homeImg}
-              path={homeItemPositions}
-              onPress={onOpenProject}
-              height={heights}
-              width={widths}
-              top={2600}
-              backgroundColor={'#1F6B6B'}
-            />
+            <AccessibilityRenderImageExternal>
+              <SvgGenerator
+                img={homeImg}
+                path={homeItemPositions}
+                onPress={onOpenProject}
+                height={heights}
+                width={widths}
+                top={2600}
+                backgroundColor={'#1F6B6B'}
+              />
+            </AccessibilityRenderImageExternal>
           )}
-        </View>
+        </AccessibilityView>
       ) : (
-        <View style={homeStyles.downloadHint}>
-          <Text style={homeStyles.downloadHintText}>
+        <AccessibilityView style={homeStyles.downloadHint}>
+          <AccessibilityText style={homeStyles.downloadHintText}>
             Please click button for downloading application data.
-          </Text>
-          <Text style={homeStyles.downloadHintText}>
+          </AccessibilityText>
+          <AccessibilityText style={homeStyles.downloadHintText}>
             Please note that it might take 5-10 minutes based on your internet
             connection.
-          </Text>
-          <TouchableOpacity
+          </AccessibilityText>
+          <AccessibilityTouchableOpacity
             onPress={onOpenDownloadImages}
             style={homeStyles.downloadBtn}
           >
-            <Text style={homeStyles.downloadBtnText}>Download</Text>
-          </TouchableOpacity>
-        </View>
+            <AccessibilityText style={homeStyles.downloadBtnText}>
+              Download
+            </AccessibilityText>
+          </AccessibilityTouchableOpacity>
+        </AccessibilityView>
       )}
       <HomeFooter homeItems={homeItemPositions} onPress={onOpenProject} />
-      <View style={homeStyles.footerGallery}>
-        <ScrollView horizontal={true}>
+      <AccessibilityView style={homeStyles.footerGallery}>
+        <AccessibilityScrollView horizontal={true}>
           {pages?.portonovi?.gallery.map(imgUrl => {
             let newImg = `${Config.IMG_PATH}${imgUrl?.img}`.replaceAll(
               ' ',
               '%20',
             )
             return (
-              <TouchableOpacity
+              <AccessibilityTouchableOpacity
                 onPress={onGoPortonoviGallery}
                 activeOpacity={0.95}
                 key={newImg}
               >
-                <Image
+                <AccessibilityImage
                   source={{
                     uri: newImg,
                   }}
                   style={hfStyles.img}
                 />
-              </TouchableOpacity>
+              </AccessibilityTouchableOpacity>
             )
           })}
-        </ScrollView>
-      </View>
-    </View>
+        </AccessibilityScrollView>
+      </AccessibilityView>
+    </AccessibilityView>
   )
 }

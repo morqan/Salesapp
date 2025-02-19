@@ -9,7 +9,18 @@ import { navigateAndSimpleReset } from '@/Navigators/utils'
 import downloadIcon from '@/Assets/Images/akar-icons_download.png'
 import plogo from '@/Assets/Images/plogo.png'
 import logoutImg from '@/Assets/Images/logout.png'
-
+import {
+  AccessibilityText,
+  AccessibilityView,
+  AccessibilityButton,
+  AccessibilityImage,
+  AccessibilityTextInput,
+  AccessibilityScrollView,
+  AccessibilityTouchableOpacity,
+  AccessibilityPressable,
+  AccessibilityKeyboardAvoiding,
+  AccessibilityRenderImageExternal
+} from '@corpowid/accessibility-widget';
 export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
   const { pages, needReLogin } = useAuth()
   const dispatch = useDispatch()
@@ -54,53 +65,53 @@ export default function MyHeader({ goBack, onDownloadImages, headerTitle }) {
     }
   }
   return (
-    <View style={headerStyles.headerBox}>
-      <View style={headerStyles.rightBox}>
-        <TouchableOpacity onPress={goToHome} style={headerStyles.logoBtn}>
-          <Image
+    <AccessibilityView style={headerStyles.headerBox}>
+      <AccessibilityView style={headerStyles.rightBox}>
+        <AccessibilityTouchableOpacity onPress={goToHome} style={headerStyles.logoBtn}>
+          <AccessibilityImage
             source={plogo}
             style={{ width: 35, height: 35, resizeMode: 'contain' }}
           />
-        </TouchableOpacity>
-        <View style={headerStyles.linkBox}>
-          <TouchableOpacity onPress={onPressMontenegro}>
-            <Text style={headerStyles.linkBtn}>MONTENEGRO</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onPressPortonovi}>
-            <Text style={headerStyles.linkBtn}>PORTONOVI</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={onPressLifestyle}>
-            <Text style={headerStyles.linkBtn}>Lifestyle</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={headerStyles.rightBox}>
+        </AccessibilityTouchableOpacity>
+        <AccessibilityView style={headerStyles.linkBox}>
+          <AccessibilityTouchableOpacity onPress={onPressMontenegro}>
+            <AccessibilityText style={headerStyles.linkBtn}>MONTENEGRO</AccessibilityText>
+          </AccessibilityTouchableOpacity>
+          <AccessibilityTouchableOpacity onPress={onPressPortonovi}>
+            <AccessibilityText style={headerStyles.linkBtn}>PORTONOVI</AccessibilityText>
+          </AccessibilityTouchableOpacity>
+          <AccessibilityTouchableOpacity onPress={onPressLifestyle}>
+            <AccessibilityText style={headerStyles.linkBtn}>Lifestyle</AccessibilityText>
+          </AccessibilityTouchableOpacity>
+        </AccessibilityView>
+      </AccessibilityView>
+      <AccessibilityView style={headerStyles.rightBox}>
         {goBack && (
-          <TouchableOpacity
+          <AccessibilityTouchableOpacity
             style={headerStyles.backBtn}
             onPress={onPressGoBack}
           >
             <SvgArrowLeft />
-          </TouchableOpacity>
+          </AccessibilityTouchableOpacity>
         )}
         {onDownloadImages && (
-          <TouchableOpacity
+          <AccessibilityTouchableOpacity
             onPress={onDownloadImages}
             style={headerStyles.backBtn}
           >
-            <Image source={downloadIcon} style={{ width: 23, height: 23 }} />
-          </TouchableOpacity>
+            <AccessibilityImage source={downloadIcon} style={{ width: 23, height: 23 }} />
+          </AccessibilityTouchableOpacity>
         )}
-        <TouchableOpacity
+        <AccessibilityTouchableOpacity
           onPress={onPressLogOut}
           style={headerStyles.logoutBtn}
         >
-          <Image
+          <AccessibilityImage
             source={logoutImg}
             style={{ width: 24, height: 24, resizeMode: 'contain' }}
           />
-        </TouchableOpacity>
-      </View>
-    </View>
+        </AccessibilityTouchableOpacity>
+      </AccessibilityView>
+    </AccessibilityView>
   )
 }

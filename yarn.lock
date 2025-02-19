@@ -782,6 +782,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@corpowid/accessibility-widget@^1.1.29":
+  version "1.1.29"
+  resolved "https://registry.yarnpkg.com/@corpowid/accessibility-widget/-/accessibility-widget-1.1.29.tgz#798a9ade7c108863b08d444924211e8cbe73bab7"
+  integrity sha512-wlv1+Ap94jummKSyiG0Ml38NGZE1XQXVi4+v6AK8Lo7xtSh4KFHM0M9awebFAf6l4JR0aCmUNYYVBzawiEkqpA==
+
 "@egjs/hammerjs@^2.0.17":
   version "2.0.17"
   resolved "https://registry.yarnpkg.com/@egjs/hammerjs/-/hammerjs-2.0.17.tgz#5dc02af75a6a06e4c2db0202cae38c9263895124"
